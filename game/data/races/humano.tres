@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/race_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/character_creation/racial_trait.gd" id="2"]
+
+[sub_resource type="Resource" id="trait_versatil"]
+script = ExtResource("2")
+trait_id = "versatil"
+display_name = "Versátil"
+description = "+1 a todas las puntuaciones de característica. Los humanos se adaptan a cualquier rol."
+ability_bonuses = {"str": 1, "dex": 1, "con": 1, "int": 1, "wis": 1, "cha": 1}
+skill_proficiencies = []
+damage_resistances = []
+speed_bonus = 0
+has_darkvision = false
+
+[resource]
+script = ExtResource("1")
+race_id = "humano"
+display_name = "Humano"
+description = "Los humanos son la raza más extendida en el mundo conocido. Su adaptabilidad y ambición los llevan a todos los rincones — y a todos los oficios."
+size = "medium"
+base_speed = 30
+traits = [SubResource("trait_versatil")]
+portrait_sets = []

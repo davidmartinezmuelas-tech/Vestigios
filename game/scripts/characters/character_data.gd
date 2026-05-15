@@ -1,0 +1,171 @@
+## character_data.gd
+## Resource con los datos base de un personaje (héroe o enemigo).
+## Crear un .tres por personaje en data/characters/
+
+class_name CharacterData
+extends Resource
+
+# ============================================================
+# IDENTIDAD
+# ============================================================
+@export var character_id: String = ""
+@export var display_name: String = ""
+@export var is_hero: bool = true
+## ID de la clase principal (usado para calcular espacios de conjuro)
+## Valores: "bardo","hechicero","mago","clerigo","druida","paladin","explorador","brujo",
+##          "barbaro","guerrero","monje","picaro" (sin conjuros estos últimos)
+@export var class_id: String = ""
+## ID de la subclase elegida (referencia a SubclassDatabase). Disponible a partir de nivel 3.
+@export var subclass_id: String = ""
+## Tiene el rasgo Maestría con Armas (Paladín, Explorador, Guerrero, Bárbaro, Pícaro nv1 en 2024)
+@export var has_weapon_mastery: bool = false
+
+## Devuelve los rasgos de subclase activos para el nivel actual.
+func get_subclass_features() -> Array[Dictionary]:
+	if subclass_id.is_empty() or level < 3:
+		return []
+	var result: Array[Dictionary] = []
+	for lv in range(1, level + 1):
+		for feat in SubclassDatabase.get_feature(subclass_id, lv):
+			result.append(feat)
+	return result
+
+## Devuelve los conjuros siempre preparados por la subclase.
+func get_subclass_always_prepared() -> Array[String]:
+	if subclass_id.is_empty():
+		return []
+	return SubclassDatabase.get_always_prepared_spells(subclass_id)
+
+# ============================================================
+# PROGRESIÓN
+# ============================================================
+@export_group("Progresión")
+@export var level: int = 1
+## Caras del dado de golpe (6, 8, 10 o 12)
+@export var hit_dice_sides: int = 8
+## Bonificador de competencia según nivel (niveles 1-4: +2, 5-8: +3, etc.)
+@export var proficiency_bonus: int = 2
+
+# ============================================================
+# PUNTUACIONES DE CARACTERÍSTICA (1–20, modificador = (puntaje-10)/2 redondeado abajo)
+# ============================================================
+@export_group("Características")
+@export_range(1, 30) var strength: int = 10
+@export_range(1, 30) var dexterity: int = 10
+@export_range(1, 30) var constitution: int = 10
+@export_range(1, 30) var intelligence: int = 10
+@export_range(1, 30) var wisdom: int = 10
+@export_range(1, 30) var charisma: int = 10
+
+# ============================================================
+# DEFENSA
+# ============================================================
+@export_group("Defensa")
+## Clase de Armadura base (incluye armadura + escudo si procede)
+@export var armor_class: int = 10
+## Tiradas de salvación con competencia: "str", "dex", "con", "int", "wis", "cha"
+@export var saving_throw_proficiencies: Array[String] = []
+## Competencias de habilidad (nombres snake_case: "percepcion", "intimidacion"...)
+@export var skill_proficiencies: Array[String] = []
+## Condiciones persistentes (sobreviven entre escenas: "resaca", "borracho"...)
+@export var persistent_conditions: Array[String] = []
+
+# ============================================================
+# ECONOMÍA
+# ============================================================
+@export_group("Economía")
+@export var starting_gold: int = 0
+
+# ============================================================
+# MOVIMIENTO
+# ============================================================
+@export_group("Movimiento")
+## Velocidad en pies (30 ft por defecto)
+@export var speed_ft: int = 30
+
+# ============================================================
+# CONJUROS Y TRUCOS
+# ============================================================
+@export_group("Conjuros")
+## IDs de trucos conocidos (nivel 0, uso ilimitado). Se resuelven contra SpellDatabase.
+@export var cantrip_ids: Array[String] = []
+## IDs de conjuros preparados/conocidos (nivel 1+). Se resuelven contra SpellDatabase.
+@export var spell_ids: Array[String] = []
+## Dados de golpe disponibles para descanso corto
+@export var hit_dice_remaining: int = 0
+
+## Devuelve los SpellData resueltos de los trucos.
+func get_cantrips() -> Array[SpellData]:
+	var result: Array[SpellData] = []
+	for id in cantrip_ids:
+		var s := SpellDatabase.get(id)
+		if s:
+			result.append(s)
+	return result
+
+## Devuelve los SpellData resueltos de los conjuros.
+func get_spells() -> Array[SpellData]:
+	var result: Array[SpellData] = []
+	for id in spell_ids:
+		var s := SpellDatabase.get(id)
+		if s:
+			result.append(s)
+	return result
+
+# ============================================================
+# ESTRÉS (mecánica propia del juego)
+# ============================================================
+@export_group("Estrés")
+@export var max_stress: int = 100
+
+# ============================================================
+# EXPERIENCIA (solo enemigos)
+# ============================================================
+@export_group("Experiencia")
+## XP que otorga al morir. 0 para héroes.
+@export var xp_reward: int = 0
+## Nivel de desafío aproximado (usado para referencia de diseño)
+@export var challenge_rating: float = 0.0
+
+# ============================================================
+# HABILIDADES
+# ============================================================
+@export_group("Habilidades")
+@export var abilities: Array[AbilityData] = []
+
+# ============================================================
+# ARTE
+# ============================================================
+@export_group("Arte")
+@export var sprite: Texture2D
+
+@export_subgroup("Retratos de diálogo")
+@export var portrait_neutral: Texture2D
+@export var portrait_happy: Texture2D
+@export var portrait_angry: Texture2D
+@export var portrait_scared: Texture2D
+@export var portrait_focused: Texture2D  # para tiradas de habilidad
+
+## Devuelve el retrato de la emoción pedida. Si no existe, devuelve neutral.
+func get_portrait(emotion: String) -> Texture2D:
+	match emotion:
+		"happy":   return portrait_happy   if portrait_happy   else portrait_neutral
+		"angry":   return portrait_angry   if portrait_angry   else portrait_neutral
+		"scared":  return portrait_scared  if portrait_scared  else portrait_neutral
+		"focused": return portrait_focused if portrait_focused else portrait_neutral
+		_:         return portrait_neutral
+
+# ============================================================
+# FUNCIONES DE UTILIDAD (accesibles desde CharacterData directamente)
+# ============================================================
+
+static func ability_modifier(score: int) -> int:
+	return floori((score - 10) / 2.0)
+
+## HP máximo: nivel 1 usa el máximo del dado; niveles superiores usan la media (redondeada arriba) + CON
+func calculate_max_hp() -> int:
+	var con_mod := ability_modifier(constitution)
+	var hp := hit_dice_sides + con_mod  # nivel 1: máximo del dado
+	var avg_per_level := ceili(hit_dice_sides / 2.0) + 1  # media del dado (p.ej. d8 → 5)
+	hp += (level - 1) * (avg_per_level + con_mod)
+	return maxi(1, hp)

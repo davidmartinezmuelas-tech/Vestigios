@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+
+; Golpe corrompido — 1d8+2. La corrupción aplica estrés extra al objetivo.
+[sub_resource type="Resource" id="ability_corrompido_1"]
+script = ExtResource("2")
+ability_id = "golpe_corrompido"
+display_name = "Golpe Corrompido"
+description = "Un ataque cargado de energía corrupta. Inflige estrés adicional al objetivo."
+ability_type = 0
+target_type = 0
+range_tiles = 1
+attack_ability = "str"
+uses_proficiency = true
+damage_dice_count = 1
+damage_dice_sides = 8
+damage_ability = "str"
+save_ability = "con"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+[resource]
+script = ExtResource("1")
+character_id = "soldado_corrompido"
+display_name = "Soldado Corrompido"
+is_hero = false
+level = 1
+hit_dice_sides = 8
+proficiency_bonus = 2
+strength = 15
+dexterity = 11
+constitution = 13
+intelligence = 7
+wisdom = 7
+charisma = 6
+armor_class = 13
+saving_throw_proficiencies = ["str", "con"]
+speed_ft = 30
+max_stress = 100
+xp_reward = 100
+challenge_rating = 0.5
+abilities = [SubResource("ability_corrompido_1")]

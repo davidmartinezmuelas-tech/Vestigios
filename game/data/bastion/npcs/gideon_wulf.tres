@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BastionNPCData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/bastion_npc_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "gideon_wulf"
+display_name = "Gideon Wulf"
+description = "Cazador joven del futuro. Llegó por una anomalía temporal y no puede irse — cuida de Alderich. Campeón del Vacío sin saberlo."
+facility_affinity = "sala_entrenamiento"
+bonus_description = "Los entrenamientos de Gideon son inusuales — técnicas de un tiempo que aún no existe. El dado de Teatro de los entrenamientos sube de d6 a d8."
+replaces_hirelings = false
+required_flag = "gideon_conocido"
+recruitment_pitch = "\"No tengo adónde ir mientras Alderich viva. Si aquí puedo ser útil, aquí me quedo.\""

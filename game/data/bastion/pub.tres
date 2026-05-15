@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "pub"
+display_name = "Pub del Bastión"
+description = "Una taberna con una red de espías frecuentando el local. El barman obtiene información sobre eventos en un radio de 50 km. Tiene siempre una bebida mágica en barril con efectos temporales."
+required_bastion_level = 3
+prerequisite_flag = ""
+space = 1
+hireling_count = 1
+available_orders = [4, 6]
+build_cost = 2500
+build_missions = 2
+order_options = [
+	{"id": "recopilacion_info", "order": 4, "name": "Recopilación de información", "description": "Los espías informan de todos los eventos importantes en 50 km durante 7 días. También pueden localizar a cualquier criatura conocida que esté en ese radio. Tarda 1 misión."},
+]

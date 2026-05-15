@@ -1,0 +1,144 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+; ── TIRADAS ──
+[sub_resource type="Resource" id="check_perspicacia_mia"]
+script = ExtResource("4")
+skill_name = "Perspicacia"
+ability = "wis"
+difficulty_class = 15
+success_node_id = "percibe_mia"
+failure_node_id = "no_percibe_mia"
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_quien_eres_mia"]
+script = ExtResource("3")
+text = "\"¿Quién eres?\""
+next_node_id = "mia_responde_quien"
+
+[sub_resource type="Resource" id="choice_por_que_no_vienes"]
+script = ExtResource("3")
+text = "\"Podrías venir con nosotros.\""
+next_node_id = "mia_no_puede_seguir"
+
+[sub_resource type="Resource" id="choice_estudiar_mia"]
+script = ExtResource("3")
+text = "Estudiarla."
+skill_check = SubResource("check_perspicacia_mia")
+
+[sub_resource type="Resource" id="choice_solo_naeren_mia"]
+script = ExtResource("3")
+text = "[Naeren la lee.]"
+required_character_id = "naeren"
+next_node_id = "naeren_lee_mia"
+sets_flag = "naeren_leyo_mia"
+
+[sub_resource type="Resource" id="choice_aceptar_despedida"]
+script = ExtResource("3")
+text = "\"Hasta la próxima.\""
+next_node_id = "mia_partida"
+
+[sub_resource type="Resource" id="choice_preguntar_entrada_secreta"]
+script = ExtResource("3")
+text = "\"¿Sabes algo del fuerte?\""
+next_node_id = "mia_da_info_fuerte"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Una figura se apoya contra la pared junto a la salida. Ha estado en silencio durante toda la pelea — no observando: participando, aunque nadie lo haya notado. Tiene sangre en el filo de la mano. No es suya."
+choices = []
+auto_next = "mia_habla_primero"
+
+[sub_resource type="Resource" id="node_mia_habla"]
+script = ExtResource("2")
+node_id = "mia_habla_primero"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"No teníais mal plan. Pero el de los flancos era mío.\" Os mira sin especial urgencia. \"Lleváis el nombre de Lyris encima como si fuera perfume. Se os nota.\""
+choices = [SubResource("choice_quien_eres_mia"), SubResource("choice_estudiar_mia"), SubResource("choice_solo_naeren_mia")]
+
+[sub_resource type="Resource" id="node_mia_responde_quien"]
+script = ExtResource("2")
+node_id = "mia_responde_quien"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Alguien que lleva más tiempo que vosotros mirando lo que pasa en este pueblo.\" Pausa. \"Mía. No necesitáis más por ahora.\""
+choices = [SubResource("choice_por_que_no_vienes"), SubResource("choice_preguntar_entrada_secreta")]
+
+[sub_resource type="Resource" id="node_percibe_mia"]
+script = ExtResource("2")
+node_id = "percibe_mia"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Se mueve con demasiada precisión para ser una civil. Conoce la sala — cada salida, cada ángulo. Ha estado aquí antes. Y aunque habla tranquila, algo detrás de sus ojos calcula constantemente."
+choices = [SubResource("choice_quien_eres_mia"), SubResource("choice_por_que_no_vienes")]
+narrator_bark = "No es quien dice ser."
+
+[sub_resource type="Resource" id="node_no_percibe_mia"]
+script = ExtResource("2")
+node_id = "no_percibe_mia"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Es difícil de leer. Calmada, eficiente. Nada que no encaje en la imagen de alguien acostumbrado a moverse en los márgenes."
+choices = [SubResource("choice_quien_eres_mia"), SubResource("choice_por_que_no_vienes")]
+
+[sub_resource type="Resource" id="node_naeren_lee_mia"]
+script = ExtResource("2")
+node_id = "naeren_lee_mia"
+speaker_id = "naeren"
+emotion = "scared"
+text = "[Un destello y Naeren aparta la vista. Lo que ha visto es demasiado — capas de algo que no cabe en un instante. Un nombre que reconoce pero no puede ubicar. Una decisión tomada hace mucho, con un peso que todavía no ha terminado de caer.]"
+choices = [SubResource("choice_quien_eres_mia")]
+narrator_bark = "Naeren sabe que Mía esconde algo importante. No lo dice."
+
+[sub_resource type="Resource" id="node_mia_no_puede"]
+script = ExtResource("2")
+node_id = "mia_no_puede_seguir"
+speaker_id = "npc"
+emotion = "sad"
+text = "Un segundo de algo que podría ser pena. \"No puedo. Vosotros vais hacia el norte, hacia Velthar. Hay razones por las que yo no cruzo esa frontera.\" Deja el tema ahí, sin más explicación. \"Pero puedo daros algo útil antes de iros.\""
+choices = [SubResource("choice_preguntar_entrada_secreta")]
+
+[sub_resource type="Resource" id="node_mia_da_info"]
+script = ExtResource("2")
+node_id = "mia_da_info_fuerte"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"El fuerte tiene una galería de servicio al norte, detrás del granero. La usan para sacar basura, lo que significa que no hay guardia fija. Si llegáis por el bosque en lugar del camino principal, podéis usarla.\" Pausa. \"O no. Es vuestra elección.\""
+choices = [SubResource("choice_aceptar_despedida")]
+narrator_bark = "Entrada secreta al norte del fuerte."
+
+[sub_resource type="Resource" id="node_mia_partida"]
+script = ExtResource("2")
+node_id = "mia_partida"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Cuidad a Johannes. Tiene un talento especial para meterse en problemas que no son suyos.\" Se da la vuelta. \"Nos veremos. Cuando sea necesario.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "Mía desaparece antes de que nadie piense en seguirla."
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "mia_despedida_taberna"
+npc_character_id = "mia"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_mia_habla"),
+	SubResource("node_mia_responde_quien"),
+	SubResource("node_percibe_mia"),
+	SubResource("node_no_percibe_mia"),
+	SubResource("node_naeren_lee_mia"),
+	SubResource("node_mia_no_puede"),
+	SubResource("node_mia_da_info"),
+	SubResource("node_mia_partida"),
+]

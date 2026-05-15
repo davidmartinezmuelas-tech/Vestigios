@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/character_creation_scene_ui.gd" id="1"]
+
+[node name="CharacterCreationScene" type="Control" script=ExtResource("1")]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.04, 0.04, 0.06, 1.0)
+
+[node name="StepLabel" type="Label" parent="."]
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 55.0
+text = "1/7 — Nombre"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
+
+[node name="ContentArea" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 70.0
+offset_bottom = -80.0
+offset_left = 80.0
+offset_right = -80.0
+
+[node name="NavBar" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+offset_left = 80.0
+offset_right = -80.0
+
+[node name="BackButton" type="Button" parent="NavBar"]
+custom_minimum_size = Vector2(140, 50)
+text = "← Atrás"
+visible = false
+
+[node name="Spacer" type="Control" parent="NavBar"]
+size_flags_horizontal = 3
+
+[node name="NextButton" type="Button" parent="NavBar"]
+custom_minimum_size = Vector2(180, 50)
+text = "Siguiente →"
+theme_override_font_sizes/font_size = 15

@@ -1,0 +1,155 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+; ── TIRADAS ──
+; Si interrogaron al soldado en la taberna → ventaja (saben el nombre del teniente)
+[sub_resource type="Resource" id="check_engano_puerta"]
+script = ExtResource("4")
+skill_name = "Engaño"
+ability = "cha"
+difficulty_class = 15
+success_node_id = "engano_exito"
+failure_node_id = "engano_fallo"
+
+[sub_resource type="Resource" id="check_persuasion_puerta"]
+script = ExtResource("4")
+skill_name = "Persuasión"
+ability = "cha"
+difficulty_class = 16
+success_node_id = "persuasion_exito"
+failure_node_id = "persuasion_fallo"
+
+[sub_resource type="Resource" id="check_engano_harren"]
+script = ExtResource("4")
+skill_name = "Engaño"
+ability = "cha"
+difficulty_class = 13
+success_node_id = "engano_harren_exito"
+failure_node_id = "engano_harren_fallo"
+has_advantage = true
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_engañar"]
+script = ExtResource("3")
+text = "\"Suministro para el teniente. Documentado desde Meredan.\""
+skill_check = SubResource("check_engano_puerta")
+
+[sub_resource type="Resource" id="choice_persuadir"]
+script = ExtResource("3")
+text = "\"Somos mensajeros del Comando. El teniente nos espera.\""
+skill_check = SubResource("check_persuasion_puerta")
+
+[sub_resource type="Resource" id="choice_usar_nombre_harren"]
+script = ExtResource("3")
+text = "\"El teniente Harren nos mandó llamar personalmente.\""
+required_flag = "soldado_interrogado_taberna"
+skill_check = SubResource("check_engano_harren")
+
+[sub_resource type="Resource" id="choice_atacar"]
+script = ExtResource("3")
+text = "Atacar a los guardias de la puerta."
+next_node_id = "combate_puerta"
+sets_flag = "fuerte_alarma"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El portón del fuerte. Dos guardias, lanzas en ristre. Detrás de ellos, el pueblo pesquero convertido en base. El carro se detiene ante la barrera."
+choices = []
+auto_next = "guardia_pregunta"
+
+[sub_resource type="Resource" id="node_pregunta"]
+script = ExtResource("2")
+node_id = "guardia_pregunta"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"¿Procedencia y destino? Nada entra sin registro.\""
+choices = [SubResource("choice_engañar"), SubResource("choice_persuadir"), SubResource("choice_usar_nombre_harren"), SubResource("choice_atacar")]
+
+[sub_resource type="Resource" id="node_engano_exito"]
+script = ExtResource("2")
+node_id = "engano_exito"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El guardia repasa el carro con la mirada. Un segundo demasiado largo. Luego levanta la barrera. \"Segundo almacén, al fondo.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "Habéis entrado. Nadie sabe que estáis aquí."
+
+[sub_resource type="Resource" id="node_engano_fallo"]
+script = ExtResource("2")
+node_id = "engano_fallo"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"Eso no cuadra con el registro. ¡Identificaos!\" Su mano va a la bocina de alarma."
+choices = [SubResource("choice_persuadir"), SubResource("choice_atacar")]
+
+[sub_resource type="Resource" id="node_persuasion_exito"]
+script = ExtResource("2")
+node_id = "persuasion_exito"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El guardia duda. Los mensajeros del Comando tienen prioridad. No quiere problemas. \"Pasad. Deprisa.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "Dentro del fuerte. Sin alarma."
+
+[sub_resource type="Resource" id="node_persuasion_fallo"]
+script = ExtResource("2")
+node_id = "persuasion_fallo"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"No tengo ningún aviso de mensajeros. Quedaos donde estáis mientras confirmo.\""
+choices = [SubResource("choice_engañar"), SubResource("choice_atacar")]
+
+[sub_resource type="Resource" id="node_harren_exito"]
+script = ExtResource("2")
+node_id = "engano_harren_exito"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El guardia se cuadra levemente. El nombre del teniente funciona como contraseña no oficial. \"Pasad. Almacén norte.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "Entráis con autoridad prestada."
+
+[sub_resource type="Resource" id="node_harren_fallo"]
+script = ExtResource("2")
+node_id = "engano_harren_fallo"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"El teniente Harren no recibe visitas sin aviso previo. ¡Alto!\""
+choices = [SubResource("choice_atacar")]
+
+[sub_resource type="Resource" id="node_combate"]
+script = ExtResource("2")
+node_id = "combate_puerta"
+speaker_id = "npc"
+emotion = "angry"
+text = "El guardia alcanza la bocina. Un sonido largo y grave resuena sobre el fuerte."
+choices = []
+ends_dialogue = true
+narrator_bark = "¡ALARMA! El fuerte sabe que estáis aquí."
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "fuerte_entrada_carro"
+npc_character_id = "guardia_fuerte"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_pregunta"),
+	SubResource("node_engano_exito"),
+	SubResource("node_engano_fallo"),
+	SubResource("node_persuasion_exito"),
+	SubResource("node_persuasion_fallo"),
+	SubResource("node_harren_exito"),
+	SubResource("node_harren_fallo"),
+	SubResource("node_combate"),
+]

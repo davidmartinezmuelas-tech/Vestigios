@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "herbolario"
+display_name = "Herbolario"
+description = "Un jardín de plantas raras y hongos cultivados en un clima controlado. Produce pociones, hierbas medicinales y venenos."
+required_bastion_level = 1
+prerequisite_flag = ""
+space = 1
+hireling_count = 1
+available_orders = [1, 6]
+build_cost = 800
+build_missions = 1
+order_options = [
+	{"id": "hierbas_curativas", "order": 1, "name": "Cosechar hierbas", "description": "2 Pociones de Curación o 10 Kits de Curación. Gratis. Tarda 1 misión."},
+	{"id": "veneno", "order": 1, "name": "Cosechar veneno", "description": "1 veneno básico o 2 viales de Antitoxina. Gratis. Tarda 1 misión."},
+	{"id": "pocion_mayor", "order": 1, "name": "Poción de Curación (mayor)", "description": "Requiere Bastión nivel 2+. 1 Poción de Curación Mayor. Tarda 1 misión.", "requires_bastion_level": 2},
+]

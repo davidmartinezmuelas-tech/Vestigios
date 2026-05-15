@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "sala_entrenamiento"
+display_name = "Sala de Entrenamiento"
+description = "Patio de armas, maniquíes de práctica y equipo de gimnasio. Un entrenador experto enseña a quienes se queden en el Bastión."
+required_bastion_level = 2
+prerequisite_flag = ""
+space = 2
+hireling_count = 4
+available_orders = [2, 6]
+build_cost = 2000
+build_missions = 2
+order_options = [
+	{"id": "entrenamiento_combate", "order": 2, "name": "Entrenamiento de combate", "description": "Reducir 1d4 daño recibido por reacción. Dura hasta la siguiente misión."},
+	{"id": "entrenamiento_habilidades", "order": 2, "name": "Entrenamiento de habilidades", "description": "Competencia en Acrobacias, Atletismo, Sigilo, Actuación o Juego de Manos. Dura hasta la siguiente misión."},
+	{"id": "entrenamiento_armas", "order": 2, "name": "Entrenamiento con armas", "description": "Competencia + maestría en un tipo de arma. Dura hasta la siguiente misión."},
+]

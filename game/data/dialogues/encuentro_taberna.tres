@@ -1,0 +1,164 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+; ── TIRADAS ──
+[sub_resource type="Resource" id="check_perspicacia_johannes"]
+script = ExtResource("4")
+skill_name = "Perspicacia"
+ability = "wis"
+difficulty_class = 13
+success_node_id = "percibe_johannes"
+failure_node_id = "no_percibe_johannes"
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_nos_conoces"]
+script = ExtResource("3")
+text = "\"¿Nos conocías?\""
+next_node_id = "johannes_responde_conoce"
+
+[sub_resource type="Resource" id="choice_quien_eres"]
+script = ExtResource("3")
+text = "\"¿Quién eres?\""
+next_node_id = "johannes_responde_quien"
+
+[sub_resource type="Resource" id="choice_estudiar_johannes"]
+script = ExtResource("3")
+text = "Estudiarle antes de hablar."
+skill_check = SubResource("check_perspicacia_johannes")
+
+[sub_resource type="Resource" id="choice_solo_naeren"]
+script = ExtResource("3")
+text = "[Naeren mira en sus pensamientos superficiales.]"
+required_character_id = "naeren"
+next_node_id = "naeren_lee_johannes"
+sets_flag = "naeren_leyo_johannes"
+
+[sub_resource type="Resource" id="choice_continuar_al_combate"]
+script = ExtResource("3")
+text = "\"Entonces tenemos un problema.\""
+next_node_id = "pre_combate"
+
+[sub_resource type="Resource" id="choice_ignorar_y_beber"]
+script = ExtResource("3")
+text = "\"Bien. Estamos de paso.\""
+next_node_id = "johannes_insiste"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "La taberna del Ciervo Muerto huele a cerveza rancia y mentiras más añejas. Son pasadas las nueve. Demasiada gente para un pueblo minero en un martes."
+choices = []
+auto_next = "taberna_llegada"
+
+[sub_resource type="Resource" id="node_llegada"]
+script = ExtResource("2")
+node_id = "taberna_llegada"
+speaker_id = "lyth"
+emotion = "neutral"
+text = "No me gusta este sitio."
+choices = []
+auto_next = "naeren_observa"
+
+[sub_resource type="Resource" id="node_naeren_observa"]
+script = ExtResource("2")
+node_id = "naeren_observa"
+speaker_id = "naeren"
+emotion = "focused"
+text = "[Naeren barre la sala con la mirada. Al fondo, un hombre con demasiada ropa para el calor que hace los mira fijamente desde hace treinta segundos.]"
+choices = []
+auto_next = "johannes_saluda"
+narrator_bark = "Hay alguien que no debería estar aquí."
+
+[sub_resource type="Resource" id="node_johannes_saluda"]
+script = ExtResource("2")
+node_id = "johannes_saluda"
+speaker_id = "npc"
+emotion = "happy"
+text = "Llevaba una hora apostando que llegaríais tarde. — La voz sale de una figura inclinada sobre una mano de cartas —. He ganado. Aunque nadie más apostaba."
+choices = [SubResource("choice_nos_conoces"), SubResource("choice_quien_eres"), SubResource("choice_estudiar_johannes"), SubResource("choice_solo_naeren")]
+
+[sub_resource type="Resource" id="node_responde_conoce"]
+script = ExtResource("2")
+node_id = "johannes_responde_conoce"
+speaker_id = "npc"
+emotion = "happy"
+text = "\"¿Conoceros? No exactamente. Sé quién os manda. Y sé que Lyris no manda a nadie a este pozo si no tiene un motivo muy concreto.\" Se levanta sin dejar de barajar las cartas. \"Johannes Varell. Y sí, estoy libre.\""
+choices = [SubResource("choice_continuar_al_combate"), SubResource("choice_ignorar_y_beber")]
+
+[sub_resource type="Resource" id="node_responde_quien"]
+script = ExtResource("2")
+node_id = "johannes_responde_quien"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Alguien que lleva tres semanas en este pueblo esperando que pasase algo interesante.\" Señala con discreción hacia el fondo de la sala. \"Lo interesante acaba de llegar. Y no sois vosotros.\""
+choices = [SubResource("choice_continuar_al_combate")]
+
+[sub_resource type="Resource" id="node_percibe_johannes"]
+script = ExtResource("2")
+node_id = "percibe_johannes"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Está nervioso aunque lo disimula bien. Ha estado aquí el tiempo suficiente para memorizar la sala. No mira a los soldados del fondo directamente — solo de reojo. Los conoce."
+choices = [SubResource("choice_nos_conoces"), SubResource("choice_continuar_al_combate")]
+narrator_bark = "Sabe quiénes son los soldados."
+
+[sub_resource type="Resource" id="node_no_percibe_johannes"]
+script = ExtResource("2")
+node_id = "no_percibe_johannes"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Parece un tahúr local. Nada más."
+choices = [SubResource("choice_nos_conoces"), SubResource("choice_continuar_al_combate")]
+
+[sub_resource type="Resource" id="node_naeren_lee_johannes"]
+script = ExtResource("2")
+node_id = "naeren_lee_johannes"
+speaker_id = "naeren"
+emotion = "focused"
+text = "[Un destello. Sabe de Lyris. Sabe de vosotros. Y sabe algo más — algo sobre los soldados — que no ha dicho todavía.]"
+choices = [SubResource("choice_continuar_al_combate")]
+narrator_bark = "Johannes oculta algo sobre los soldados."
+
+[sub_resource type="Resource" id="node_johannes_insiste"]
+script = ExtResource("2")
+node_id = "johannes_insiste"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"Podéis ignorarme. Pero los dos hombres del fondo llevan veinte minutos mirando vuestras espaldas, y uno de ellos tiene la mano en el cuchillo.\" Pausa. \"Solo informo.\""
+choices = [SubResource("choice_continuar_al_combate")]
+
+[sub_resource type="Resource" id="node_pre_combate"]
+script = ExtResource("2")
+node_id = "pre_combate"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Johannes deja las cartas sobre la mesa. \"Hay dos al frente y dos bloqueando la salida trasera. Los del frente se moverán primero — siempre lo hacen.\" Se pone en pie. \"¿Vuestro plan?\""
+choices = []
+ends_dialogue = true
+narrator_bark = "Dos soldados avanzan desde el fondo."
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "encuentro_taberna"
+npc_character_id = "johannes"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_llegada"),
+	SubResource("node_naeren_observa"),
+	SubResource("node_johannes_saluda"),
+	SubResource("node_responde_conoce"),
+	SubResource("node_responde_quien"),
+	SubResource("node_percibe_johannes"),
+	SubResource("node_no_percibe_johannes"),
+	SubResource("node_naeren_lee_johannes"),
+	SubResource("node_johannes_insiste"),
+	SubResource("node_pre_combate"),
+]

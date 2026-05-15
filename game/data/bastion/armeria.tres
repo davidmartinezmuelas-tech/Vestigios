@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "armeria"
+display_name = "Armería"
+description = "Maniquíes con armaduras, estantes de armas y cofres de munición. Cuando está abastecida, los Defensores del Bastión son más difíciles de matar: se tira 1d8 en lugar de 1d6 al calcular bajas."
+required_bastion_level = 2
+prerequisite_flag = ""
+space = 1
+hireling_count = 1
+available_orders = [5, 6]
+build_cost = 1500
+build_missions = 1
+order_options = [
+	{"id": "abastecer_armeria", "order": 5, "name": "Abastecer armería", "description": "Coste: 100 PO + 100 PO por Defensor (mitad si hay Forja). Hasta el siguiente ataque: tirar 1d8 en lugar de 1d6 por cada Defensor en riesgo."},
+]

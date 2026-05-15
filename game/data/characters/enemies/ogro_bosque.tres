@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+
+; Garrote — 2d8+4 contundente
+[sub_resource type="Resource" id="ability_ogro_1"]
+script = ExtResource("2")
+ability_id = "garrote_ogro"
+display_name = "Garrote"
+description = "El ogro aplasta con su garrote improvisado. Capaz de derribar a cualquiera."
+ability_type = 0
+target_type = 0
+range_tiles = 1
+attack_ability = "str"
+uses_proficiency = true
+damage_dice_count = 2
+damage_dice_sides = 8
+damage_ability = "str"
+save_ability = "con"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+[resource]
+script = ExtResource("1")
+character_id = "ogro_bosque"
+display_name = "Ogro del Bosque"
+is_hero = false
+level = 2
+hit_dice_sides = 10
+proficiency_bonus = 2
+strength = 19
+dexterity = 8
+constitution = 16
+intelligence = 5
+wisdom = 7
+charisma = 7
+armor_class = 11
+saving_throw_proficiencies = ["str"]
+speed_ft = 40
+max_stress = 100
+xp_reward = 450
+challenge_rating = 2.0
+abilities = [SubResource("ability_ogro_1")]

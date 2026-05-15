@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+
+; Golpe Sagrado — ataque cuerpo a cuerpo (STR), 1d8+STR
+[sub_resource type="Resource" id="ability_vael_1"]
+script = ExtResource("2")
+ability_id = "golpe_sagrado"
+display_name = "Golpe Sagrado"
+description = "Un golpe imbuido de la energía de la Vida Antigua. Ataque cuerpo a cuerpo, 1d8+STR."
+ability_type = 0
+target_type = 0
+range_tiles = 1
+attack_ability = "str"
+uses_proficiency = true
+damage_dice_count = 1
+damage_dice_sides = 8
+damage_ability = "str"
+save_ability = "con"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+; Imposición de Manos — curación directa, 1d8+CHA
+[sub_resource type="Resource" id="ability_vael_2"]
+script = ExtResource("2")
+ability_id = "imposicion_de_manos"
+display_name = "Imposición de Manos"
+description = "Vael posa la mano sobre un aliado. La Vida cierra sus heridas. Cura 1d8+CHA."
+ability_type = 3
+target_type = 2
+range_tiles = 1
+attack_ability = "cha"
+uses_proficiency = false
+damage_dice_count = 1
+damage_dice_sides = 8
+damage_ability = "cha"
+save_ability = "con"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+[resource]
+script = ExtResource("1")
+character_id = "vael"
+class_id = "paladin"
+subclass_id = "juramento_vida"
+has_weapon_mastery = true
+hit_dice_remaining = 1
+display_name = "Vael"
+is_hero = true
+level = 1
+hit_dice_sides = 10
+proficiency_bonus = 2
+strength = 16
+dexterity = 10
+constitution = 14
+intelligence = 10
+wisdom = 12
+charisma = 14
+armor_class = 18
+saving_throw_proficiencies = ["wis", "cha"]
+speed_ft = 30
+max_stress = 100
+abilities = [SubResource("ability_vael_1"), SubResource("ability_vael_2")]
+cantrip_ids = []
+spell_ids = ["castigo_divino", "curar_heridas", "heroismo", "escudo_fe", "detectar_mal_bien", "restauracion_menor", "auxilio"]

@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+
+[sub_resource type="Resource" id="choice_que_buscar"]
+script = ExtResource("3")
+text = "\"¿Qué buscamos exactamente en Arcanis?\""
+next_node_id = "lyris_objetivo_arcanis"
+
+[sub_resource type="Resource" id="choice_por_que_nosotros"]
+script = ExtResource("3")
+text = "\"¿Por qué nosotros? Hay agentes más experimentados.\""
+next_node_id = "lyris_por_que_nosotros"
+
+[sub_resource type="Resource" id="choice_calder"]
+script = ExtResource("3")
+text = "\"Antes de ir a Arcanis — ¿quién es Calder Reth?\""
+required_flag = "lyris_menciono_calder"
+next_node_id = "lyris_calder_info"
+
+[sub_resource type="Resource" id="choice_aceptar"]
+script = ExtResource("3")
+text = "\"Entendido. Estaremos en el barco.\""
+next_node_id = "lyris_cierre_arcanis"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "La mañana llega con sol y con Lyris. Está frente al barco que os ha preparado, con un mapa doblado en la mano y el aspecto de alguien que ha dormido bien aunque no haya dormido nada."
+choices = []
+auto_next = "lyris_apertura_arcanis"
+
+[sub_resource type="Resource" id="node_apertura"]
+script = ExtResource("2")
+node_id = "lyris_apertura_arcanis"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Arcanis. La ciudad en la isla. Los académicos saben algo que no están compartiendo. La carta de Vorn los menciona oblicuamente — algo bajo la Aguja de Marfil.\" Despliega el mapa. \"Tenéis que entrar, averiguar qué es, y salir sin que nadie sepa que estuvisteis allí.\""
+choices = [SubResource("choice_que_buscar"), SubResource("choice_por_que_nosotros"), SubResource("choice_calder"), SubResource("choice_aceptar")]
+
+[sub_resource type="Resource" id="node_objetivo"]
+script = ExtResource("2")
+node_id = "lyris_objetivo_arcanis"
+speaker_id = "npc"
+emotion = "focused"
+text = "\"Hay algo sellado bajo la torre principal. Los académicos llevan años estudiándolo sin entenderlo. Kethara sabe que existe. Vorn lo sabía. Eso lo convierte en prioritario.\" Una pausa. \"Si Kethara lo quiere intacto, nosotros necesitamos saber por qué.\""
+choices = [SubResource("choice_por_que_nosotros"), SubResource("choice_aceptar")]
+narrator_bark = "Algo bajo la Aguja de Marfil. El fragmento de Las Profundidades."
+
+[sub_resource type="Resource" id="node_por_que"]
+script = ExtResource("2")
+node_id = "lyris_por_que_nosotros"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Porque los agentes experimentados están en Kethara, en Meredan, o muertos.\" Lo dice sin énfasis. \"Y porque vosotros acabáis de demostrar que podéis improvisar.\" Eso, viniendo de Lyris, es un cumplido considerable."
+choices = [SubResource("choice_que_buscar"), SubResource("choice_aceptar")]
+
+[sub_resource type="Resource" id="node_calder"]
+script = ExtResource("2")
+node_id = "lyris_calder_info"
+speaker_id = "npc"
+emotion = "focused"
+text = "\"Tiefling rojo. Controla el flujo de dinero entre Velthar y Kethara en Meredan. No toma partido porque la guerra es su fuente de ingresos.\" Una pausa muy leve. \"Si la carta de Vorn iba dirigida a él, hay una conversación pendiente en Meredan. Pero eso es después de Arcanis.\""
+choices = [SubResource("choice_aceptar")]
+narrator_bark = "Calder Reth. El nombre que Sela conoce."
+sets_flag = "lyris_confirmo_calder"
+
+[sub_resource type="Resource" id="node_cierre"]
+script = ExtResource("2")
+node_id = "lyris_cierre_arcanis"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"El barco zarpa a mediodía. Tened cuidado en Arcanis — los académicos son más peligrosos de lo que parecen cuando creen que saben algo que vosotros no.\" Se da la vuelta. \"Y... buen trabajo en el fuerte.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "Destino: Arcanis. La ciudad que flota entre el conocimiento y el peligro."
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "lyris_briefing_arcanis"
+npc_character_id = "lyris"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_apertura"),
+	SubResource("node_objetivo"),
+	SubResource("node_por_que"),
+	SubResource("node_calder"),
+	SubResource("node_cierre"),
+]

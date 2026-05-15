@@ -1,0 +1,150 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+; ── TIRADAS (CDs más altas — segundo encuentro, los soldados están alerta) ──
+[sub_resource type="Resource" id="check_engano_2"]
+script = ExtResource("4")
+skill_name = "Engaño"
+ability = "cha"
+difficulty_class = 16
+success_node_id = "engano_exito_2"
+failure_node_id = "engano_fallo_2"
+
+[sub_resource type="Resource" id="check_perspicacia_2"]
+script = ExtResource("4")
+skill_name = "Perspicacia"
+ability = "wis"
+difficulty_class = 13
+success_node_id = "perspicacia_exito_2"
+failure_node_id = "perspicacia_fallo_2"
+
+[sub_resource type="Resource" id="check_sigilo_2"]
+script = ExtResource("4")
+skill_name = "Sigilo"
+ability = "dex"
+difficulty_class = 16
+success_node_id = "sigilo_exito_2"
+failure_node_id = "sigilo_fallo_2"
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_engañar_2"]
+script = ExtResource("3")
+text = "Inventar otra historia diferente."
+skill_check = SubResource("check_engano_2")
+
+[sub_resource type="Resource" id="choice_perspicacia_2"]
+script = ExtResource("3")
+text = "Estudiar su formación antes de hablar."
+skill_check = SubResource("check_perspicacia_2")
+
+[sub_resource type="Resource" id="choice_esconderse_2"]
+script = ExtResource("3")
+text = "Esconderse de nuevo en la oscuridad."
+skill_check = SubResource("check_sigilo_2")
+
+[sub_resource type="Resource" id="choice_pelear_2"]
+script = ExtResource("3")
+text = "Atacar primero."
+next_node_id = "combate_2"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "A una legua del fuerte, las luces de otro carro parpadean en el camino. Este lleva más soldados — cuatro, y están prestando atención. Alguien les avisó."
+choices = []
+auto_next = "soldado_patrulla"
+
+[sub_resource type="Resource" id="node_patrulla"]
+script = ExtResource("2")
+node_id = "soldado_patrulla"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Identifícaos. Hemos recibido aviso de intrusos en el camino esta noche.\""
+choices = [SubResource("choice_perspicacia_2"), SubResource("choice_engañar_2"), SubResource("choice_esconderse_2"), SubResource("choice_pelear_2")]
+
+[sub_resource type="Resource" id="node_perspicacia_exito"]
+script = ExtResource("2")
+node_id = "perspicacia_exito_2"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Lees la situación: el cabo está nervioso pero no tiene pruebas. Con la historia correcta podéis pasar — quiere dejaros ir más de lo que quiere problemas."
+choices = [SubResource("choice_engañar_2")]
+narrator_bark = "El cabo quiere que esto sea simple. Dáselo."
+
+[sub_resource type="Resource" id="node_perspicacia_fallo"]
+script = ExtResource("2")
+node_id = "perspicacia_fallo_2"
+speaker_id = "npc"
+emotion = "neutral"
+text = "No puedes leer bien la situación con tanta oscuridad."
+choices = [SubResource("choice_engañar_2"), SubResource("choice_esconderse_2"), SubResource("choice_pelear_2")]
+
+[sub_resource type="Resource" id="node_engano_exito"]
+script = ExtResource("2")
+node_id = "engano_exito_2"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El cabo os mira fijamente. Luego a sus soldados. \"Dejadlos.\" Una decisión que le costará dormir esta noche, pero os deja pasar."
+choices = []
+ends_dialogue = true
+narrator_bark = "Segundo encuentro superado. El fuerte está a la vista."
+
+[sub_resource type="Resource" id="node_engano_fallo"]
+script = ExtResource("2")
+node_id = "engano_fallo_2"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"¡Mentira! ¡Esos son los intrusos! ¡A por ellos!\""
+choices = [SubResource("choice_pelear_2")]
+
+[sub_resource type="Resource" id="node_sigilo_exito"]
+script = ExtResource("2")
+node_id = "sigilo_exito_2"
+speaker_id = "npc"
+emotion = "neutral"
+text = "La oscuridad trabaja a vuestro favor. Cuatro soldados, cuatro linternas apuntando al camino — nadie mira las cunetas. Os deslizáis."
+choices = []
+ends_dialogue = true
+narrator_bark = "Habéis llegado a la linde del bosque. El fuerte está frente a vosotros."
+
+[sub_resource type="Resource" id="node_sigilo_fallo"]
+script = ExtResource("2")
+node_id = "sigilo_fallo_2"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"¡Movimiento en el margen! ¡Formad!\""
+choices = [SubResource("choice_pelear_2")]
+
+[sub_resource type="Resource" id="node_combate"]
+script = ExtResource("2")
+node_id = "combate_2"
+speaker_id = "npc"
+emotion = "angry"
+text = "Cuatro soldados armados. La noche se llena de acero."
+choices = []
+ends_dialogue = true
+narrator_bark = "¡Combate! Cuatro guardias del fuerte."
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "camino_encuentro_2"
+npc_character_id = "guardia_fuerte"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_patrulla"),
+	SubResource("node_perspicacia_exito"),
+	SubResource("node_perspicacia_fallo"),
+	SubResource("node_engano_exito"),
+	SubResource("node_engano_fallo"),
+	SubResource("node_sigilo_exito"),
+	SubResource("node_sigilo_fallo"),
+	SubResource("node_combate"),
+]

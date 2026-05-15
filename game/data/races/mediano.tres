@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/race_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/character_creation/racial_trait.gd" id="2"]
+
+[sub_resource type="Resource" id="trait_mediano_base"]
+script = ExtResource("2")
+trait_id = "suerte_mediana"
+display_name = "Suerte mediana"
+description = "+2 DEX, +1 CHA. Velocidad 7,5m. Suerte: repite los 1 naturales. Valentía: ventaja contra el miedo. Agilidad mediana: puedes moverte por el espacio de criaturas más grandes."
+ability_bonuses = {"dex": 2, "cha": 1}
+skill_proficiencies = []
+damage_resistances = []
+speed_bonus = 0
+has_darkvision = false
+
+[resource]
+script = ExtResource("1")
+race_id = "mediano"
+display_name = "Mediano"
+description = "Los medianos prefieren la comodidad del hogar, pero cuando el camino los llama, resultan ser los compañeros más tenaces y afortunados que puedas encontrar."
+size = "small"
+base_speed = 25
+traits = [SubResource("trait_mediano_base")]
+portrait_sets = []

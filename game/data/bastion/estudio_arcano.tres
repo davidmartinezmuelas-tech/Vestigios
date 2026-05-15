@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "estudio_arcano"
+display_name = "Estudio Arcano"
+description = "Sala de investigación tranquila con escritorios y estanterías. Genera un encantamiento que permite identificar objetos mágicos una vez por semana."
+required_bastion_level = 1
+prerequisite_flag = "can_use_arcane_focus"
+space = 1
+hireling_count = 1
+available_orders = [0, 6]
+build_cost = 1200
+build_missions = 1
+order_options = [
+	{"id": "craft_foco_arcano", "order": 0, "name": "Fabricar Foco Arcano", "description": "El hireling fabrica un Foco Arcano. Tarda 1 misión. Gratis."},
+	{"id": "craft_libro_en_blanco", "order": 0, "name": "Fabricar libro en blanco", "description": "El hireling fabrica un libro en blanco. Tarda 1 misión. Coste: 10 PO."},
+	{"id": "craft_objeto_magico_arcana", "order": 0, "name": "Fabricar objeto mágico (Arcana)", "description": "Requiere Bastión nivel 3+. Objeto Común o Infrecuente de las tablas de Arcana.", "requires_bastion_level": 3},
+]

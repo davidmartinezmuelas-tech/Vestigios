@@ -1,0 +1,171 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+; ── TIRADAS ──
+[sub_resource type="Resource" id="check_persuasion_ogro"]
+script = ExtResource("4")
+skill_name = "Persuasión"
+ability = "cha"
+difficulty_class = 20
+success_node_id = "ogro_cede"
+failure_node_id = "ogro_rechaza"
+
+[sub_resource type="Resource" id="check_engano_ogro"]
+script = ExtResource("4")
+skill_name = "Engaño"
+ability = "cha"
+difficulty_class = 18
+success_node_id = "ogro_engañado"
+failure_node_id = "ogro_enfadado"
+
+[sub_resource type="Resource" id="check_naturaleza_ogro"]
+script = ExtResource("4")
+skill_name = "Naturaleza"
+ability = "int"
+difficulty_class = 12
+success_node_id = "conoce_ogros"
+failure_node_id = "no_sabe_ogros"
+has_disadvantage = true
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_comprar"]
+script = ExtResource("3")
+text = "\"¿Qué quieres a cambio del tesoro?\""
+skill_check = SubResource("check_persuasion_ogro")
+
+[sub_resource type="Resource" id="choice_engañar"]
+script = ExtResource("3")
+text = "\"Somos los guardaespaldas del dueño del tesoro.\""
+skill_check = SubResource("check_engano_ogro")
+
+[sub_resource type="Resource" id="choice_naturaleza"]
+script = ExtResource("3")
+text = "Intentar recordar qué se sabe sobre los ogros."
+skill_check = SubResource("check_naturaleza_ogro")
+
+[sub_resource type="Resource" id="choice_pelear"]
+script = ExtResource("3")
+text = "Atacar."
+next_node_id = "combate_ogro"
+
+[sub_resource type="Resource" id="choice_irse"]
+script = ExtResource("3")
+text = "\"No vale la pena. Nos vamos.\""
+next_node_id = "sin_tesoro"
+
+[sub_resource type="Resource" id="choice_tras_conocer"]
+script = ExtResource("3")
+text = "Usar lo que sabes de ogros."
+skill_check = SubResource("check_persuasion_ogro")
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "angry"
+text = "El ogro os bloquea el paso al claro. Una mole de dos metros y medio que huele a tierra húmeda y no ha dormido bien. El tesoro brilla detrás de él, al pie del árbol."
+choices = []
+auto_next = "ogro_gruñe"
+
+[sub_resource type="Resource" id="node_ogrogrune"]
+script = ExtResource("2")
+node_id = "ogro_gruñe"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"Mío. Todo mío. Iros.\""
+choices = [SubResource("choice_comprar"), SubResource("choice_engañar"), SubResource("choice_naturaleza"), SubResource("choice_pelear"), SubResource("choice_irse")]
+
+[sub_resource type="Resource" id="node_conoce_ogros"]
+script = ExtResource("2")
+node_id = "conoce_ogros"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Los ogros valoran la fuerza y el intercambio directo. No entienden el engaño pero sí la negociación honesta. Odian que los subestimen."
+choices = [SubResource("choice_tras_conocer"), SubResource("choice_pelear")]
+narrator_bark = "Un ogro honesto: si le ofreces algo real, podría escuchar."
+
+[sub_resource type="Resource" id="node_no_sabe_ogros"]
+script = ExtResource("2")
+node_id = "no_sabe_ogros"
+speaker_id = "npc"
+emotion = "neutral"
+text = "La oscuridad del bosque hace difícil pensar. No recuerdas nada útil sobre ogros."
+choices = [SubResource("choice_comprar"), SubResource("choice_pelear"), SubResource("choice_irse")]
+
+[sub_resource type="Resource" id="node_ogro_cede"]
+script = ExtResource("2")
+node_id = "ogro_cede"
+speaker_id = "npc"
+emotion = "happy"
+text = "El ogro os mira durante un tiempo que parece demasiado largo. Luego se aparta. \"Una cosa. Solo una. Y os vais.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "El ogro accede. Podéis coger un objeto del tesoro."
+
+[sub_resource type="Resource" id="node_ogro_rechaza"]
+script = ExtResource("2")
+node_id = "ogro_rechaza"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"No. Mío.\""
+choices = [SubResource("choice_engañar"), SubResource("choice_pelear"), SubResource("choice_irse")]
+
+[sub_resource type="Resource" id="node_ogro_engañado"]
+script = ExtResource("2")
+node_id = "ogro_engañado"
+speaker_id = "npc"
+emotion = "scared"
+text = "El ogro parpadea. \"¿Dueño?\" Parece genuinamente confundido. Mientras procesa la información, hay una ventana muy pequeña para actuar."
+choices = []
+ends_dialogue = true
+narrator_bark = "El ogro está confundido. Tenéis un momento para tomar algo y correr."
+
+[sub_resource type="Resource" id="node_ogro_enfadado"]
+script = ExtResource("2")
+node_id = "ogro_enfadado"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"¡Mentira! ¡No hay dueño! ¡Mío!\""
+choices = [SubResource("choice_pelear"), SubResource("choice_irse")]
+
+[sub_resource type="Resource" id="node_combate"]
+script = ExtResource("2")
+node_id = "combate_ogro"
+speaker_id = "npc"
+emotion = "angry"
+text = "El ogro ruge y levanta su garrote."
+choices = []
+ends_dialogue = true
+narrator_bark = "¡Combate!"
+
+[sub_resource type="Resource" id="node_sin_tesoro"]
+script = ExtResource("2")
+node_id = "sin_tesoro"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El ogro gruñe satisfecho mientras os alejáis. El tesoro sigue siendo suyo."
+choices = []
+ends_dialogue = true
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "ogro_encuentro"
+npc_character_id = "ogro_bosque"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_ogrogrune"),
+	SubResource("node_conoce_ogros"),
+	SubResource("node_no_sabe_ogros"),
+	SubResource("node_ogro_cede"),
+	SubResource("node_ogro_rechaza"),
+	SubResource("node_ogro_engañado"),
+	SubResource("node_ogro_enfadado"),
+	SubResource("node_combate"),
+	SubResource("node_sin_tesoro"),
+]

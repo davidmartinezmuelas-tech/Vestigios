@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "bestial"
+display_name = "Bestial"
+description = "Recintos para albergar hasta 4 criaturas grandes. Las criaturas cuentan como Defensores del Bastión. Puedes reclutar bestias de distintos niveles de desafío pagando su coste."
+required_bastion_level = 3
+prerequisite_flag = ""
+space = 2
+hireling_count = 2
+available_orders = [3, 6]
+build_cost = 4000
+build_missions = 2
+order_options = [
+	{"id": "reclutar_bestia", "order": 3, "name": "Reclutar bestia", "description": "Los hirelings buscan una bestia de la lista del Bestial. Coste según el CR de la criatura (50-3500 PO). Tarda 1 misión. La bestia actúa como Defensor del Bastión."},
+]

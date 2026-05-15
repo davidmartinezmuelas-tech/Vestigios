@@ -1,0 +1,93 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+
+[sub_resource type="Resource" id="choice_que_encontraste"]
+script = ExtResource("3")
+text = "\"¿Qué has encontrado en sus aposentos?\""
+next_node_id = "lyris_carta"
+
+[sub_resource type="Resource" id="choice_siguiente_paso"]
+script = ExtResource("3")
+text = "\"¿Qué hacemos ahora?\""
+next_node_id = "lyris_siguiente"
+
+[sub_resource type="Resource" id="choice_celebrar"]
+script = ExtResource("3")
+text = "\"Esta noche hay que celebrarlo.\""
+next_node_id = "lyris_celebracion"
+
+[sub_resource type="Resource" id="choice_continuar"]
+script = ExtResource("3")
+text = "\"Entendido.\""
+next_node_id = "lyris_cierre"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El sonido de cascos llena el aire antes de que la vanguardia aparezca por la puerta. Treinta soldados de Velthar. Detrás de ellos, una figura que conocéis bien. Lyris Nightveil os mira desde el umbral del fuerte con la misma expresión de siempre: la de alguien que ya sabía cómo iba a terminar esto."
+choices = []
+auto_next = "lyris_abre"
+
+[sub_resource type="Resource" id="node_lyris_abre"]
+script = ExtResource("2")
+node_id = "lyris_abre"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Vorn está muerto. Los rehenes, liberados. El fuerte, en manos de Velthar.\" Pausa. \"Bien hecho. Aunque lleváis cuarenta minutos de retraso respecto a mi estimación.\""
+choices = [SubResource("choice_que_encontraste"), SubResource("choice_siguiente_paso"), SubResource("choice_celebrar")]
+
+[sub_resource type="Resource" id="node_lyris_carta"]
+script = ExtResource("2")
+node_id = "lyris_carta"
+speaker_id = "npc"
+emotion = "focused"
+text = "\"Una carta. Sin firma, pero con el sello de Meredan.\" Os la muestra brevemente antes de guardarla. \"Vorn esperaba instrucciones que nunca llegaron. Alguien en Meredan está moviendo piezas que ni Kethara conoce todavía.\" Sus ojos os estudian. \"¿Habéis oído ese nombre antes? Calder Reth.\""
+choices = [SubResource("choice_siguiente_paso"), SubResource("choice_celebrar")]
+narrator_bark = "La carta conecta el fuerte con alguien en Meredan."
+sets_flag = "lyris_menciono_calder"
+
+[sub_resource type="Resource" id="node_lyris_siguiente"]
+script = ExtResource("2")
+node_id = "lyris_siguiente"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Esta noche, descansad. Mañana, hablamos. Hay algo en Arcanis que necesita vuestra atención — y un barco que no puede esperar.\""
+choices = [SubResource("choice_celebrar")]
+
+[sub_resource type="Resource" id="node_lyris_celebracion"]
+script = ExtResource("2")
+node_id = "lyris_celebracion"
+speaker_id = "npc"
+emotion = "happy"
+text = "El amago más leve de una sonrisa. \"La gente del pueblo lo merece. Y vosotros también.\" Una pausa. \"No abuséis. Tenéis barco mañana.\""
+choices = [SubResource("choice_continuar")]
+
+[sub_resource type="Resource" id="node_lyris_cierre"]
+script = ExtResource("2")
+node_id = "lyris_cierre"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Lyris se da la vuelta y empieza a dar órdenes a los soldados. El fuerte de Piedra Gris tiene un nuevo dueño."
+choices = []
+ends_dialogue = true
+narrator_bark = "La noche comienza."
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "lyris_llegada_fuerte"
+npc_character_id = "lyris"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_lyris_abre"),
+	SubResource("node_lyris_carta"),
+	SubResource("node_lyris_siguiente"),
+	SubResource("node_lyris_celebracion"),
+	SubResource("node_lyris_cierre"),
+]

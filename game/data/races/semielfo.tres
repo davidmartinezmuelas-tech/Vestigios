@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/race_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/character_creation/racial_trait.gd" id="2"]
+
+[sub_resource type="Resource" id="trait_semielfo_base"]
+script = ExtResource("2")
+trait_id = "herencia_multiple"
+display_name = "Herencia múltiple"
+description = "+2 CHA, +1 a dos características a elección. Visión en la oscuridad 18m. Herencia feérica. Competencia en 2 habilidades adicionales a elección."
+ability_bonuses = {"cha": 2, "dex": 1, "wis": 1}
+skill_proficiencies = []
+damage_resistances = []
+speed_bonus = 0
+has_darkvision = true
+darkvision_range_ft = 60
+
+[resource]
+script = ExtResource("1")
+race_id = "semielfo"
+display_name = "Semielfo"
+description = "Los semielfo transitan entre dos mundos sin pertenecer del todo a ninguno. Eso les da una perspectiva única — y una soledad que pocos comprenden."
+size = "medium"
+base_speed = 30
+traits = [SubResource("trait_semielfo_base")]
+portrait_sets = []

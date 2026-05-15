@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "plano_dimensional"
+display_name = "Plano Dimensional"
+description = "Una puerta en otra facilidad lleva a una sala de piedra en un espacio extradimensional. No puede ser disipada. Permite crear objetos pequeños de la nada. Quien duerma aquí gana PG Temporales."
+required_bastion_level = 4
+prerequisite_flag = "can_use_arcane_focus"
+space = 2
+hireling_count = 1
+available_orders = [2, 6]
+build_cost = 8000
+build_missions = 3
+order_options = [
+	{"id": "resiliencia_arcana", "order": 2, "name": "Resiliencia arcana", "description": "Runas mágicas en las paredes del plano durante 7 días. Al terminar un Descanso Largo aquí: ganar PG Temporales igual a 5 × nivel del personaje."},
+]

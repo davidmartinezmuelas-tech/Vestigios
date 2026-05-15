@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "sala_trofeos"
+display_name = "Sala de Trofeos"
+description = "Colección de recuerdos, armas de viejas batallas, cabezas de criaturas derrotadas y reliquias. El hireling investiga temas usando los trofeos como punto de partida."
+required_bastion_level = 2
+prerequisite_flag = ""
+space = 1
+hireling_count = 1
+available_orders = [4, 6]
+build_cost = 1200
+build_missions = 1
+order_options = [
+	{"id": "investigar_lore", "order": 4, "name": "Investigar lore", "description": "El hireling investiga una criatura, leyenda u objeto. Tarda 1 misión. Devuelve hasta 3 datos precisos desconocidos."},
+	{"id": "buscar_objeto", "order": 4, "name": "Buscar objeto útil", "description": "El hireling busca un objeto aprovechable entre los trofeos. Tirar dado: par → objeto mágico Común aleatorio."},
+]

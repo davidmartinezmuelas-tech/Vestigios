@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "archivo"
+display_name = "Archivo"
+description = "Repositorio de libros raros, mapas y pergaminos, adjunto a la Biblioteca. Contiene un libro de referencia único que otorga ventaja en una categoría de tiradas de Conocimiento."
+required_bastion_level = 3
+prerequisite_flag = ""
+space = 1
+hireling_count = 1
+available_orders = [4, 6]
+build_cost = 3000
+build_missions = 2
+order_options = [
+	{"id": "lore_profundo", "order": 4, "name": "Investigación profunda", "description": "Como el conjuro Leyenda. El hireling obtiene información sobre cualquier persona, lugar u objeto legendario. Tarda 1 misión."},
+]

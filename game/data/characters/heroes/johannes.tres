@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+
+; Golpe Resonante — ataque cuerpo a cuerpo de fineza (DEX), 1d6+DEX
+[sub_resource type="Resource" id="ability_johannes_1"]
+script = ExtResource("2")
+ability_id = "golpe_resonante"
+display_name = "Golpe Resonante"
+description = "Un golpe con eco psíquico que desestabiliza al objetivo. Ataque de fineza."
+ability_type = 0
+target_type = 0
+range_tiles = 1
+attack_ability = "dex"
+uses_proficiency = true
+damage_dice_count = 1
+damage_dice_sides = 6
+damage_ability = "dex"
+save_ability = "dex"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+; Melodía Vigorizante — curación 1d6+CHA
+[sub_resource type="Resource" id="ability_johannes_2"]
+script = ExtResource("2")
+ability_id = "melodia_vigorizante"
+display_name = "Melodía Vigorizante"
+description = "Una melodía que cierra heridas de un aliado. Cura 1d6+CHA."
+ability_type = 3
+target_type = 2
+range_tiles = 6
+attack_ability = "cha"
+uses_proficiency = false
+damage_dice_count = 1
+damage_dice_sides = 6
+damage_ability = "cha"
+save_ability = "con"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+[resource]
+script = ExtResource("1")
+character_id = "johannes"
+class_id = "bardo"
+subclass_id = "colegio_arcanis"
+hit_dice_remaining = 1
+display_name = "Johannes Varell"
+is_hero = true
+level = 1
+hit_dice_sides = 8
+proficiency_bonus = 2
+strength = 10
+dexterity = 14
+constitution = 12
+intelligence = 13
+wisdom = 10
+charisma = 16
+armor_class = 13
+saving_throw_proficiencies = ["dex", "cha"]
+speed_ft = 30
+max_stress = 100
+abilities = [SubResource("ability_johannes_1"), SubResource("ability_johannes_2")]
+cantrip_ids = ["burla_danosa", "ilusion_menor", "prestidigitacion"]
+spell_ids = ["curar_heridas", "palabra_curacion", "hechizar_persona", "heroismo", "silencio", "sugesion", "invisibilidad", "disipar_magia"]

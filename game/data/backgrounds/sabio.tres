@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BackgroundData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/background_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+background_id = "sabio"
+display_name = "Sabio"
+description = "Pasaste años estudiando en una biblioteca, un scriptorium o al lado de un maestro. El conocimiento es tu herramienta más valiosa."
+skill_proficiencies = ["arcanos", "historia"]
+tool_proficiencies = []
+languages = ["un_idioma_a_eleccion", "otro_idioma_a_eleccion"]
+starting_gold = 10
+feature_name = "Investigador"
+feature_description = "Cuando no encuentras la información que buscas, sabes dónde ir a buscarla. Siempre puedes localizar una biblioteca, un archivo o a otro erudito que te oriente."

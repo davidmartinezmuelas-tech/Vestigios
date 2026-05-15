@@ -1,0 +1,144 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+; ── TIRADAS ──
+[sub_resource type="Resource" id="check_persuasion"]
+script = ExtResource("4")
+skill_name = "Persuasión"
+ability = "cha"
+difficulty_class = 12
+success_node_id = "soldado_habla_persuasion"
+failure_node_id = "soldado_calla"
+
+[sub_resource type="Resource" id="check_intimidacion"]
+script = ExtResource("4")
+skill_name = "Intimidación"
+ability = "cha"
+difficulty_class = 11
+success_node_id = "soldado_habla_intimidacion"
+failure_node_id = "soldado_calla"
+
+[sub_resource type="Resource" id="check_medicina"]
+script = ExtResource("4")
+skill_name = "Medicina"
+ability = "wis"
+difficulty_class = 10
+success_node_id = "medicina_revela"
+failure_node_id = "medicina_falla"
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_persuadir"]
+script = ExtResource("3")
+text = "\"Habla y te dejamos ir.\""
+skill_check = SubResource("check_persuasion")
+
+[sub_resource type="Resource" id="choice_intimidar"]
+script = ExtResource("3")
+text = "\"Tienes diez segundos. Empieza a hablar.\""
+skill_check = SubResource("check_intimidacion")
+
+[sub_resource type="Resource" id="choice_medicina"]
+script = ExtResource("3")
+text = "Tratar sus heridas primero."
+skill_check = SubResource("check_medicina")
+
+[sub_resource type="Resource" id="choice_dejarlo_ir"]
+script = ExtResource("3")
+text = "\"Lárgate. No vuelvas.\""
+next_node_id = "fin_sin_info"
+sets_flag = "soldado_liberado_taberna"
+
+[sub_resource type="Resource" id="choice_continuar_tras_info"]
+script = ExtResource("3")
+text = "\"¿Quién dio la orden?\""
+next_node_id = "soldado_quien_dio_orden"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "scared"
+text = "El soldado está en el suelo. Respira, pero apenas. Os mira con los ojos muy abiertos — no de odio, de miedo."
+choices = [SubResource("choice_persuadir"), SubResource("choice_intimidar"), SubResource("choice_medicina"), SubResource("choice_dejarlo_ir")]
+
+[sub_resource type="Resource" id="node_persuasion"]
+script = ExtResource("2")
+node_id = "soldado_habla_persuasion"
+speaker_id = "npc"
+emotion = "scared"
+text = "\"...Había cuatro. Nos mandaron a esperar. Alguien en Meredan os sigue la pista — no sé quién exactamente, solo sé que tiene influencia. El fuerte está más ocupado de lo normal. Hay algo dentro que no quieren que veáis.\""
+choices = [SubResource("choice_continuar_tras_info")]
+narrator_bark = "Alguien en Meredan sabe que venís."
+
+[sub_resource type="Resource" id="node_intimidacion"]
+script = ExtResource("2")
+node_id = "soldado_habla_intimidacion"
+speaker_id = "npc"
+emotion = "scared"
+text = "\"¡Está bien! Nos mandaron a esperar aquí. Teníamos orden de reteneros. La orden vino del fuerte, del teniente Harren. Hay algo en el fuerte que no quieren que nadie vea. ¡Eso es todo lo que sé!\""
+choices = [SubResource("choice_continuar_tras_info")]
+narrator_bark = "El teniente Harren dio las órdenes."
+
+[sub_resource type="Resource" id="node_calla"]
+script = ExtResource("2")
+node_id = "soldado_calla"
+speaker_id = "npc"
+emotion = "angry"
+text = "Aprieta los dientes. \"No sé nada.\""
+choices = [SubResource("choice_dejarlo_ir")]
+
+[sub_resource type="Resource" id="node_medicina"]
+script = ExtResource("2")
+node_id = "medicina_revela"
+speaker_id = "npc"
+emotion = "scared"
+text = "Mientras le curas, el soldado relaja la mandíbula. \"...No queríamos estar aquí. Nos trasladaron hace dos semanas. Algo en el fuerte pone nervioso a todo el mundo. Los hombres de dentro no hablan con nadie.\""
+choices = [SubResource("choice_persuadir"), SubResource("choice_continuar_tras_info")]
+narrator_bark = "Hay algo en el fuerte que aterra a sus propios soldados."
+
+[sub_resource type="Resource" id="node_medicina_falla"]
+script = ExtResource("2")
+node_id = "medicina_falla"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Las heridas son superficiales. No cambia nada entre vosotros."
+choices = [SubResource("choice_persuadir"), SubResource("choice_intimidar"), SubResource("choice_dejarlo_ir")]
+
+[sub_resource type="Resource" id="node_quien_dio_orden"]
+script = ExtResource("2")
+node_id = "soldado_quien_dio_orden"
+speaker_id = "npc"
+emotion = "scared"
+text = "\"El teniente Harren. Pero él no actúa solo — recibe órdenes de alguien en Meredan. Nunca he visto a esa persona. Solo sé que Harren le tiene miedo.\" Pausa. \"Dejadme ir. Por favor.\""
+choices = [SubResource("choice_dejarlo_ir")]
+narrator_bark = "Harren responde ante alguien en Meredan."
+
+[sub_resource type="Resource" id="node_fin_sin_info"]
+script = ExtResource("2")
+node_id = "fin_sin_info"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El soldado se arrastra hacia la salida sin mirar atrás."
+choices = []
+ends_dialogue = true
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "interrogatorio_taberna"
+npc_character_id = "soldado_taberna"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_persuasion"),
+	SubResource("node_intimidacion"),
+	SubResource("node_calla"),
+	SubResource("node_medicina"),
+	SubResource("node_medicina_falla"),
+	SubResource("node_quien_dio_orden"),
+	SubResource("node_fin_sin_info"),
+]
