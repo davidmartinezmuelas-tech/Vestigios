@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/race_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/character_creation/racial_trait.gd" id="2"]
+
+[sub_resource type="Resource" id="trait_draconido_base"]
+script = ExtResource("2")
+trait_id = "herencia_draconico"
+display_name = "Herencia dracónica"
+description = "+2 STR, +1 CHA. Arma de aliento (2d6 del tipo de tu linaje, salvación CON CD 8+prof+CON). Resistencia al daño del tipo de tu linaje."
+ability_bonuses = {"str": 2, "cha": 1}
+skill_proficiencies = []
+damage_resistances = []
+speed_bonus = 0
+has_darkvision = false
+
+[resource]
+script = ExtResource("1")
+race_id = "draconido"
+display_name = "Dracónido"
+description = "Los dracónidos llevan la sangre de los dragones en sus venas. Su orgullo y su poder son proporcionales al linaje que invocan."
+size = "medium"
+base_speed = 30
+traits = [SubResource("trait_draconido_base")]
+portrait_sets = []

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/race_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/character_creation/racial_trait.gd" id="2"]
+
+[sub_resource type="Resource" id="trait_elfic_base"]
+script = ExtResource("2")
+trait_id = "puntuaciones_elficas"
+display_name = "Agilidad élfica"
+description = "+2 DEX. Visión en la oscuridad 18m. Competencia en Percepción. Ventaja contra encantamientos e inmunidad al sueño mágico."
+ability_bonuses = {"dex": 2, "int": 1}
+skill_proficiencies = ["percepcion"]
+damage_resistances = []
+speed_bonus = 0
+has_darkvision = true
+darkvision_range_ft = 60
+
+[sub_resource type="Resource" id="trait_trance"]
+script = ExtResource("2")
+trait_id = "trance"
+display_name = "Trance"
+description = "Los elfos meditan 4 horas en lugar de dormir 8. Reciben los mismos beneficios de un descanso largo."
+ability_bonuses = {}
+skill_proficiencies = []
+damage_resistances = []
+speed_bonus = 0
+has_darkvision = false
+
+[resource]
+script = ExtResource("1")
+race_id = "elfo"
+display_name = "Elfo"
+description = "Los elfos son seres de gracia antigua y memoria larga. El mundo cambia a su alrededor mientras ellos observan — y en ocasiones intervienen."
+size = "medium"
+base_speed = 30
+traits = [SubResource("trait_elfic_base"), SubResource("trait_trance")]
+portrait_sets = []

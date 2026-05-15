@@ -1,0 +1,151 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+; ── TIRADAS ──
+[sub_resource type="Resource" id="check_engano_1"]
+script = ExtResource("4")
+skill_name = "Engaño"
+ability = "cha"
+difficulty_class = 14
+success_node_id = "engano_exito_1"
+failure_node_id = "engano_fallo_1"
+
+[sub_resource type="Resource" id="check_persuasion_1"]
+script = ExtResource("4")
+skill_name = "Persuasión"
+ability = "cha"
+difficulty_class = 13
+success_node_id = "persuasion_exito_1"
+failure_node_id = "persuasion_fallo_1"
+
+[sub_resource type="Resource" id="check_sigilo_1"]
+script = ExtResource("4")
+skill_name = "Sigilo"
+ability = "dex"
+difficulty_class = 14
+success_node_id = "sigilo_exito_1"
+failure_node_id = "sigilo_fallo_1"
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_engañar_1"]
+script = ExtResource("3")
+text = "\"Suministradores del Comando Sur. Lleváis retraso.\""
+skill_check = SubResource("check_engano_1")
+
+[sub_resource type="Resource" id="choice_persuadir_1"]
+script = ExtResource("3")
+text = "\"Solo somos viajeros. Nada que declarar.\""
+skill_check = SubResource("check_persuasion_1")
+
+[sub_resource type="Resource" id="choice_esconderse_1"]
+script = ExtResource("3")
+text = "Tirarse al margen del camino antes de que os vean."
+skill_check = SubResource("check_sigilo_1")
+
+[sub_resource type="Resource" id="choice_pelear_1"]
+script = ExtResource("3")
+text = "Prepararse para el combate."
+next_node_id = "combate_1"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Una hora de camino. La luna pinta el polvo de plata. Luego, el sonido de ruedas y herrajes. Un carro con el emblema de Kethara dobla la curva. Dos soldados en el pescante os ven."
+choices = []
+auto_next = "soldado_alto"
+
+[sub_resource type="Resource" id="node_alto"]
+script = ExtResource("2")
+node_id = "soldado_alto"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"¡Alto ahí! ¿Documentos de paso?\""
+choices = [SubResource("choice_engañar_1"), SubResource("choice_persuadir_1"), SubResource("choice_esconderse_1"), SubResource("choice_pelear_1")]
+
+[sub_resource type="Resource" id="node_engano_exito"]
+script = ExtResource("2")
+node_id = "engano_exito_1"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El soldado os mira un segundo más de la cuenta. Luego asiente. \"Pasad. Y despachad rápido.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "El carro sigue su camino."
+
+[sub_resource type="Resource" id="node_engano_fallo"]
+script = ExtResource("2")
+node_id = "engano_fallo_1"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"Eso no cuadra. Bajad del camino — ahora.\""
+choices = [SubResource("choice_pelear_1")]
+
+[sub_resource type="Resource" id="node_persuasion_exito"]
+script = ExtResource("2")
+node_id = "persuasion_exito_1"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Mmm.\" El soldado vacila. \"Seguid. No os quedéis en el camino de noche.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "Os dejan pasar."
+
+[sub_resource type="Resource" id="node_persuasion_fallo"]
+script = ExtResource("2")
+node_id = "persuasion_fallo_1"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"Nadie viaja sin documentos. Esto es zona de control. Bajad las armas.\""
+choices = [SubResource("choice_engañar_1"), SubResource("choice_pelear_1")]
+
+[sub_resource type="Resource" id="node_sigilo_exito"]
+script = ExtResource("2")
+node_id = "sigilo_exito_1"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Os fundís con las sombras de la cuneta. El carro pasa sin detenerse. Los soldados no os han visto."
+choices = []
+ends_dialogue = true
+narrator_bark = "Primer encuentro superado sin combate."
+
+[sub_resource type="Resource" id="node_sigilo_fallo"]
+script = ExtResource("2")
+node_id = "sigilo_fallo_1"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"¡Ahí, en la cuneta! ¡Salid con las manos en alto!\""
+choices = [SubResource("choice_pelear_1")]
+
+[sub_resource type="Resource" id="node_combate"]
+script = ExtResource("2")
+node_id = "combate_1"
+speaker_id = "npc"
+emotion = "angry"
+text = "Los soldados desenfundan."
+choices = []
+ends_dialogue = true
+narrator_bark = "¡Combate! Tres soldados del camino."
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "camino_encuentro_1"
+npc_character_id = "soldado_taberna"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_alto"),
+	SubResource("node_engano_exito"),
+	SubResource("node_engano_fallo"),
+	SubResource("node_persuasion_exito"),
+	SubResource("node_persuasion_fallo"),
+	SubResource("node_sigilo_exito"),
+	SubResource("node_sigilo_fallo"),
+	SubResource("node_combate"),
+]

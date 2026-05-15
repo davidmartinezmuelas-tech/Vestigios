@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "scriptorium"
+display_name = "Scriptorium"
+description = "Escritorios y suministros de escritura. Fabrica copias de libros, pergaminos de hechizos o panfletos para distribuir en un radio de 50 km."
+required_bastion_level = 2
+prerequisite_flag = ""
+space = 1
+hireling_count = 1
+available_orders = [0, 6]
+build_cost = 1500
+build_missions = 1
+order_options = [
+	{"id": "craft_copia_libro", "order": 0, "name": "Copiar libro", "description": "Copia de un libro no mágico. Requiere un libro en blanco. Tarda 1 misión."},
+	{"id": "craft_pergamino_hechizo", "order": 0, "name": "Fabricar pergamino de hechizo", "description": "Pergamino de hechizo de Clérigo o Mago de nivel 3 o inferior. Ver tablas de crafting para tiempo y coste."},
+	{"id": "craft_panfletos", "order": 0, "name": "Distribuir panfletos", "description": "Hasta 50 copias de un documento. 7 días, 1 PO por copia. Distribución gratuita en radio de 50 km."},
+]

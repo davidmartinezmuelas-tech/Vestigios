@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+character_id = "lyris"
+display_name = "Lyris Nightveil"
+is_hero = false
+level = 10
+hit_dice_sides = 8
+proficiency_bonus = 4
+strength = 10
+dexterity = 18
+constitution = 12
+intelligence = 14
+wisdom = 14
+charisma = 14
+armor_class = 16
+saving_throw_proficiencies = ["dex", "int"]
+speed_ft = 30
+max_stress = 100
+xp_reward = 0
+abilities = []

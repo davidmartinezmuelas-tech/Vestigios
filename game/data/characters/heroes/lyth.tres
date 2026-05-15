@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+
+; Flecha Rápida — ataque a distancia (DEX), 1d8+DEX
+[sub_resource type="Resource" id="ability_lyth_1"]
+script = ExtResource("2")
+ability_id = "flecha_rapida"
+display_name = "Flecha Rápida"
+description = "Disparo limpio y veloz. Ataque a distancia, 1d8+DEX."
+ability_type = 0
+target_type = 0
+range_tiles = 8
+attack_ability = "dex"
+uses_proficiency = true
+damage_dice_count = 1
+damage_dice_sides = 8
+damage_ability = "dex"
+save_ability = "dex"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+; Flecha Marcadora — daño 1d4+DEX + aplica efecto MARKED
+[sub_resource type="Resource" id="ability_lyth_2"]
+script = ExtResource("2")
+ability_id = "flecha_marcadora"
+display_name = "Flecha Marcadora"
+description = "Lyth marca al objetivo. 1d4+DEX y queda Marcado: los ataques contra él tienen ventaja."
+ability_type = 0
+target_type = 0
+range_tiles = 8
+attack_ability = "dex"
+uses_proficiency = true
+damage_dice_count = 1
+damage_dice_sides = 4
+damage_ability = "dex"
+save_ability = "dex"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+[resource]
+script = ExtResource("1")
+character_id = "lyth"
+class_id = "explorador"
+subclass_id = "senda_garek"
+has_weapon_mastery = true
+hit_dice_remaining = 1
+display_name = "Lyth"
+is_hero = true
+level = 1
+hit_dice_sides = 10
+proficiency_bonus = 2
+strength = 12
+dexterity = 17
+constitution = 14
+intelligence = 10
+wisdom = 13
+charisma = 8
+armor_class = 14
+saving_throw_proficiencies = ["str", "dex"]
+speed_ft = 30
+max_stress = 100
+abilities = [SubResource("ability_lyth_1"), SubResource("ability_lyth_2")]
+cantrip_ids = []
+spell_ids = ["marca_cazador", "curar_heridas", "silencio", "paso_brumoso"]

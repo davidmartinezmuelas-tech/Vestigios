@@ -1,0 +1,17 @@
+﻿[gd_resource type="Resource" script_class="BackgroundData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/background_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+background_id = "vagabundo"
+display_name = "Vagabundo"
+description = "Trasfondo de Vagabundo — D&D 2024."
+skill_proficiencies = ["intuicion", "sigilo"]
+tool_proficiencies = ["herramientas_ladron"]
+languages = []
+starting_gold = 50
+feature_name = "Rasgo de Vagabundo"
+feature_description = "Rasgo narrativo del trasfondo Vagabundo."
+ability_score_options = {"dex": 2, "wis": 1, "cha": 1}
+origin_feat_id = "afortunado"

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/race_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/character_creation/racial_trait.gd" id="2"]
+
+[sub_resource type="Resource" id="trait_enano_base"]
+script = ExtResource("2")
+trait_id = "resistencia_enana"
+display_name = "Resistencia enana"
+description = "+2 CON. Visión en la oscuridad 18m. Ventaja en salvaciones contra veneno. Resistencia al daño por veneno."
+ability_bonuses = {"con": 2, "wis": 1}
+skill_proficiencies = []
+damage_resistances = ["poison"]
+speed_bonus = -5
+has_darkvision = true
+darkvision_range_ft = 60
+
+[sub_resource type="Resource" id="trait_terquedad_enana"]
+script = ExtResource("2")
+trait_id = "terquedad_enana"
+display_name = "Terquedad enana"
+description = "+1 PG adicional por nivel. Los enanos se niegan a caer."
+ability_bonuses = {}
+skill_proficiencies = []
+damage_resistances = []
+speed_bonus = 0
+has_darkvision = false
+
+[resource]
+script = ExtResource("1")
+race_id = "enano"
+display_name = "Enano"
+description = "Los enanos son conocidos por su dureza, su orgullo y su memoria para los agravios. Bajo tierra o en superficie, se mantienen firmes cuando otros ceden."
+size = "medium"
+base_speed = 25
+traits = [SubResource("trait_enano_base"), SubResource("trait_terquedad_enana")]
+portrait_sets = []

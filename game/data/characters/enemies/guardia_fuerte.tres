@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+
+; Lanza — 1d6+2 perforante
+[sub_resource type="Resource" id="ability_guardia_1"]
+script = ExtResource("2")
+ability_id = "lanzada"
+display_name = "Lanzada"
+description = "Ataque con lanza reglamentaria."
+ability_type = 0
+target_type = 0
+range_tiles = 1
+attack_ability = "str"
+uses_proficiency = true
+damage_dice_count = 1
+damage_dice_sides = 6
+damage_ability = "str"
+save_ability = "con"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+[resource]
+script = ExtResource("1")
+character_id = "guardia_fuerte"
+display_name = "Guardia del Fuerte"
+is_hero = false
+level = 1
+hit_dice_sides = 8
+proficiency_bonus = 2
+strength = 14
+dexterity = 10
+constitution = 12
+intelligence = 10
+wisdom = 10
+charisma = 10
+armor_class = 16
+saving_throw_proficiencies = ["str", "con"]
+speed_ft = 30
+max_stress = 100
+xp_reward = 50
+challenge_rating = 0.25
+abilities = [SubResource("ability_guardia_1")]

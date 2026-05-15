@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BastionNPCData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/bastion_npc_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "alderich"
+display_name = "Alderich"
+description = "Jefe anciano de la Iglesia de Cazadores. Ya no puede cazar, pero su conocimiento sobre la Corrupción y los Antiguos no tiene igual fuera de Arcanis."
+facility_affinity = "biblioteca"
+bonus_description = "La investigación sobre criaturas corruptas y Antiguos devuelve un dato adicional. Sus conversaciones revelan lore que no está en los libros."
+replaces_hirelings = false
+required_flag = "alderich_conocido"
+recruitment_pitch = "\"Mi lugar es la Iglesia. Pero si vuestro Bastión tiene biblioteca, podría ser más útil allí que aquí esperando que llegue el fin.\""

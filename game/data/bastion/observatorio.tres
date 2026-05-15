@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "observatorio"
+display_name = "Observatorio"
+description = "Un telescopio apuntando al cielo nocturno desde lo alto del Bastión. Genera un encantamiento que permite lanzar Contactar otro Plano sin gastar espacio de conjuro. Puede generar encantamientos adicionales aleatorios al explorar los misterios de las estrellas."
+required_bastion_level = 3
+prerequisite_flag = "can_use_spellcasting_focus"
+space = 1
+hireling_count = 1
+available_orders = [2, 6]
+build_cost = 3500
+build_missions = 2
+order_options = [
+	{"id": "descubrimiento_eldrico", "order": 2, "name": "Exploración estelar", "description": "7 noches de observación. Al terminar: tirar un dado. Par = nada. Impar = encantamiento aleatorio (Visión en la Oscuridad, Heroísmo o Vitalidad) para un personaje a elección."},
+]

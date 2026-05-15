@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+
+; Mandoble — 2d6+4 cortante
+[sub_resource type="Resource" id="ability_vorn_1"]
+script = ExtResource("2")
+ability_id = "mandoble_vorn"
+display_name = "Mandoble"
+description = "Un golpe devastador con el mandoble de Vorn. Pocos lo aguantan de pie."
+ability_type = 0
+target_type = 0
+range_tiles = 1
+attack_ability = "str"
+uses_proficiency = true
+damage_dice_count = 2
+damage_dice_sides = 6
+damage_ability = "str"
+save_ability = "con"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+; Grito de guerra — tirada de salvación WIS CD 14 o asustado
+[sub_resource type="Resource" id="ability_vorn_2"]
+script = ExtResource("2")
+ability_id = "grito_de_guerra"
+display_name = "Grito de Guerra"
+description = "Vorn lanza un grito que hiela la sangre. Salvación WIS CD 14 o queda Asustado."
+ability_type = 2
+target_type = 1
+range_tiles = 6
+attack_ability = "cha"
+uses_proficiency = true
+damage_dice_count = 0
+damage_dice_sides = 0
+damage_ability = ""
+save_ability = "wis"
+save_dc = 14
+save_success_damage_multiplier = 0.0
+effects = []
+
+[resource]
+script = ExtResource("1")
+character_id = "general_vorn"
+display_name = "General Vorn Ashkael"
+is_hero = false
+level = 4
+hit_dice_sides = 10
+proficiency_bonus = 2
+strength = 18
+dexterity = 12
+constitution = 14
+intelligence = 14
+wisdom = 13
+charisma = 16
+armor_class = 18
+saving_throw_proficiencies = ["str", "con"]
+speed_ft = 30
+max_stress = 100
+xp_reward = 1100
+challenge_rating = 4.0
+abilities = [SubResource("ability_vorn_1"), SubResource("ability_vorn_2")]

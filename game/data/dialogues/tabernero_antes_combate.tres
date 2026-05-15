@@ -1,0 +1,226 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+; ── TIRADAS DE HABILIDAD ──────────────────────────────────────
+
+[sub_resource type="Resource" id="check_perspicacia"]
+script = ExtResource("4")
+skill_name = "Perspicacia"
+ability = "wis"
+difficulty_class = 13
+success_node_id = "percibe_nervios"
+failure_node_id = "no_percibe"
+
+[sub_resource type="Resource" id="check_persuasion"]
+script = ExtResource("4")
+skill_name = "Persuasión"
+ability = "cha"
+difficulty_class = 12
+success_node_id = "persuasion_exito"
+failure_node_id = "persuasion_fallo"
+
+[sub_resource type="Resource" id="check_intimidacion"]
+script = ExtResource("4")
+skill_name = "Intimidación"
+ability = "cha"
+difficulty_class = 14
+success_node_id = "intimidacion_exito"
+failure_node_id = "intimidacion_fallo"
+
+; ── OPCIONES ──────────────────────────────────────────────────
+
+[sub_resource type="Resource" id="choice_preguntar"]
+script = ExtResource("3")
+text = "\"¿Qué pasa aquí esta noche? Está más tenso de lo habitual.\""
+next_node_id = "tabernero_evasivo"
+required_character_id = ""
+required_flag = ""
+sets_flag = ""
+skill_check = null
+show_when_blocked = false
+
+[sub_resource type="Resource" id="choice_perspicacia"]
+script = ExtResource("3")
+text = "Estudia su lenguaje corporal."
+next_node_id = ""
+skill_check = SubResource("check_perspicacia")
+show_when_blocked = false
+
+[sub_resource type="Resource" id="choice_pasar"]
+script = ExtResource("3")
+text = "\"Solo estamos de paso. Una ronda y nos vamos.\""
+next_node_id = "fin_pacifco"
+show_when_blocked = false
+
+[sub_resource type="Resource" id="choice_persuadir"]
+script = ExtResource("3")
+text = "\"Somos gente de fiar. Puedes contarnos.\""
+skill_check = SubResource("check_persuasion")
+show_when_blocked = false
+
+[sub_resource type="Resource" id="choice_intimidar"]
+script = ExtResource("3")
+text = "\"Habla. O averiguamos la verdad de otra manera.\""
+skill_check = SubResource("check_intimidacion")
+show_when_blocked = false
+
+[sub_resource type="Resource" id="choice_naeren_lee"]
+script = ExtResource("3")
+text = "[Naeren lee sus pensamientos superficiales.]"
+next_node_id = "naeren_revela"
+required_character_id = "naeren"
+sets_flag = "tabernero_leido"
+show_when_blocked = true
+
+[sub_resource type="Resource" id="choice_continuar_evasivo"]
+script = ExtResource("3")
+text = "\"Entendido. Una ronda.\""
+next_node_id = "fin_pacifco"
+show_when_blocked = false
+
+[sub_resource type="Resource" id="choice_insistir"]
+script = ExtResource("3")
+text = "\"Estás mintiendo. ¿Qué tienes miedo de decirnos?\""
+next_node_id = "tabernero_rompe"
+sets_flag = "tabernero_presionado"
+show_when_blocked = false
+
+; ── NODOS ─────────────────────────────────────────────────────
+
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El tabernero os mira desde detrás de la barra. Hay algo en sus ojos — no es cansancio. Es miedo."
+choices = []
+auto_next = "tabernero_saluda"
+
+[sub_resource type="Resource" id="node_saluda"]
+script = ExtResource("2")
+node_id = "tabernero_saluda"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Viajeros. Bienvenidos al Ciervo Muerto.\" Habla despacio. Demasiado despacio para alguien que tiene trabajo."
+choices = [SubResource("choice_preguntar"), SubResource("choice_perspicacia"), SubResource("choice_pasar"), SubResource("choice_naeren_lee")]
+
+[sub_resource type="Resource" id="node_evasivo"]
+script = ExtResource("2")
+node_id = "tabernero_evasivo"
+speaker_id = "npc"
+emotion = "scared"
+text = "\"¿Tenso? No, qué va. Ha sido una noche larga.\" Se limpia las manos en el delantal aunque está seco."
+choices = [SubResource("choice_perspicacia"), SubResource("choice_persuadir"), SubResource("choice_intimidar"), SubResource("choice_continuar_evasivo"), SubResource("choice_insistir")]
+
+[sub_resource type="Resource" id="node_percibe_nervios"]
+script = ExtResource("2")
+node_id = "percibe_nervios"
+speaker_id = "npc"
+emotion = "scared"
+text = "Sus pupilas están dilatadas. Las manos no paran quietas. Alguien le ha dicho que os espere — o que os detenga."
+choices = [SubResource("choice_persuadir"), SubResource("choice_intimidar"), SubResource("choice_insistir")]
+narrator_bark = "El tabernero oculta algo."
+
+[sub_resource type="Resource" id="node_no_percibe"]
+script = ExtResource("2")
+node_id = "no_percibe"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Parece cansado. Nada más."
+choices = [SubResource("choice_persuadir"), SubResource("choice_continuar_evasivo")]
+
+[sub_resource type="Resource" id="node_persuasion_exito"]
+script = ExtResource("2")
+node_id = "persuasion_exito"
+speaker_id = "npc"
+emotion = "scared"
+text = "Baja la voz hasta casi desaparecer. \"Hay hombres. Cuatro. Os están esperando. No sé para qué — solo me dijeron que los avisara cuando llegarais.\""
+choices = []
+auto_next = "fin_info"
+
+[sub_resource type="Resource" id="node_persuasion_fallo"]
+script = ExtResource("2")
+node_id = "persuasion_fallo"
+speaker_id = "npc"
+emotion = "angry"
+text = "\"No sé de qué habláis. Bebed o salid.\""
+choices = [SubResource("choice_intimidar"), SubResource("choice_pasar")]
+
+[sub_resource type="Resource" id="node_intimidacion_exito"]
+script = ExtResource("2")
+node_id = "intimidacion_exito"
+speaker_id = "npc"
+emotion = "scared"
+text = "Le tiemblan las manos. \"¡Está bien! Hay cuatro hombres en el fondo. Me pagaron para teneros aquí diez minutos. ¡Eso es todo lo que sé!\""
+choices = []
+auto_next = "fin_info"
+
+[sub_resource type="Resource" id="node_intimidacion_fallo"]
+script = ExtResource("2")
+node_id = "intimidacion_fallo"
+speaker_id = "npc"
+emotion = "angry"
+text = "Se yergue, más asustado de los hombres del fondo que de vosotros. \"Fuera de aquí o llamo a la guardia.\""
+choices = [SubResource("choice_pasar")]
+
+[sub_resource type="Resource" id="node_naeren_revela"]
+script = ExtResource("2")
+node_id = "naeren_revela"
+speaker_id = "naeren"
+emotion = "focused"
+text = "Naeren cierra los ojos un instante. Cuando los abre, os mira a vosotros, no al tabernero. [Cuatro hombres. Emboscada. Tiene miedo de ellos, no de nosotros.]"
+choices = []
+auto_next = "fin_info"
+
+[sub_resource type="Resource" id="node_rompe"]
+script = ExtResource("2")
+node_id = "tabernero_rompe"
+speaker_id = "npc"
+emotion = "scared"
+text = "Se le quiebra la máscara. \"¡Me amenazaron a mí y a mi familia! Cuatro soldados. Al fondo. Tenía que reteneros aquí. Por favor, no les digáis que os avisé.\""
+choices = []
+auto_next = "fin_info"
+
+[sub_resource type="Resource" id="node_fin_info"]
+script = ExtResource("2")
+node_id = "fin_info"
+speaker_id = "npc"
+emotion = "scared"
+text = "El tabernero se aparta de la barra. Hay cuatro hombres al fondo de la sala que ya os están mirando."
+choices = []
+ends_dialogue = true
+narrator_bark = "Cuatro soldados al fondo. Saben que estáis aquí."
+
+[sub_resource type="Resource" id="node_fin_pacifico"]
+script = ExtResource("2")
+node_id = "fin_pacifco"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El tabernero asiente y se da la vuelta. Algo en la sala no cuadra, pero no podéis precisar qué."
+choices = []
+ends_dialogue = true
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "tabernero_antes_combate"
+npc_character_id = "tabernero_ciervo_muerto"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_saluda"),
+	SubResource("node_evasivo"),
+	SubResource("node_percibe_nervios"),
+	SubResource("node_no_percibe"),
+	SubResource("node_persuasion_exito"),
+	SubResource("node_persuasion_fallo"),
+	SubResource("node_intimidacion_exito"),
+	SubResource("node_intimidacion_fallo"),
+	SubResource("node_naeren_revela"),
+	SubResource("node_rompe"),
+	SubResource("node_fin_info"),
+	SubResource("node_fin_pacifico"),
+]

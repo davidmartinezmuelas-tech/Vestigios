@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+
+; Pulso Psíquico — ataque de conjuro (CHA), 1d10
+[sub_resource type="Resource" id="ability_naeren_1"]
+script = ExtResource("2")
+ability_id = "pulso_psiquico"
+display_name = "Pulso Psíquico"
+description = "Naeren proyecta un impacto mental dirigido. Tirada de ataque de conjuro, 1d10."
+ability_type = 1
+target_type = 0
+range_tiles = 6
+attack_ability = "cha"
+uses_proficiency = true
+damage_dice_count = 1
+damage_dice_sides = 10
+damage_ability = ""
+save_ability = "int"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+; Sobrecarga Mental — tirada de salvación INT, 3d6
+[sub_resource type="Resource" id="ability_naeren_2"]
+script = ExtResource("2")
+ability_id = "sobrecarga_mental"
+display_name = "Sobrecarga Mental"
+description = "Explosión de energía psíquica. CD INT, 3d6. La mitad al superar la tirada."
+ability_type = 2
+target_type = 0
+range_tiles = 6
+attack_ability = "cha"
+uses_proficiency = true
+damage_dice_count = 3
+damage_dice_sides = 6
+damage_ability = ""
+save_ability = "int"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+[resource]
+script = ExtResource("1")
+character_id = "naeren"
+class_id = "hechicero"
+subclass_id = "herencia_arquitecto"
+hit_dice_remaining = 1
+display_name = "Naeren"
+is_hero = true
+level = 1
+hit_dice_sides = 6
+proficiency_bonus = 2
+strength = 8
+dexterity = 12
+constitution = 13
+intelligence = 14
+wisdom = 10
+charisma = 17
+armor_class = 11
+saving_throw_proficiencies = ["con", "cha"]
+speed_ft = 30
+max_stress = 100
+abilities = [SubResource("ability_naeren_1"), SubResource("ability_naeren_2")]
+cantrip_ids = ["burla_danosa", "ilusion_menor", "prestidigitacion"]
+spell_ids = ["proyectil_magico", "escudo", "manos_ardientes", "sueno", "invisibilidad", "paso_brumoso", "bola_fuego", "contrahechizo"]

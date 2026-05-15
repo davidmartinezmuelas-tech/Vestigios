@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "cuadra"
+display_name = "Cuadra"
+description = "Aloja hasta 3 monturas grandes. Las monturas criadas aquí tienen ventaja en Trato con Animales. Al venderlas, se obtiene un 20% extra sobre el precio estándar (50% en nivel 3, 100% en nivel 4)."
+required_bastion_level = 2
+prerequisite_flag = ""
+space = 1
+hireling_count = 1
+available_orders = [5, 6]
+build_cost = 1500
+build_missions = 1
+order_options = [
+	{"id": "comercio_animales", "order": 5, "name": "Comprar / vender monturas", "description": "El hireling compra o vende monturas al precio estándar. Las ventas tienen un 20% de beneficio (crece con el nivel del Bastión). Tarda 1 misión."},
+]

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "teatro"
+display_name = "Teatro"
+description = "Un escenario, zona de bambalinas y asientos para el público. Los personajes que participen en una producción ganan un dado de Teatro (d6) que pueden añadir a cualquier tirada d20 cuando quieran."
+required_bastion_level = 2
+prerequisite_flag = ""
+space = 2
+hireling_count = 4
+available_orders = [2, 6]
+build_cost = 3000
+build_missions = 2
+order_options = [
+	{"id": "produccion_teatral", "order": 2, "name": "Producción teatral", "description": "14 días de ensayos + 7 días de actuaciones. Personajes que contribuyan: tirar CD 15 Actuación (CHA). Si más éxitos que fallos: cada contribuyente gana 1 Dado de Teatro (d6) para añadir a cualquier tirada d20 antes de la siguiente misión."},
+]

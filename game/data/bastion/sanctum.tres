@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "sanctum"
+display_name = "Sanctum"
+description = "El pináculo de la devoción sagrada. Genera encantamiento para lanzar Sanar sin gastar espacio. Los ritos diarios otorgan PG Temporales al beneficiario tras cada Descanso Largo. El personaje siempre tiene Palabra del Recuerdo preparada."
+required_bastion_level = 4
+prerequisite_flag = "can_use_divine_focus"
+space = 1
+hireling_count = 4
+available_orders = [2, 6]
+build_cost = 8000
+build_missions = 3
+order_options = [
+	{"id": "ritos_fortalecedores", "order": 2, "name": "Ritos fortalecedores", "description": "Los hirelings realizan ritos diarios durante 7 días en beneficio de un personaje designado. Cada vez que termine un Descanso Largo, ese personaje gana PG Temporales igual al nivel del lanzador. Dura 7 días."},
+]

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "taller"
+display_name = "Taller"
+description = "Espacio creativo con 6 tipos de herramientas de artesano. Fabrica equipo de aventurero y, con el Bastión a nivel 3, objetos mágicos de Implementos. Tras un Descanso Corto aquí: Inspiración Heroica."
+required_bastion_level = 1
+prerequisite_flag = ""
+space = 1
+hireling_count = 3
+available_orders = [0, 6]
+build_cost = 1500
+build_missions = 1
+order_options = [
+	{"id": "craft_equipo_aventurero", "order": 0, "name": "Fabricar equipo de aventurero", "description": "Todo lo fabricable con las herramientas del taller. Reglas estándar de crafting."},
+	{"id": "craft_objeto_magico_implemento", "order": 0, "name": "Fabricar objeto mágico (Implemento)", "description": "Requiere Bastión nivel 3+. Objeto Común o Infrecuente de las tablas de Implementos.", "requires_bastion_level": 3},
+]

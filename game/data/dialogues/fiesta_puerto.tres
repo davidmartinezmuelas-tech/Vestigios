@@ -1,0 +1,183 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+
+; ── OPCIONES BEBIDA ──
+[sub_resource type="Resource" id="choice_beber_1"]
+script = ExtResource("3")
+text = "\"Una copa más.\""
+next_node_id = "bebida_segunda"
+
+[sub_resource type="Resource" id="choice_beber_2"]
+script = ExtResource("3")
+text = "\"Venga, otra.\""
+next_node_id = "bebida_borracho"
+sets_flag = "personaje_borracho"
+
+[sub_resource type="Resource" id="choice_parar_bebida"]
+script = ExtResource("3")
+text = "\"Ya es suficiente por esta noche.\""
+next_node_id = "fiesta_menu"
+
+; ── OPCIONES COMPAÑÍA ──
+[sub_resource type="Resource" id="choice_johannes_noche"]
+script = ExtResource("3")
+text = "Buscar a Johannes."
+required_character_id = "johannes"
+next_node_id = "compania_johannes"
+sets_flag = "noche_con_johannes"
+
+[sub_resource type="Resource" id="choice_naeren_noche"]
+script = ExtResource("3")
+text = "Buscar a Naeren."
+required_character_id = "naeren"
+next_node_id = "compania_naeren"
+sets_flag = "noche_con_naeren"
+
+[sub_resource type="Resource" id="choice_lyth_noche"]
+script = ExtResource("3")
+text = "Buscar a Lyth."
+required_character_id = "lyth"
+next_node_id = "compania_lyth"
+sets_flag = "noche_con_lyth"
+
+[sub_resource type="Resource" id="choice_soldado_noche"]
+script = ExtResource("3")
+text = "Hablar con uno de los soldados de Lyris."
+next_node_id = "compania_soldado"
+sets_flag = "noche_con_soldado"
+
+[sub_resource type="Resource" id="choice_solo"]
+script = ExtResource("3")
+text = "Esta noche, descansar a solas."
+next_node_id = "descanso_solo"
+
+; ── OPCIONES LYRIS FIESTA ──
+[sub_resource type="Resource" id="choice_lyris_vorn"]
+script = ExtResource("3")
+text = "\"¿Qué más sabes de Vorn?\""
+next_node_id = "lyris_fiesta_vorn"
+
+[sub_resource type="Resource" id"choice_fin_fiesta"]
+script = ExtResource("3")
+text = "\"Buenas noches.\""
+next_node_id = "fin_fiesta"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "happy"
+text = "El muelle del pueblo pesquero brilla con antorchas. Los soldados de Velthar y los aldeanos liberados comparten mesa. Alguien ha encontrado las reservas de vino del fuerte y ha decidido que esta noche son de dominio público."
+choices = []
+auto_next = "fiesta_menu"
+
+[sub_resource type="Resource" id="node_menu"]
+script = ExtResource("2")
+node_id = "fiesta_menu"
+speaker_id = "npc"
+emotion = "neutral"
+text = "La fiesta sigue. ¿Qué hacéis?"
+choices = [SubResource("choice_beber_1"), SubResource("choice_johannes_noche"), SubResource("choice_naeren_noche"), SubResource("choice_lyth_noche"), SubResource("choice_soldado_noche"), SubResource("choice_solo")]
+
+[sub_resource type="Resource" id="node_bebida_1"]
+script = ExtResource("2")
+node_id = "bebida_segunda"
+speaker_id = "npc"
+emotion = "happy"
+text = "El vino del fuerte es mejor de lo esperado. O quizás es solo que la noche lo hace todo mejor."
+choices = [SubResource("choice_beber_2"), SubResource("choice_parar_bebida")]
+
+[sub_resource type="Resource" id="node_borracho"]
+script = ExtResource("2")
+node_id = "bebida_borracho"
+speaker_id = "npc"
+emotion = "happy"
+text = "A la quinta copa, las antorchas se vuelven dos. A la sexta, Lyris dice algo que probablemente tiene mucho sentido pero no podéis descifrar. La noche pasa rápido."
+choices = [SubResource("choice_solo")]
+narrator_bark = "Mañana va a ser un día difícil."
+
+[sub_resource type="Resource" id="node_johannes"]
+script = ExtResource("2")
+node_id = "compania_johannes"
+speaker_id = "johannes"
+emotion = "happy"
+text = "Johannes está sentado al borde del muelle con los pies colgando sobre el agua. Tiene una copa en la mano y la mirada en el horizonte. Al veros, hace un gesto hacia el espacio a su lado. \"Sabía que vendrías. Siempre lo sé.\""
+choices = []
+auto_next = "johannes_noche_cierre"
+
+[sub_resource type="Resource" id="node_johannes_cierre"]
+script = ExtResource("2")
+node_id = "johannes_noche_cierre"
+speaker_id = "johannes"
+emotion = "neutral"
+text = "Pasan horas. El muelle se vacía. Las antorchas se apagan. Solo queda el mar."
+choices = []
+ends_dialogue = true
+
+[sub_resource type="Resource" id="node_naeren"]
+script = ExtResource("2")
+node_id = "compania_naeren"
+speaker_id = "naeren"
+emotion = "neutral"
+text = "[Naeren está en un rincón apartado, mirando el agua. Al veros, no dice nada. Pero se mueve un poco para haceros sitio. A veces las cosas más importantes no necesitan palabras.]"
+choices = []
+ends_dialogue = true
+
+[sub_resource type="Resource" id="node_lyth"]
+script = ExtResource("2")
+node_id = "compania_lyth"
+speaker_id = "lyth"
+emotion = "happy"
+text = "Lyth está en medio de la fiesta, orejas animadas, apostando carreras de cangrejos con tres soldados y ganando sistemáticamente. Al veros, lanza un cangrejo al aire y dice: \"¡Por fin! Necesito a alguien que me ayude a malgastar estas ganancias.\""
+choices = []
+ends_dialogue = true
+
+[sub_resource type="Resource" id="node_soldado"]
+script = ExtResource("2")
+node_id = "compania_soldado"
+speaker_id = "npc"
+emotion = "happy"
+text = "Un soldado joven de Velthar, primer destino fuera de casa. Os habla de su pueblo, de por qué se alistó, de lo que espera que pase cuando acabe la guerra. No es una conversación profunda. Pero es honesta."
+choices = []
+ends_dialogue = true
+
+[sub_resource type="Resource" id="node_solo"]
+script = ExtResource("2")
+node_id = "descanso_solo"
+speaker_id = "npc"
+emotion = "neutral"
+text = "A veces la mejor compañía es uno mismo. Encontráis un rincón tranquilo y dejáis que la fiesta continúe sin vosotros."
+choices = []
+ends_dialogue = true
+
+[sub_resource type="Resource" id="node_fin_fiesta"]
+script = ExtResource("2")
+node_id = "fin_fiesta"
+speaker_id = "npc"
+emotion = "neutral"
+text = "La fiesta se apaga poco a poco. Las antorchas se reducen a brasas. El mar sigue igual que siempre."
+choices = []
+ends_dialogue = true
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "fiesta_puerto"
+npc_character_id = "lyris"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_menu"),
+	SubResource("node_bebida_1"),
+	SubResource("node_borracho"),
+	SubResource("node_johannes"),
+	SubResource("node_johannes_cierre"),
+	SubResource("node_naeren"),
+	SubResource("node_lyth"),
+	SubResource("node_soldado"),
+	SubResource("node_solo"),
+	SubResource("node_fin_fiesta"),
+]

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "sala_juegos"
+display_name = "Sala de Juegos"
+description = "Ajedrez, dados, cartas. Los hirelings convierten la sala en un garito de apuestas durante 7 días y comparten las ganancias de la casa."
+required_bastion_level = 2
+prerequisite_flag = ""
+space = 2
+hireling_count = 4
+available_orders = [5, 6]
+build_cost = 2000
+build_missions = 2
+order_options = [
+	{"id": "garito", "order": 5, "name": "Garito de apuestas", "description": "Los hirelings gestionan un garito 7 días. Resultado: tirar 1d100 → 1-50: 1d6×10 PO | 51-85: 2d6×10 PO | 86-95: 4d6×10 PO | 96-00: 10d6×10 PO."},
+]

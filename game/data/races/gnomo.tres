@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/race_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/character_creation/racial_trait.gd" id="2"]
+
+[sub_resource type="Resource" id="trait_gnomo_base"]
+script = ExtResource("2")
+trait_id = "astucia_gnomica"
+display_name = "Astucia gnómica"
+description = "+2 INT, +1 CON. Velocidad 7,5m. Visión en la oscuridad 18m. Ventaja en todas las tiradas de salvación de INT, WIS y CHA contra magia."
+ability_bonuses = {"int": 2, "con": 1}
+skill_proficiencies = []
+damage_resistances = []
+speed_bonus = 0
+has_darkvision = true
+darkvision_range_ft = 60
+
+[resource]
+script = ExtResource("1")
+race_id = "gnomo"
+display_name = "Gnomo"
+description = "Los gnomos son la raza más curiosa del mundo conocido. Su entusiasmo por el conocimiento y la inventiva los convierte en aliados impredecibles — y en enemigos que nunca se rinden."
+size = "small"
+base_speed = 25
+traits = [SubResource("trait_gnomo_base")]
+portrait_sets = []

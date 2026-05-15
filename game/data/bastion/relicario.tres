@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "relicario"
+display_name = "Relicario"
+description = "Cámara que alberga objetos sagrados. Genera un encantamiento para lanzar Restauración Mayor sin gastar espacio. Puede preparar un talismán especial que reemplaza los componentes materiales de un conjuro (hasta 1000 PO)."
+required_bastion_level = 3
+prerequisite_flag = "can_use_divine_focus"
+space = 0
+hireling_count = 1
+available_orders = [1, 6]
+build_cost = 3000
+build_missions = 2
+order_options = [
+	{"id": "preparar_talismán", "order": 1, "name": "Preparar talismán", "description": "El hireling prepara un talismán sagrado. Tarda 1 misión. Gratis. El talismán reemplaza los componentes de un conjuro de hasta 1000 PO (sin consumirse). Un solo uso antes de necesitar nueva preparación."},
+]

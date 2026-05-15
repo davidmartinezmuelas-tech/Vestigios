@@ -1,0 +1,119 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+[sub_resource type="Resource" id="check_perspicacia_vorn"]
+script = ExtResource("4")
+skill_name = "Perspicacia"
+ability = "wis"
+difficulty_class = 14
+success_node_id = "vorn_revela_algo"
+failure_node_id = "vorn_no_revela"
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_quien_manda"]
+script = ExtResource("3")
+text = "\"¿Quién te da las órdenes?\""
+next_node_id = "vorn_evasivo"
+
+[sub_resource type="Resource" id="choice_que_espera"]
+script = ExtResource("3")
+text = "\"¿Qué estás esperando en este barco?\""
+skill_check = SubResource("check_perspicacia_vorn")
+
+[sub_resource type="Resource" id="choice_pelear"]
+script = ExtResource("3")
+text = "\"No necesitamos hablar.\""
+next_node_id = "vorn_combate"
+
+[sub_resource type="Resource" id="choice_johannes_conoce"]
+script = ExtResource("3")
+text = "Johannes da un paso al frente. \"Te conozco. Te vi en Meredan hace dos años.\""
+required_character_id = "johannes"
+next_node_id = "vorn_johannes"
+sets_flag = "vorn_reconocio_johannes"
+
+[sub_resource type="Resource" id="choice_tras_evasivo"]
+script = ExtResource("3")
+text = "Atacar."
+next_node_id = "vorn_combate"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El general Vorn Ashkael os observa desde la cubierta de su navío. No desenfunda. No da órdenes. Os esperaba."
+choices = []
+auto_next = "vorn_abre"
+
+[sub_resource type="Resource" id="node_vorn_abre"]
+script = ExtResource("2")
+node_id = "vorn_abre"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Lleváis retraso. Los de la taberna tenían que haber acabado con vosotros.\" Una pausa. \"Eso dice algo de vosotros. Y algo de ellos.\""
+choices = [SubResource("choice_quien_manda"), SubResource("choice_que_espera"), SubResource("choice_johannes_conoce"), SubResource("choice_pelear")]
+
+[sub_resource type="Resource" id="node_vorn_evasivo"]
+script = ExtResource("2")
+node_id = "vorn_evasivo"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Mis órdenes vienen de donde siempre vienen las órdenes. De arriba.\" Una sonrisa sin humor. \"No te daré un nombre. No lo hagas fácil.\""
+choices = [SubResource("choice_que_espera"), SubResource("choice_tras_evasivo")]
+
+[sub_resource type="Resource" id="node_vorn_revela"]
+script = ExtResource("2")
+node_id = "vorn_revela_algo"
+speaker_id = "npc"
+emotion = "scared"
+text = "Hay algo en sus ojos que no encaja con el general que pretende ser. Miedo. Real. \"Este fuerte no era el objetivo. Era el primer paso. Lo que viene después...\" Se detiene. \"No importa. Ya no puedo detenerlo.\""
+choices = [SubResource("choice_pelear")]
+narrator_bark = "Vorn sabe que algo más está en marcha. Y tiene miedo de ello."
+
+[sub_resource type="Resource" id="node_vorn_no_revela"]
+script = ExtResource("2")
+node_id = "vorn_no_revela"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Nada en su cara te dice nada. Es un soldado. Lleva años entrenando para esto."
+choices = [SubResource("choice_pelear")]
+
+[sub_resource type="Resource" id="node_vorn_johannes"]
+script = ExtResource("2")
+node_id = "vorn_johannes"
+speaker_id = "npc"
+emotion = "angry"
+text = "Por primera vez, algo se quiebra en su compostura. \"Meredan.\" Una pausa larga. \"Entonces sabes más de lo que deberías.\" Los ojos de Vorn cambian. \"Eso lo cambia todo.\""
+choices = [SubResource("choice_pelear")]
+narrator_bark = "Johannes y Vorn se conocen de algo relacionado con Meredan."
+
+[sub_resource type="Resource" id="node_vorn_combate"]
+script = ExtResource("2")
+node_id = "vorn_combate"
+speaker_id = "npc"
+emotion = "angry"
+text = "Vorn desenvaina. \"Debería haberos matado en Karreth.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "¡El General Vorn Ashkael ataca!"
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "vorn_barco"
+npc_character_id = "general_vorn"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_vorn_abre"),
+	SubResource("node_vorn_evasivo"),
+	SubResource("node_vorn_revela"),
+	SubResource("node_vorn_no_revela"),
+	SubResource("node_vorn_johannes"),
+	SubResource("node_vorn_combate"),
+]

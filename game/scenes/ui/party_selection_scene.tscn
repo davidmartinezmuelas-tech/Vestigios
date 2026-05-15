@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/party_selection_ui.gd" id="1"]
+
+[node name="PartySelectionScene" type="CanvasLayer"]
+layer = 10
+
+[node name="Root" type="Control" parent="." script=ExtResource("1")]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="Root"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.08, 0.92)
+
+[node name="MissionInfo" type="VBoxContainer" parent="Root"]
+anchor_right = 1.0
+offset_bottom = 120.0
+offset_left = 40.0
+offset_top = 30.0
+offset_right = -40.0
+
+[node name="Title" type="Label" parent="Root/MissionInfo"]
+text = "MISIÓN"
+theme_override_font_sizes/font_size = 24
+
+[node name="Description" type="RichTextLabel" parent="Root/MissionInfo"]
+bbcode_enabled = true
+custom_minimum_size = Vector2(0, 60)
+fit_content = true
+
+[node name="RosterGrid" type="HFlowContainer" parent="Root"]
+anchor_right = 1.0
+offset_top = 140.0
+offset_bottom = 560.0
+offset_left = 40.0
+offset_right = -40.0
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="SlotBar" type="HBoxContainer" parent="Root"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -160.0
+offset_left = 40.0
+offset_right = -260.0
+theme_override_constants/separation = 12
+
+[node name="SlotsLabel" type="Label" parent="Root/SlotBar"]
+text = "Elige 4 personajes"
+vertical_alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="Root"]
+anchor_top = 1.0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_left = -220.0
+offset_bottom = -30.0
+offset_right = -40.0
+text = "PARTIR →"
+theme_override_font_sizes/font_size = 16

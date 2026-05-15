@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MissionData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/mission_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+mission_id = "fuerte_piedra_gris"
+display_name = "El Fuerte de Piedra Gris"
+briefing = "Un fuerte fronterizo ha caído en manos de soldados corrompidos. Lyris os ha encargado investigar qué ocurre allí y neutralizar la amenaza antes de que la corrupción se extienda. Empezáis en la taberna del pueblo cercano."
+party_slots = 4
+recommended_level = 1
+required_character_ids = []
+exploration_scene = "res://scenes/world/mission_01/taberna_karreth.tscn"
+available_hazanas = ["taberna_superada", "bosque_explorado", "ogro_derrotado", "fuerte_conquistado"]

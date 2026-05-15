@@ -1,0 +1,88 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_informacion"]
+script = ExtResource("3")
+text = "\"¿Cuántos soldados hay? ¿Dónde están?\""
+next_node_id = "rehenes_info"
+
+[sub_resource type="Resource" id="choice_vorn"]
+script = ExtResource("3")
+text = "\"¿Sabéis algo del que manda aquí?\""
+next_node_id = "rehenes_vorn"
+
+[sub_resource type="Resource" id="choice_distraccion"]
+script = ExtResource("3")
+text = "\"¿Podéis crear una distracción?\""
+next_node_id = "rehenes_distraccion"
+sets_flag = "rehenes_ofrecen_distraccion"
+
+[sub_resource type="Resource" id="choice_salir"]
+script = ExtResource("3")
+text = "\"Salid por el muelle cuando digamos. Id al agua.\""
+next_node_id = "rehenes_despedida"
+sets_flag = "fuerte_rehenes_liberados"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "scared"
+text = "Dentro de la casa, doce aldeanos. La mayoría llevan días sin dormir bien. Una mujer mayor se levanta. \"Sabía que alguien vendría. Lyris siempre manda a alguien.\""
+choices = [SubResource("choice_informacion"), SubResource("choice_vorn"), SubResource("choice_distraccion")]
+narrator_bark = "Los rehenes están vivos."
+
+[sub_resource type="Resource" id="node_info"]
+script = ExtResource("2")
+node_id = "rehenes_info"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Veinte, treinta quizás. La mayoría en la plaza. Cambian el turno de guardia al amanecer — ahora mismo están cansados. El almacén del puerto es donde guardan las armas.\""
+choices = [SubResource("choice_vorn"), SubResource("choice_distraccion")]
+narrator_bark = "Guardia baja. Puerto: armería improvisada."
+
+[sub_resource type="Resource" id="node_vorn"]
+script = ExtResource("2")
+node_id = "rehenes_vorn"
+speaker_id = "npc"
+emotion = "scared"
+text = "\"Vorn Ashkael. Llegó hace tres semanas con el barco. No duerme en tierra — siempre en el navío. Dicen que está esperando algo. Nadie sabe qué. Pero tiene miedo. Lo notamos.\""
+choices = [SubResource("choice_distraccion"), SubResource("choice_salir")]
+narrator_bark = "Vorn espera algo en el barco. Y tiene miedo."
+
+[sub_resource type="Resource" id="node_distraccion"]
+script = ExtResource("2")
+node_id = "rehenes_distraccion"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Hay una tina de aceite de pescado en el almacén del norte. Si alguien le prende fuego... los guardias de la plaza correrán hacia allí. Os dará unos minutos.\""
+choices = [SubResource("choice_salir")]
+narrator_bark = "Aceite de pescado en el almacén norte. Posible distracción."
+
+[sub_resource type="Resource" id="node_despedida"]
+script = ExtResource("2")
+node_id = "rehenes_despedida"
+speaker_id = "npc"
+emotion = "happy"
+text = "La mujer os coge la mano. \"Haced lo que tengáis que hacer. Nosotros nos ocupamos del resto.\" Se vuelve hacia los suyos. \"Vamos. El muelle.\""
+choices = []
+ends_dialogue = true
+narrator_bark = "Los rehenes huyen por el muelle."
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "fuerte_rehenes"
+npc_character_id = "cochero_karreth"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_info"),
+	SubResource("node_vorn"),
+	SubResource("node_distraccion"),
+	SubResource("node_despedida"),
+]

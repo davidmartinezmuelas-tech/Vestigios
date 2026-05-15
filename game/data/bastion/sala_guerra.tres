@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "sala_guerra"
+display_name = "Sala de Guerra"
+description = "Mesa de planificación con un círculo de tenientes veteranos. Cada teniente reduce las bajas del Bastión en ataques. Permite reclutar hasta 10 tenientes y movilizar ejércitos de 100 soldados por teniente."
+required_bastion_level = 4
+prerequisite_flag = "has_fighting_style"
+space = 2
+hireling_count = 2
+available_orders = [3, 6]
+build_cost = 10000
+build_missions = 3
+order_options = [
+	{"id": "reclutar_teniente", "order": 3, "name": "Reclutar teniente", "description": "Ganas 1 teniente veterano (máximo 10). Cada teniente presente en el Bastión reduce en 1 los dados de bajas en ataques."},
+	{"id": "movilizar_soldados", "order": 3, "name": "Movilizar soldados", "description": "Cada teniente recluta 100 guardias en 7 días (o 20 montados). Coste: 1 PO/día/guardia. El ejército necesita liderazgo para mantenerse. Se disuelve sin líder o sin comida."},
+]

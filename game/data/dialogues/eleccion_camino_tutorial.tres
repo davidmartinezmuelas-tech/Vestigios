@@ -1,0 +1,120 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/dialogue/skill_check_data.gd" id="4"]
+
+; ── TIRADA DE PERCEPCIÓN para estudiar el terreno ──
+[sub_resource type="Resource" id="check_percepcion"]
+script = ExtResource("4")
+skill_name = "Percepción"
+ability = "wis"
+difficulty_class = 12
+success_node_id = "estudia_terreno_exito"
+failure_node_id = "estudia_terreno_fallo"
+
+; ── OPCIONES ──
+[sub_resource type="Resource" id="choice_camino"]
+script = ExtResource("3")
+text = "\"Por el camino principal. Llegamos antes.\""
+next_node_id = "confirma_camino"
+sets_flag = "ruta_elegida_tutorial_camino"
+
+[sub_resource type="Resource" id="choice_bosque"]
+script = ExtResource("3")
+text = "\"Por el bosque. Menos ojos.\""
+next_node_id = "confirma_bosque"
+sets_flag = "ruta_elegida_tutorial_bosque"
+
+[sub_resource type="Resource" id="choice_estudiar"]
+script = ExtResource("3")
+text = "Estudiar el terreno antes de decidir."
+skill_check = SubResource("check_percepcion")
+
+[sub_resource type="Resource" id="choice_confirmar_camino"]
+script = ExtResource("3")
+text = "\"Vamos.\""
+next_node_id = "partida"
+sets_flag = "ruta_elegida_tutorial_camino"
+
+[sub_resource type="Resource" id="choice_confirmar_bosque"]
+script = ExtResource("3")
+text = "\"Vamos.\""
+next_node_id = "partida"
+sets_flag = "ruta_elegida_tutorial_bosque"
+
+; ── NODOS ──
+[sub_resource type="Resource" id="node_start"]
+script = ExtResource("2")
+node_id = "start"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El cochero os mira desde el pescante. El carro está listo. Dos rutas llevan al Fuerte de Piedra Gris desde aquí."
+choices = []
+auto_next = "opciones_ruta"
+
+[sub_resource type="Resource" id="node_opciones"]
+script = ExtResource("2")
+node_id = "opciones_ruta"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"El camino principal es más rápido. Llegaréis de noche, eso sí. El bosque es más largo, pero más silencioso. Llegaréis al amanecer.\""
+choices = [SubResource("choice_camino"), SubResource("choice_bosque"), SubResource("choice_estudiar")]
+
+[sub_resource type="Resource" id="node_estudia_exito"]
+script = ExtResource("2")
+node_id = "estudia_terreno_exito"
+speaker_id = "npc"
+emotion = "neutral"
+text = "Estudias el horizonte. El camino principal tiene patrullas — dos grupos, probablemente. El bosque es más denso de lo que parece, pero hay una senda animal que lo cruza sin dificultad."
+choices = [SubResource("choice_camino"), SubResource("choice_bosque")]
+narrator_bark = "Camino: 2 encuentros probables. Bosque: 1 encuentro opcional."
+
+[sub_resource type="Resource" id="node_estudia_fallo"]
+script = ExtResource("2")
+node_id = "estudia_terreno_fallo"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El terreno es el terreno. Difícil de decir qué os espera en cualquiera de los dos."
+choices = [SubResource("choice_camino"), SubResource("choice_bosque")]
+
+[sub_resource type="Resource" id="node_confirma_camino"]
+script = ExtResource("2")
+node_id = "confirma_camino"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Por el camino principal. Rápido y directo. Llegaremos de noche.\" El cochero chasquea las riendas."
+choices = [SubResource("choice_confirmar_camino")]
+
+[sub_resource type="Resource" id="node_confirma_bosque"]
+script = ExtResource("2")
+node_id = "confirma_bosque"
+speaker_id = "npc"
+emotion = "neutral"
+text = "\"Por el bosque. Sin prisa.\" El cochero suspira y guía al caballo hacia los árboles."
+choices = [SubResource("choice_confirmar_bosque")]
+
+[sub_resource type="Resource" id="node_partida"]
+script = ExtResource("2")
+node_id = "partida"
+speaker_id = "npc"
+emotion = "neutral"
+text = "El carro se pone en marcha."
+choices = []
+ends_dialogue = true
+
+[resource]
+script = ExtResource("1")
+dialogue_id = "eleccion_camino_tutorial"
+npc_character_id = "cochero_karreth"
+start_node_id = "start"
+nodes = [
+	SubResource("node_start"),
+	SubResource("node_opciones"),
+	SubResource("node_estudia_exito"),
+	SubResource("node_estudia_fallo"),
+	SubResource("node_confirma_camino"),
+	SubResource("node_confirma_bosque"),
+	SubResource("node_partida"),
+]

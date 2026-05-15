@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FacilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/bastion/facility_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+facility_id = "almacen_comercial"
+display_name = "Almacén Comercial"
+description = "Espacio fresco y oscuro para bienes comerciales. El hireling compra y vende mercancía, generando beneficios crecientes con el nivel del Bastión."
+required_bastion_level = 1
+prerequisite_flag = ""
+space = 1
+hireling_count = 1
+available_orders = [5, 6]
+build_cost = 800
+build_missions = 1
+order_options = [
+	{"id": "comercio_bienes", "order": 5, "name": "Comerciar bienes", "description": "El hireling compra bienes por hasta 500 PO o los vende con un 10% de beneficio. Tarda 1 misión."},
+]

@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+
+; Puñetazo / daga — 1d4+1 contundente o cortante
+[sub_resource type="Resource" id="ability_soldado_taberna_1"]
+script = ExtResource("2")
+ability_id = "golpe_bruto"
+display_name = "Golpe Bruto"
+description = "Un puñetazo o golpe de improvisado."
+ability_type = 0
+target_type = 0
+range_tiles = 1
+attack_ability = "str"
+uses_proficiency = true
+damage_dice_count = 1
+damage_dice_sides = 4
+damage_ability = "str"
+save_ability = "con"
+save_dc = 0
+save_success_damage_multiplier = 0.5
+effects = []
+
+[resource]
+script = ExtResource("1")
+character_id = "soldado_taberna"
+display_name = "Soldado sin armadura"
+is_hero = false
+level = 1
+hit_dice_sides = 8
+proficiency_bonus = 2
+strength = 12
+dexterity = 12
+constitution = 10
+intelligence = 9
+wisdom = 9
+charisma = 8
+armor_class = 11
+saving_throw_proficiencies = ["str"]
+speed_ft = 30
+max_stress = 100
+xp_reward = 25
+challenge_rating = 0.125
+abilities = [SubResource("ability_soldado_taberna_1")]

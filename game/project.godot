@@ -1,0 +1,46 @@
+; Engine configuration file.
+; Generated for Vestigios — Godot 4.3
+; Editar preferiblemente desde el editor de Godot.
+
+config_version=5
+
+[application]
+
+config/name="Vestigios"
+config/description="Un RPG táctico oscuro de fantasía"
+run/main_scene="res://scenes/core/main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://assets/icons/icon.svg"
+
+[autoload]
+
+EventBus="*res://scripts/autoloads/event_bus.gd"
+GameManager="*res://scripts/autoloads/game_manager.gd"
+WorldState="*res://scripts/autoloads/world_state.gd"
+AudioManager="*res://scripts/autoloads/audio_manager.gd"
+FormationManager="*res://scripts/autoloads/formation_manager.gd"
+DialogueManager="*res://scripts/autoloads/dialogue_manager.gd"
+BastionManager="*res://scripts/autoloads/bastion_manager.gd"
+SaveManager="*res://scripts/save/save_manager.gd"
+LevelManager="*res://scripts/core/level_manager.gd"
+RestManager="*res://scripts/core/rest_manager.gd"
+ItemDatabase="*res://scripts/items/item_database.gd"
+MagicItemDatabase="*res://scripts/items/magic_item_database.gd"
+SpellDatabase="*res://scripts/abilities/spell_database.gd"
+FeatDatabase="*res://scripts/core/feat_database.gd"
+ClassFeatureDatabase="*res://scripts/core/class_feature_database.gd"
+SubclassDatabase="*res://scripts/core/subclass_database.gd"
+RngManager="*res://scripts/utils/rng_manager.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/canvas_textures/default_texture_filter=0

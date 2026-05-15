@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/race_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/character_creation/racial_trait.gd" id="2"]
+
+[sub_resource type="Resource" id="trait_herencia_infernal"]
+script = ExtResource("2")
+trait_id = "herencia_infernal"
+display_name = "Herencia infernal"
+description = "+2 CHA, +1 INT. Visión en la oscuridad 18m. Resistencia al daño por fuego. Acceso a conjuros infernales por nivel."
+ability_bonuses = {"cha": 2, "int": 1}
+skill_proficiencies = []
+damage_resistances = ["fire"]
+speed_bonus = 0
+has_darkvision = true
+darkvision_range_ft = 60
+
+[resource]
+script = ExtResource("1")
+race_id = "tiefling"
+display_name = "Tiefling"
+description = "Los tiefling cargan con la marca de un pacto infernal en su sangre. El mundo los mira con desconfianza. Algunos la merecen. Otros no."
+size = "medium"
+base_speed = 30
+traits = [SubResource("trait_herencia_infernal")]
+portrait_sets = []

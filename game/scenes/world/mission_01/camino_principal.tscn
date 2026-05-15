@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/mission_01/camino_principal.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/combat/combat_manager.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/combat/turn_manager.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/ui/combat_ui.gd" id="4"]
+
+[node name="CaminoPrincipal" type="Node2D" script=ExtResource("1")]
+
+; ── LÓGICA COMBATE ──────────────────────────────────────────
+[node name="CombatManager" type="Node" parent="."]
+script = ExtResource("2")
+
+[node name="TurnManager" type="Node" parent="CombatManager"]
+script = ExtResource("3")
+
+[node name="CombatResolver" type="Node" parent="CombatManager"]
+
+[node name="CombatGrid" type="Node" parent="CombatManager"]
+
+; ── PERSONAJES (spawnea por código) ─────────────────────────
+[node name="Characters" type="Node2D" parent="."]
+
+; ── FONDO ────────────────────────────────────────────────────
+[node name="Background" type="ColorRect" parent="."]
+color = Color(0.06, 0.06, 0.08, 1.0)
+size = Vector2(1920, 1080)
+
+; Camino
+[node name="Road" type="ColorRect" parent="."]
+color = Color(0.18, 0.15, 0.12, 1.0)
+size = Vector2(1920, 200)
+position = Vector2(0, 440)
+
+; ── TEXTO NARRATIVO ──────────────────────────────────────────
+[node name="RoadLabel" type="Label" parent="."]
+anchor_left = 0.1
+anchor_right = 0.9
+offset_top = 40.0
+offset_bottom = 100.0
+text = "El camino principal. La luna llena os ilumina — y os hace visibles."
+horizontal_alignment = 1
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 14
+
+; ── BARRA DE CONDICIONES ─────────────────────────────────────
+[node name="ConditionBar" type="HBoxContainer" parent="."]
+position = Vector2(12, 60)
+theme_override_constants/separation = 8
+
+; ── UI DE COMBATE ────────────────────────────────────────────
+[node name="CombatUI" type="CanvasLayer" parent="." script=ExtResource("4")]
+layer = 5
+visible = false
+
+[node name="PartyPanel" type="VBoxContainer" parent="CombatUI"]
+anchor_bottom = 1.0
+offset_right = 220.0
+offset_top = 60.0
+offset_bottom = -160.0
+offset_left = 12.0
+
+[node name="TurnOrderBar" type="HBoxContainer" parent="CombatUI"]
+anchor_left = 0.2
+anchor_right = 0.8
+offset_bottom = 50.0
+
+[node name="AbilityBar" type="HBoxContainer" parent="CombatUI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -110.0
+offset_left = 8.0
+offset_right = -8.0
+visible = false
+
+[node name="ActiveName" type="Label" parent="CombatUI/AbilityBar"]
+custom_minimum_size = Vector2(100, 0)
+vertical_alignment = 1
+text = "—"
+
+[node name="Abilities" type="HBoxContainer" parent="CombatUI/AbilityBar"]
+size_flags_horizontal = 3
+
+[node name="Separator" type="VSeparator" parent="CombatUI/AbilityBar"]
+
+[node name="MoveButton" type="Button" parent="CombatUI/AbilityBar"]
+custom_minimum_size = Vector2(110, 52)
+text = "Mover"
+
+[node name="EndTurnButton" type="Button" parent="CombatUI/AbilityBar"]
+custom_minimum_size = Vector2(110, 52)
+text = "Fin de turno"

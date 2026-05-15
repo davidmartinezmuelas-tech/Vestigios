@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BackgroundData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creation/background_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+background_id = "forastero"
+display_name = "Forastero"
+description = "Creciste en tierras salvajes, alejado de la civilización. Sabes sobrevivir donde otros morirían, y leer el terreno como un libro."
+skill_proficiencies = ["atletismo", "supervivencia"]
+tool_proficiencies = []
+languages = ["un_idioma_a_eleccion"]
+starting_gold = 10
+feature_name = "Memoria del camino"
+feature_description = "Recuerdas cualquier terreno por el que hayas pasado una vez. Nunca te pierdes en lugares que ya has visitado y puedes encontrar alimento y refugio básico en zonas naturales."

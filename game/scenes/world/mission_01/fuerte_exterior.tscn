@@ -1,0 +1,117 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/mission_01/fuerte_exterior.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/combat/combat_manager.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/combat/turn_manager.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/ui/combat_ui.gd" id="4"]
+
+[node name="FuerteExterior" type="Node2D" script=ExtResource("1")]
+
+[node name="CombatManager" type="Node" parent="."]
+script = ExtResource("2")
+
+[node name="TurnManager" type="Node" parent="CombatManager"]
+script = ExtResource("3")
+
+[node name="CombatResolver" type="Node" parent="CombatManager"]
+
+[node name="CombatGrid" type="Node" parent="CombatManager"]
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="Background" type="ColorRect" parent="."]
+color = Color(0.05, 0.06, 0.08, 1.0)
+size = Vector2(1920, 1080)
+
+; Muralla del fuerte
+[node name="Wall" type="ColorRect" parent="."]
+color = Color(0.35, 0.30, 0.25, 1.0)
+size = Vector2(1200, 80)
+position = Vector2(360, 280)
+
+; Torretas
+[node name="Tower1" type="ColorRect" parent="."]
+color = Color(0.3, 0.25, 0.2, 1.0)
+size = Vector2(70, 120)
+position = Vector2(360, 200)
+
+[node name="Tower2" type="ColorRect" parent="."]
+color = Color(0.3, 0.25, 0.2, 1.0)
+size = Vector2(70, 120)
+position = Vector2(1490, 200)
+
+; Puerta
+[node name="Gate" type="ColorRect" parent="."]
+color = Color(0.2, 0.15, 0.1, 1.0)
+size = Vector2(120, 80)
+position = Vector2(900, 280)
+
+; Mar
+[node name="Sea" type="ColorRect" parent="."]
+color = Color(0.06, 0.12, 0.22, 1.0)
+size = Vector2(1920, 300)
+position = Vector2(0, -60)
+
+; Panel de elección de entrada
+[node name="EntryPanel" type="VBoxContainer" parent="."]
+anchor_left = 0.3
+anchor_right = 0.7
+anchor_top = 0.6
+anchor_bottom = 0.9
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="EntryPanel"]
+text = "¿Cómo entráis al fuerte?"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="CarroButton" type="Button" parent="EntryPanel"]
+custom_minimum_size = Vector2(0, 60)
+text = "🚗  Por la puerta principal — con el carro\nEngañar o persuadir a los guardias"
+
+[node name="MarButton" type="Button" parent="EntryPanel"]
+custom_minimum_size = Vector2(0, 60)
+text = "🌊  Por el mar — a nado\nSigilo y atletismo. Sin carro, sin testigos."
+
+[node name="CombatUI" type="CanvasLayer" parent="." script=ExtResource("4")]
+layer = 5
+visible = false
+
+[node name="PartyPanel" type="VBoxContainer" parent="CombatUI"]
+anchor_bottom = 1.0
+offset_right = 220.0
+offset_top = 60.0
+offset_bottom = -160.0
+offset_left = 12.0
+
+[node name="TurnOrderBar" type="HBoxContainer" parent="CombatUI"]
+anchor_left = 0.2
+anchor_right = 0.8
+offset_bottom = 50.0
+
+[node name="AbilityBar" type="HBoxContainer" parent="CombatUI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -110.0
+offset_left = 8.0
+offset_right = -8.0
+visible = false
+
+[node name="ActiveName" type="Label" parent="CombatUI/AbilityBar"]
+custom_minimum_size = Vector2(100, 0)
+vertical_alignment = 1
+text = "—"
+
+[node name="Abilities" type="HBoxContainer" parent="CombatUI/AbilityBar"]
+size_flags_horizontal = 3
+
+[node name="Separator" type="VSeparator" parent="CombatUI/AbilityBar"]
+
+[node name="MoveButton" type="Button" parent="CombatUI/AbilityBar"]
+custom_minimum_size = Vector2(110, 52)
+text = "Mover"
+
+[node name="EndTurnButton" type="Button" parent="CombatUI/AbilityBar"]
+custom_minimum_size = Vector2(110, 52)
+text = "Fin de turno"
