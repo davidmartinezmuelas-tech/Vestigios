@@ -40,11 +40,60 @@ func get_subclass_always_prepared() -> Array[String]:
 # PROGRESIÓN
 # ============================================================
 @export_group("Progresión")
+## Nivel total del personaje (suma de todos los niveles de clase)
 @export var level: int = 1
-## Caras del dado de golpe (6, 8, 10 o 12)
+## Caras del dado de golpe de la clase principal (6, 8, 10 o 12)
 @export var hit_dice_sides: int = 8
-## Bonificador de competencia según nivel (niveles 1-4: +2, 5-8: +3, etc.)
+## Bonificador de competencia según nivel total
 @export var proficiency_bonus: int = 2
+
+## Multiclase — clase secundaria (vacío si solo hay una clase)
+@export var multiclass_id: String = ""
+## Niveles en la clase secundaria (level = nivel_principal + multiclass_level)
+@export var multiclass_level: int = 0
+
+## Nivel efectivo en una clase concreta.
+func class_level(queried_class_id: String) -> int:
+	if queried_class_id == class_id:
+		return level - multiclass_level
+	if queried_class_id == multiclass_id:
+		return multiclass_level
+	return 0
+
+## Nivel total del personaje (principal + secundaria).
+func total_level() -> int:
+	return level
+
+## Valida si este personaje puede multiclasear en otra clase.
+## Comprueba los requisitos de AMBAS clases (D&D 2024).
+func can_multiclass_into(new_class_id: String) -> bool:
+	if new_class_id == class_id:
+		return false  # no se puede repetir la misma clase
+	# Requisitos de la clase actual
+	var current_reqs := ClassDefinition.get_multiclass_requirements(class_id)
+	for ability in current_reqs:
+		if get(ability, 10) < current_reqs[ability]:
+			return false
+	# Requisitos de la clase nueva
+	var new_reqs := ClassDefinition.get_multiclass_requirements(new_class_id)
+	for ability in new_reqs:
+		if get(ability, 10) < new_reqs[ability]:
+			return false
+	return true
+
+## Texto del motivo por el que no puede multiclasear (para mostrar en UI).
+func multiclass_blocked_reason(new_class_id: String) -> String:
+	if new_class_id == class_id:
+		return "Ya eres %s." % class_id
+	var current_reqs := ClassDefinition.get_multiclass_requirements(class_id)
+	for ability in current_reqs:
+		if get(ability, 10) < current_reqs[ability]:
+			return "Tu clase actual requiere %s %d." % [ability.to_upper(), current_reqs[ability]]
+	var new_reqs := ClassDefinition.get_multiclass_requirements(new_class_id)
+	for ability in new_reqs:
+		if get(ability, 10) < new_reqs[ability]:
+			return "%s requiere %s %d." % [new_class_id, ability.to_upper(), new_reqs[ability]]
+	return ""
 
 # ============================================================
 # PUNTUACIONES DE CARACTERÍSTICA (1–20, modificador = (puntaje-10)/2 redondeado abajo)
@@ -63,6 +112,9 @@ func get_subclass_always_prepared() -> Array[String]:
 @export_group("Defensa")
 ## Clase de Armadura base (incluye armadura + escudo si procede)
 @export var armor_class: int = 10
+## ID del ArmorData equipado actualmente (referencia a ItemDatabase)
+## "" = sin armadura. Si el personaje no tiene FUE suficiente → velocidad -10ft
+@export var equipped_armor_id: String = ""
 ## Tiradas de salvación con competencia: "str", "dex", "con", "int", "wis", "cha"
 @export var saving_throw_proficiencies: Array[String] = []
 ## Competencias de habilidad (nombres snake_case: "percepcion", "intimidacion"...)
@@ -75,6 +127,16 @@ func get_subclass_always_prepared() -> Array[String]:
 # ============================================================
 @export_group("Economía")
 @export var starting_gold: int = 0
+
+# ============================================================
+# LOOT
+# ============================================================
+@export_group("Loot")
+## Si true: al morir puede soltar equipo y objetos mágicos.
+## Si false (enemigo básico): solo oro — el combate destruyó su equipo.
+@export var is_boss: bool = false
+## Tabla de loot que genera al morir. nil = usar fórmula por CR.
+@export var loot_table: LootTable = null
 
 # ============================================================
 # MOVIMIENTO

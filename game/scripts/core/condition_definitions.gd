@@ -219,6 +219,33 @@ const ALL: Dictionary = {
 		"skill_disadvantage": ["supervivencia", "naturaleza"],
 	},
 
+	"en_silencio": {
+		"display_name": "En Silencio",
+		"icon": "🔇✨",
+		"description": "Dentro del área del conjuro Silencio. No puede pronunciar componentes verbales.",
+		"blocks_verbal_components": true,
+	},
+
+	"oculto": {
+		"display_name": "Oculto",
+		"icon": "👤",
+		"description": "El personaje se ha ocultado con éxito. Los ataques contra él tienen desventaja.",
+		"attackers_disadvantage": true,
+	},
+
+	"punto_debil_revelado": {
+		"display_name": "Punto débil revelado",
+		"icon": "🎯",
+		"description": "Se ha identificado una apertura en su defensa. Los ataques tienen ventaja durante 3 turnos.",
+		"attackers_advantage": true,
+	},
+
+	"posicion_revelada": {
+		"display_name": "Posición revelada",
+		"icon": "📍",
+		"description": "Su posición ha sido detectada a pesar de la invisibilidad. Atacarle no tiene desventaja por 2 turnos.",
+	},
+
 	# ── MAESTRÍA ─────────────────────────────────────────────
 
 	"debilitado_maestria": {

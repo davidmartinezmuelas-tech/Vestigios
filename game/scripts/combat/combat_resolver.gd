@@ -59,6 +59,11 @@ func _resolve_attack(user: BaseCharacter, ability: AbilityData, target: BaseChar
 	if target.stats.attackers_have_advantage():
 		adv = true
 
+	# Objetivo invisible: desventaja para el atacante
+	# EXCEPTO si la posición ha sido revelada con la acción Buscar
+	if target.stats.has_condition("invisible") and not target.stats.has_condition("posicion_revelada"):
+		disadv = true
+
 	# Tirar d20
 	var d20: int
 	if disadv and not adv:
@@ -78,10 +83,27 @@ func _resolve_attack(user: BaseCharacter, ability: AbilityData, target: BaseChar
 
 	var attack_total := d20 + _attack_bonus(user, ability)
 
+	# ── COBERTURA: comprobar si el objetivo tiene cover ───────
+	var cover_bonus := _get_cover_bonus(user, target)
+	if cover_bonus == CombatGrid.COVER_FULL:
+		# Cobertura total — no se puede atacar
+		EventBus.narrator_bark.emit(
+			"%s tiene cobertura total — no puede ser atacado." % target.get_display_name(), 2.5
+		)
+		return
+	var effective_ac := target.stats.armor_class + cover_bonus
+
 	# ── Fallo normal: intentar Rozar ─────────────────────────
-	if not is_critical and attack_total < target.stats.armor_class:
+	if not is_critical and attack_total < effective_ac:
 		_maybe_apply_rozar(user, ability, target)
 		EventBus.attack_missed.emit(user, target)
+		if cover_bonus > 0:
+			EventBus.narrator_bark.emit(
+				"Fallo — %s tiene %s." % [
+					target.get_display_name(),
+					CombatGrid.cover_label(cover_bonus)
+				], 2.0
+			)
 		return
 
 	# ── GOLPE ─────────────────────────────────────────────────
@@ -262,7 +284,14 @@ func _resolve_saving_throw(user: BaseCharacter, ability: AbilityData, target: Ba
 	if cd == 0:
 		cd = 8 + user.stats.proficiency_bonus + user.stats.get_modifier(ability.attack_ability)
 
-	var save_roll := RngManager.randi_range(1, 20) + target.stats.get_modifier(ability.save_ability)
+	var base_roll := RngManager.randi_range(1, 20) + target.stats.get_modifier(ability.save_ability)
+
+	# Cobertura en tiradas de DES (D&D 2024: +2/+5 al save, no a la CD)
+	var cover_add := 0
+	if ability.save_ability == "dex":
+		cover_add = get_dex_save_cover_bonus(target, user.grid_position)
+
+	var save_roll := base_roll + cover_add
 	var passed    := save_roll >= cd
 
 	var damage := _roll_damage(user, ability, false)
@@ -350,3 +379,24 @@ func _apply_effects(user: BaseCharacter, ability: AbilityData, target: BaseChara
 
 func _has_mastery(character: BaseCharacter) -> bool:
 	return character.data != null and character.data.has_weapon_mastery
+
+# ============================================================
+# COBERTURA
+# ============================================================
+
+## Devuelve el bonus de cobertura del target respecto al atacante.
+## Usa el grid si está disponible; si no, devuelve COVER_NONE.
+func _get_cover_bonus(attacker: BaseCharacter, target: BaseCharacter) -> int:
+	if _grid == null:
+		return CombatGrid.COVER_NONE
+	return _grid.get_cover_bonus(attacker.grid_position, target.grid_position)
+
+## Devuelve el bonus de cobertura para tiradas de salvación de DES.
+## Solo aplica la mitad del camino — la cobertura protege al defensor.
+func get_dex_save_cover_bonus(target: BaseCharacter, origin_pos: Vector2i) -> int:
+	if _grid == null:
+		return 0
+	var cover := _grid.get_cover_bonus(origin_pos, target.grid_position)
+	if cover == CombatGrid.COVER_FULL:
+		return 0  # cobertura total contra ataques, no contra AoE que te incluye
+	return cover

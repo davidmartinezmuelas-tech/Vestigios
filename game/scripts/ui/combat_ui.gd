@@ -32,6 +32,7 @@ var _active_character: BaseCharacter = null
 var _combat_manager: CombatManager   = null
 var _move_mode_active: bool          = false
 var _enemy_hud_nodes: Dictionary     = {}   # BaseCharacter → Control
+var _cover_tooltip: Label            = null  # tooltip de cobertura flotante
 
 # ============================================================
 # SETUP
@@ -46,6 +47,15 @@ func setup(combat_manager: CombatManager) -> void:
 	end_turn_btn.pressed.connect(func(): end_turn_pressed.emit())
 	move_btn.pressed.connect(_on_move_toggled)
 	ability_bar.hide()
+	_build_cover_tooltip()
+
+func _build_cover_tooltip() -> void:
+	_cover_tooltip = Label.new()
+	_cover_tooltip.name = "CoverTooltip"
+	_cover_tooltip.add_theme_font_size_override("font_size", 11)
+	_cover_tooltip.add_theme_color_override("font_color", Color(0.9, 0.8, 0.4))
+	_cover_tooltip.visible = false
+	add_child(_cover_tooltip)
 
 ## Llama esto una vez al inicio del combate para registrar los personajes.
 func register_characters(heroes: Array[BaseCharacter], enemies: Array[BaseCharacter]) -> void:
@@ -161,6 +171,14 @@ func _build_enemy_hud_node(enemy: BaseCharacter) -> Control:
 	# Posicionar sobre el sprite del enemigo en el mundo
 	_anchor_hud_to_character(container, enemy)
 
+	# Badge de cobertura (se actualiza en _process)
+	var cover_badge := Label.new()
+	cover_badge.name = "CoverBadge"
+	cover_badge.add_theme_font_size_override("font_size", 9)
+	cover_badge.add_theme_color_override("font_color", Color(0.9, 0.8, 0.3))
+	cover_badge.visible = false
+	container.add_child(cover_badge)
+
 	return container
 
 func _build_enemy_info_panel(enemy: BaseCharacter) -> Control:
@@ -215,14 +233,28 @@ func _update_enemy_hud(enemy: BaseCharacter, hp: int, max_hp: int) -> void:
 		bar.value     = hp
 
 func _process(_delta: float) -> void:
-	# Actualizar posición de los HUDs de enemigos para que sigan a los sprites
+	# Actualizar posición de los HUDs de enemigos + badge de cobertura
 	for enemy in _enemy_hud_nodes:
 		var hud := _enemy_hud_nodes[enemy] as Control
 		if hud == null or not is_instance_valid(enemy):
 			continue
-		# Convertir posición del personaje en el mundo a coordenadas de pantalla
 		var screen_pos := (enemy as Node2D).get_viewport_transform() * (enemy as Node2D).global_position
 		hud.position = screen_pos + Vector2(-40, -80)
+
+		# Actualizar badge de cobertura si el turno activo puede atacar
+		var cover_badge := hud.get_node_or_null("CoverBadge") as Label
+		if cover_badge and _active_character != null and _combat_manager != null:
+			var grid := _combat_manager.grid
+			if grid != null:
+				var cover := grid.get_cover_bonus(
+					_active_character.grid_position,
+					(enemy as BaseCharacter).grid_position
+				)
+				var cover_text := CombatGrid.cover_label(cover)
+				cover_badge.text = cover_text
+				cover_badge.visible = not cover_text.is_empty()
+			else:
+				cover_badge.visible = false
 
 # ============================================================
 # BARRA DE HABILIDADES (abajo, cambia según el turno)
@@ -259,6 +291,34 @@ func _build_ability_bar(character: BaseCharacter) -> void:
 	hide_btn.custom_minimum_size = Vector2(100, 52)
 	hide_btn.tooltip_text = "Acción de bonus. Tirada de Sigilo vs Percepción pasiva de enemigos."
 	abilities_container.add_child(hide_btn)
+
+	# ── ACCIÓN: BUSCAR ───────────────────────────────────────
+	var search_btn := Button.new()
+	search_btn.text = "🔍 Buscar"
+	search_btn.custom_minimum_size = Vector2(90, 52)
+	search_btn.tooltip_text = "Acción. Prueba de Percepción (SAB).\nCD 10: objetos del entorno | CD 15: trampas + ocultos | CD 20: invisibles"
+	search_btn.pressed.connect(func():
+		if _combat_manager:
+			_combat_manager.player_search_action()
+	)
+	abilities_container.add_child(search_btn)
+
+	# ── ACCIÓN: ESTUDIAR ─────────────────────────────────────
+	var study_btn := Button.new()
+	study_btn.text = "📖 Estudiar"
+	study_btn.custom_minimum_size = Vector2(100, 52)
+	study_btn.tooltip_text = "Acción. Prueba de Inteligencia sobre un objetivo seleccionado.\nCD 10: salud | CD 15: resistencias | CD 20: abre vulnerabilidad (ventaja 3 turnos)"
+	study_btn.name = "StudyButton"
+	study_btn.pressed.connect(func():
+		# Usa el último enemigo con targeted
+		if _combat_manager:
+			var targets := _combat_manager.get_enemies().filter(
+				func(e: BaseCharacter) -> bool: return e.is_alive()
+			)
+			if not targets.is_empty():
+				_combat_manager.player_study_action(targets[0])
+	)
+	abilities_container.add_child(study_btn)
 
 func _build_ability_button(ability: AbilityData, character: BaseCharacter) -> Button:
 	var btn := Button.new()

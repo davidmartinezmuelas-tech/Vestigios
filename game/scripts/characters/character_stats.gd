@@ -126,10 +126,26 @@ var _class_resources: Dictionary = {}
 var _class_resource_max: Dictionary = {}
 
 func init_class_resources(class_id: String, char_data: CharacterData) -> void:
-	var resource_map := ClassFeatureDatabase.get_class_resources(class_id, level, char_data)
+	# Clase principal
+	var primary_level := char_data.class_level(class_id)
+	var resource_map  := ClassFeatureDatabase.get_class_resources(class_id, primary_level, char_data)
 	for key in resource_map:
 		_class_resource_max[key] = resource_map[key]
-		_class_resources[key] = resource_map[key]
+		_class_resources[key]    = resource_map[key]
+
+	# Clase secundaria (multiclase) — añade sus recursos propios
+	if not char_data.multiclass_id.is_empty() and char_data.multiclass_level > 0:
+		var secondary_map := ClassFeatureDatabase.get_class_resources(
+			char_data.multiclass_id, char_data.multiclass_level, char_data
+		)
+		for key in secondary_map:
+			# Combinar (sumar) recursos que ya existen, añadir los nuevos
+			if _class_resource_max.has(key):
+				_class_resource_max[key] += secondary_map[key]
+				_class_resources[key]    += secondary_map[key]
+			else:
+				_class_resource_max[key] = secondary_map[key]
+				_class_resources[key]    = secondary_map[key]
 
 func get_class_resource(resource_id: String) -> int:
 	return _class_resources.get(resource_id, 0)
@@ -197,6 +213,10 @@ func initialize(data: CharacterData) -> void:
 	_active_conditions.clear()
 	for cond_id in data.persistent_conditions:
 		_active_conditions[cond_id] = {"rounds_remaining": -1}
+
+	# Requisito de Fuerza mínima para armaduras pesadas (D&D 2024)
+	# Si FUE < requisito: velocidad -10ft (penalización de movimiento)
+	_apply_armor_str_penalty(data)
 
 # ============================================================
 # MODIFICADORES DE CARACTERÍSTICA (estático, útil desde cualquier sitio)
@@ -296,6 +316,7 @@ func attackers_have_advantage() -> bool:
 	var adv_conds := [
 		"aturdido", "cegado", "inconsciente",
 		"paralizado", "petrificado", "apresado",
+		"punto_debil_revelado",  # acción Estudiar revela apertura táctica
 	]
 	for c in adv_conds:
 		if has_condition(c):
@@ -355,3 +376,24 @@ func _get_score(ability: String) -> int:
 		"wis": return wisdom
 		"cha": return charisma
 	return 10
+
+## Comprueba si la armadura equipada requiere más FUE de la que tiene el personaje.
+## Si es así, aplica -10ft de velocidad (D&D 2024).
+func _apply_armor_str_penalty(data: CharacterData) -> void:
+	if data.equipped_armor_id.is_empty():
+		return
+	var armor := ItemDatabase.get_armor(data.equipped_armor_id)
+	if armor == null:
+		return
+	var required_str := armor.requires_strength
+	if required_str > 0 and data.strength < required_str:
+		_temp_modifiers["speed"] = _temp_modifiers.get("speed", 0) - 10
+
+## Devuelve true si el personaje cumple el requisito de FUE para su armadura equipada.
+func meets_armor_str_requirement(data: CharacterData) -> bool:
+	if data.equipped_armor_id.is_empty():
+		return true
+	var armor := ItemDatabase.get_armor(data.equipped_armor_id)
+	if armor == null:
+		return true
+	return data.strength >= armor.requires_strength

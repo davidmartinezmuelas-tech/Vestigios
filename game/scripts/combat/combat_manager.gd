@@ -103,6 +103,14 @@ func player_use_ability(ability: AbilityData, targets: Array[BaseCharacter], slo
 			EventBus.narrator_bark.emit("Ya has actuado este turno.", 2.0)
 			return
 
+	# ── Componentes de conjuro (D&D 2024) ────────────────────
+	# Material (M): no implementado — simplificación de diseño
+	if is_spell:
+		var block := _check_spell_components(spell, _active_character)
+		if not block.is_empty():
+			EventBus.narrator_bark.emit(block, 3.0)
+			return
+
 	# ── Truco (nivel 0): sin espacio de conjuro ───────────────
 	if is_spell and spell.is_cantrip():
 		_resolve_spell(_active_character, spell, targets, 0)
@@ -147,6 +155,23 @@ func _resolve_spell(user: BaseCharacter, spell: SpellData, targets: Array[BaseCh
 	else:
 		_resolve_action_bookkeeping(user)
 
+## Comprueba si las condiciones del lanzador bloquean algún componente del conjuro.
+## Devuelve string de error (no vacío = bloqueado) o "" si puede lanzar.
+func _check_spell_components(spell: SpellData, caster: BaseCharacter) -> String:
+	var comps: Array[String] = spell.components
+
+	# VERBAL (V): bloqueado por ensordecido (no puede hablar) o zona de Silencio
+	if "v" in comps:
+		if caster.stats.has_condition("ensordecido") or caster.stats.has_condition("en_silencio"):
+			return "%s no puede pronunciar los componentes verbales." % caster.get_display_name()
+
+	# SOMÁTICO (S): bloqueado por apresado (manos inmovilizadas)
+	if "s" in comps:
+		if caster.stats.has_condition("apresado"):
+			return "%s no puede realizar los gestos somáticos." % caster.get_display_name()
+
+	return ""
+
 func _resolve_action_bookkeeping(_user: BaseCharacter) -> void:
 	_check_combat_end()
 
@@ -155,6 +180,158 @@ func player_end_turn() -> void:
 	if _state != CombatState.PLAYER_MOVE and _state != CombatState.PLAYER_ACTION:
 		return
 	_active_character.end_turn()
+	_check_combat_end()
+
+# ============================================================
+# ACCIÓN: BUSCAR (Search)
+## Prueba de Sabiduría (Percepción) activa.
+## CD 10 → enemigos ocultos en rango
+## CD 15 → también trampas en rango
+## CD 20 → también objetos del entorno interactuables
+# ============================================================
+
+func player_search_action() -> void:
+	if _state != CombatState.PLAYER_MOVE and _state != CombatState.PLAYER_ACTION:
+		return
+	if _active_character == null or not _active_character.can_act():
+		return
+
+	var char := _active_character
+	var wis_mod     := char.stats.get_modifier("wis")
+	var prof_bonus  := char.stats.proficiency_bonus
+	var roll        := RngManager.randi_range(1, 20) + wis_mod + prof_bonus
+	var search_range := 6  # 30ft = 6 casillas de radio
+
+	var found_anything := false
+
+	# CD 10+: objetos del entorno (barriles, lámparas, elementos interactuables)
+	# Son estáticos y visibles si sabes dónde mirar
+	if roll >= 10 and grid != null:
+		var objs := grid.get_env_objects_in_range(char.grid_position, search_range)
+		for obj in objs:
+			if not obj.get("revealed", false):
+				grid.reveal_env_object(obj["cell"])
+				EventBus.narrator_bark.emit(
+					"%s nota: %s — %s" % [char.get_display_name(), obj.get("name","?"), obj.get("description","")],
+					3.0
+				)
+				found_anything = true
+
+	# CD 15+: trampas y enemigos que se han OCULTADO (oculto)
+	# Las trampas son estáticas pero disimuladas. Los ocultos se mueven poco.
+	if roll >= 15:
+		if grid != null:
+			var traps := grid.get_traps_in_range(char.grid_position, search_range)
+			for cell in traps:
+				if not grid.is_trap_revealed(cell):
+					grid.reveal_trap(cell)
+					var trap := grid.get_trap(cell)
+					EventBus.narrator_bark.emit(
+						"¡%s detecta una trampa! (%s)" % [char.get_display_name(), trap.get("damage_dice", "?")],
+						3.5
+					)
+					found_anything = true
+
+		for enemy in _enemies:
+			if not enemy.is_alive():
+				continue
+			if enemy.stats.has_condition("oculto"):
+				if grid.get_distance(char.grid_position, enemy.grid_position) <= search_range:
+					enemy.stats.remove_condition("oculto")
+					EventBus.narrator_bark.emit(
+						"%s localiza a %s, que se había ocultado." % [char.get_display_name(), enemy.get_display_name()],
+						3.5
+					)
+					found_anything = true
+
+	# CD 20+: enemigos INVISIBLES (invisibilidad mágica)
+	# No se ven, pero se pueden detectar por sonido, desplazamiento de aire o presencia mágica.
+	# Solo se revela su posición aproximada — siguen siendo invisibles pero atacables sin desventaja.
+	if roll >= 20:
+		for enemy in _enemies:
+			if not enemy.is_alive():
+				continue
+			if enemy.stats.has_condition("invisible"):
+				if grid.get_distance(char.grid_position, enemy.grid_position) <= search_range:
+					# No eliminamos 'invisible' — solo añadimos 'posicion_revelada' para la UI
+					enemy.stats.add_condition("posicion_revelada", 2)
+					EventBus.narrator_bark.emit(
+						"%s intuye la presencia de %s por sus movimientos. Posición aproximada revelada." % [
+							char.get_display_name(), enemy.get_display_name()
+						], 4.0
+					)
+					found_anything = true
+
+	if not found_anything:
+		var result_text := "No detecta nada fuera de lo normal." if roll < 15 else "El área parece despejada."
+		EventBus.narrator_bark.emit(
+			"%s busca... %s (tirada %d)" % [char.get_display_name(), result_text, roll],
+			2.5
+		)
+
+	char.end_turn()
+	_check_combat_end()
+
+# ============================================================
+# ACCIÓN: ESTUDIAR (Study)
+## Prueba de Inteligencia activa sobre un objetivo.
+## CD 10 → rango aproximado de PG (sano/herido/crítico)
+## CD 15 → resistencias e inmunidades conocidas
+## CD 20 → revela una apertura (ventaja en el próximo ataque vs este objetivo)
+# ============================================================
+
+func player_study_action(target: BaseCharacter) -> void:
+	if _state != CombatState.PLAYER_MOVE and _state != CombatState.PLAYER_ACTION:
+		return
+	if _active_character == null or not _active_character.can_act():
+		return
+	if target == null or not target.is_alive():
+		return
+
+	var char   := _active_character
+	var int_mod    := char.stats.get_modifier("int")
+	var prof_bonus := char.stats.proficiency_bonus
+	var roll       := RngManager.randi_range(1, 20) + int_mod + prof_bonus
+
+	var enemy_id := target.data.character_id if target.data else ""
+	var knowledge := WorldState.enemy_knowledge
+
+	if roll >= 20:
+		# Estudio completo: revela todo + apertura táctica
+		knowledge.study_enemy(enemy_id, [], [])
+		# Aplica condición de "punto débil revelado" en el objetivo
+		target.stats.add_condition("punto_debil_revelado", 3)
+		EventBus.narrator_bark.emit(
+			"%s estudia a %s — encuentra una apertura. Ventaja en los próximos ataques." % [
+				char.get_display_name(), target.get_display_name()
+			], 4.0
+		)
+	elif roll >= 15:
+		# Revela resistencias/inmunidades (subida a FAMILIAR)
+		knowledge.study_enemy(enemy_id, [], [])
+		EventBus.narrator_bark.emit(
+			"%s analiza a %s. Resistencias y vulnerabilidades reveladas." % [
+				char.get_display_name(), target.get_display_name()
+			], 3.5
+		)
+	elif roll >= 10:
+		# Estado de salud aproximado
+		knowledge.sight_enemy(enemy_id)
+		var hp_pct := target.stats.health_percentage()
+		var state_text := "parece sano" if hp_pct > 0.6 else ("está herido" if hp_pct > 0.25 else "está al límite")
+		EventBus.narrator_bark.emit(
+			"%s evalúa a %s — %s." % [
+				char.get_display_name(), target.get_display_name(), state_text
+			], 3.0
+		)
+	else:
+		EventBus.narrator_bark.emit(
+			"%s no consigue leer a %s. (tirada %d)" % [
+				char.get_display_name(), target.get_display_name(), roll
+			], 2.5
+		)
+
+	char.end_turn()
 	_check_combat_end()
 
 # ============================================================
@@ -343,15 +520,63 @@ func _check_combat_end() -> void:
 func _end_combat(victory: bool) -> void:
 	_state = CombatState.ENDED
 
-	# Limpiar condiciones post-combate (resaca, exhausto_nado, etc.) de los héroes
 	if victory:
+		# Limpiar condiciones post-combate de los héroes
 		for hero in _heroes:
 			if hero.is_alive() and hero.data != null:
 				hero.stats.clear_post_combat_conditions()
-				# Sincronizar con CharacterData: limpiar persistent_conditions que se eliminan
 				hero.data.persistent_conditions = hero.data.persistent_conditions.filter(
 					func(c: String) -> bool: return not ConditionDefs.removes_after_combat(c)
 				)
 
+		# Generar loot de los enemigos derrotados
+		_generate_loot()
+
 	combat_ended.emit(victory)
 	EventBus.combat_ended.emit(victory, {})
+
+func _generate_loot() -> void:
+	var loot_parts: Array[String] = []
+
+	for enemy in _enemies:
+		if enemy.data == null:
+			continue
+
+		var data := enemy.data
+
+		# Loot table explícita (bosses y enemigos especiales)
+		if data.loot_table != null:
+			var result := data.loot_table.generate()
+			if not result.is_empty():
+				loot_parts.append(result)
+			continue
+
+		# Enemigos básicos: solo oro basado en CR
+		# El equipo del enemigo queda destruido por el combate
+		if not data.is_boss:
+			var gold := _gold_for_cr(data.challenge_rating)
+			if gold > 0:
+				WorldState.add_gold(gold)
+				loot_parts.append("%d PO" % gold)
+
+	if not loot_parts.is_empty():
+		EventBus.narrator_bark.emit(
+			"Obtenéis: %s." % ", ".join(loot_parts), 3.5
+		)
+
+## Devuelve el oro aproximado que suelta un enemigo según su CR.
+## Fórmula basada en la tabla de Individual Treasure (D&D 2024 DMG).
+static func _gold_for_cr(cr: float) -> int:
+	if cr <= 0:
+		return 0
+	if cr < 0.5:
+		return RngManager.randi_range(1, 3)      # CR 1/8-1/4: 1-3 PO
+	if cr < 1.0:
+		return RngManager.randi_range(2, 6)      # CR 1/2: 2-6 PO
+	if cr < 3.0:
+		return RngManager.randi_range(3, 12)     # CR 1-2: 3-12 PO
+	if cr < 6.0:
+		return RngManager.randi_range(10, 30)    # CR 3-5: 10-30 PO
+	if cr < 11.0:
+		return RngManager.randi_range(30, 90)    # CR 6-10: 30-90 PO
+	return RngManager.randi_range(100, 300)      # CR 11+: 100-300 PO

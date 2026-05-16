@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+﻿[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
@@ -48,6 +48,8 @@ class_id = "guerrero"
 subclass_id = "arco_antiguo_guerrero"
 has_weapon_mastery = true
 hit_dice_remaining = 1
+multiclass_id = "picaro"
+multiclass_level = 0
 display_name = "Bicho"
 is_hero = true
 level = 1
@@ -60,6 +62,7 @@ intelligence = 8
 wisdom = 10
 charisma = 12
 armor_class = 16
+equipped_armor_id = "cota_malla"
 saving_throw_proficiencies = ["str", "con"]
 speed_ft = 30
 max_stress = 100
