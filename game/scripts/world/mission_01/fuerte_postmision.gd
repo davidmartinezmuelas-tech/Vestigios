@@ -5,8 +5,8 @@
 ##   LOOT       → el jugador puede saquear el fuerte (cofre de Vorn, armería)
 ##   LYRIS      → llegada del ejército aliado, Lyris da info
 ##   FIESTA     → celebración en el puerto (bebida, compañía, interacciones)
-##   MAÑANA     → briefing de Lyris → Arcanis
-##   DONE       → vuelta al Bastión / preparar Arcanis
+##   MAÑANA     → briefing de Lyris → Ilvernis
+##   DONE       → vuelta al Bastión / preparar Ilvernis
 
 extends Node2D
 
@@ -156,19 +156,19 @@ func _on_party_dialogue_closed(_id: String) -> void:
 
 func _state_morning() -> void:
 	scene_label.text = "Puerto del fuerte — Amanecer"
-	_open_dialogue("res://data/dialogues/lyris_briefing_arcanis.tres", _lyris_data,
+	_open_dialogue("res://data/dialogues/lyris_briefing_ilvernis.tres", _lyris_data,
 		func(_id): _enter_state(State.DONE)
 	)
 
 # ── FIN DE MISIÓN ─────────────────────────────────────────────
 
 func _state_done() -> void:
-	# La resaca dura hasta el primer combate en Arcanis (se elimina entonces)
+	# La resaca dura hasta el primer combate en Ilvernis (se elimina entonces)
 	WorldState.set_flag("mision_01_completada", true)
 	LevelManager.complete_hazana("fuerte_conquistado")
 	SaveManager.autosave()
 
-	# Volver al Bastión para preparar el viaje a Arcanis
+	# Volver al Bastión para preparar el viaje a Ilvernis
 	BastionManager.resolve_bastion_turn()
 	GameManager.go_to_scene("res://scenes/world/bastion_scene.tscn")
 

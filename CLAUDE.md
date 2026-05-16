@@ -90,18 +90,30 @@ game/
 ---
 
 ## Personajes jugables y subclases
-| Personaje | Clase | Subclase (Vestigios) | ID subclase |
-|---|---|---|---|
-| **Vael** | Paladín | Juramento de la Vida | `juramento_vida` |
-| **Lyth** | Exploradora | Senda de Garek | `senda_garek` |
-| **Bicho** | Guerrero | Portador del Arco Antiguo | `arco_antiguo_guerrero` |
-| **Johannes** | Bardo | Colegio de Arcanis | `colegio_arcanis` |
-| **Naeren** | Hechicera | Herencia del Arquitecto | `herencia_arquitecto` |
-| **Mía** | Monje | Discípulos de Sylvara Dusk | `discipulos_sylvara` |
 
-**Protagonista:** elegido por el jugador al inicio (uno de los anteriores o personaje custom).
+### Incorporación progresiva
+| Momento | Personaje | Raza | Clase | Subclase | ID subclase |
+|---|---|---|---|---|---|
+| **Misión Fuerte** | **Lyth** | Harengon | Exploradora | Senda de Kolvek | `senda_kolvek` |
+| **Misión Fuerte** | **Naeren** | Humana | Hechicera | Herencia del Arquitecto | `herencia_arquitecto` |
+| **Misión Fuerte** | **Johannes** | Semielfo (medio drow, no lo sabe) | Bardo | Colegio de Mirsel | `colegio_mirsel` |
+| **Misión Fuerte** | **Mía** | Humana | Monje | Discípulos de Sylvara Dusk | `discipulos_sylvara` |
+| **Misión Ilvernis — llegada** | **Vael** | Humano | Paladín | Juramento de la Vida | `juramento_vida` |
+| **Tras Ilvernis** | **Zyvara** | Drow | Bruja | Pacto con Ossyr | `pacto_ossyr` |
+| **Misión Garreth** | **Bicho** | Humano | Guerrero | Portador del Arco Antiguo | `arco_antiguo_guerrero` |
+
+**Protagonista:** elegido por el jugador al inicio (uno de los 4 de M1, o personaje custom).
 El protagonista **siempre** va en misiones — no se puede dejar en el Bastión.
-Todos los demás pueden quedarse. Party slots por misión: 4 (o 5 en misiones grandes).
+Party slots por misión: 4 (o 5 en misiones grandes).
+
+### Notas de personaje relevantes
+- **Lyth:** Harengon cazadora de la Iglesia de Cazadores de Meredan. Garreth Ashveil arrasó su poblado — es su objetivo personal. Viaja con Naeren y se encuentran a Johannes y Mía en la taberna de Karreth.
+- **Naeren:** Viaja con Lyth. Llegan juntas a Karreth. Hechicera con conexión a El Arquitecto (uno de los Cinco Antiguos). Durante la Misión 2 en Ilvernis, la influencia de Ossyr/Las Profundidades la corrompe parcialmente al debilitarse el sello — su magia resuena con la entidad de forma involuntaria.
+- **Johannes:** Semielfo sin saberlo (madre drow). Creció en caravana gitana itinerante, padre jefe del clan. La madre (Adreth) desapareció al pactar con Ossyr para proteger a su hijo. Johannes se fue al cumplir la mayoría de edad, acabó en Meredan. Había quedado con Mía en la taberna de Karreth para iniciar la misión.
+- **Vael:** Enviado por el ejército de Velthar a Ilvernis como apoyo especializado. Tiene conocimiento relevante sobre el fragmento de Las Profundidades y su conexión con El Antiguo de la Vida lo hace especialmente útil para lo que ocurre bajo La Aguja.
+- **Zyvara:** Drow de Sorveth, sassy y pragmática. Pacto con Ossyr. Se acerca al grupo después de la Misión 2, por cuenta propia. Conoce los textos de Ysara sobre pactos con Las Profundidades. A través de Ossyr siente el vínculo de Adreth sin saber qué es.
+- **Bicho:** Secuestrado por Garreth Ashveil, que lo usa para investigar sobre la inmortalidad. El grupo lo encuentra durante la Misión 3. El Arco Antiguo no tiene relación con Garreth.
+- **Mía:** Permanece en la party en todo momento de la historia.
 
 ---
 
@@ -165,14 +177,14 @@ Todos los demás pueden quedarse. Party slots por misión: 4 (o 5 en misiones gr
 - **Velthar** — estado militarista aliado del grupo. Rey: Aldric Voss (antagonista real)
 - **Kethara** — reino corrupto, posee el fragmento de El Poder. Rey: Maerek Solden (combate a Aldric desde las sombras)
 - **Meredan** — ciudad portuaria neutral. Crimen organizado: Calder Reth (tiefling rojo)
-- **Arcanis** — isla académica. La Aguja de Marfil. Fragmento de Las Profundidades bajo el suelo.
+- **Ilvernis** — isla académica. La Aguja de Marfil. Fragmento de Las Profundidades bajo el suelo.
 
 ### Los Cinco Antiguos
 | Antiguo | Estado | Conexión |
 |---|---|---|
 | El Poder | Fragmento activo en Kethara | Corrupción de los soldados |
-| Las Profundidades | Fragmento bajo Arcanis, sello debilitado | Orvyn el Sordo, Ysara la Encadenada |
-| La Vida | Sin fragmento. Campeón: Vael | Reth la Primera, los Vigías de la Vida |
+| Las Profundidades | Fragmento bajo Ilvernis, sello debilitado | Orvyn el Sordo, Ysara la Encadenada |
+| La Vida | Sin fragmento. Campeón: Vael | Tavar la Primera, los Vigías de la Vida |
 | El Arquitecto | Sin fragmento. Conexión: Naeren y Seraphel | Herencia del Arquitecto (subclase) |
 | El Vacío | Sin fragmento. Campeón: Gideon Wulf | Tarek el Inmóvil (conexión histórica) |
 
@@ -209,8 +221,11 @@ Menú Principal → Selección de Protagonista
 MISIÓN 1 — El Fuerte de Piedra Gris:
   Karreth (taberna) → Carro (elección) → Bosque Gris O Camino Principal → Fuerte
 
+  Pool disponible M1: Lyth, Naeren, Johannes, Mía (+ protagonista si es custom)
+
   Taberna:
-    - Encuentro con Johannes y Mía
+    - Lyth y Naeren llegan a la taberna, encuentran a Johannes y Mía (habían quedado ahí)
+    - Los 4 están reunidos antes de que empiece nada
     - Combate 2 soldados sin armadura
     - Interrogatorio opcional → info de Harren y Meredan
     - Party selection (4 de los disponibles)
@@ -240,7 +255,7 @@ MISIÓN 1 — El Fuerte de Piedra Gris:
     - Saqueo (aposentos Vorn: carta "C.R." + 200 PO; armería: 75 PO)
     - Llegada de Lyris + ejército aliado
     - Fiesta en el puerto (bebida → resaca solo al protagonista; opciones de compañía)
-    - Briefing de Lyris: "barco para Arcanis al amanecer"
+    - Briefing de Lyris: "barco para Ilvernis al amanecer"
 ```
 
 ---
