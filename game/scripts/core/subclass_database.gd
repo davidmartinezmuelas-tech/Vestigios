@@ -198,24 +198,24 @@ func _reg_paladin_subclasses() -> void:
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 func _reg_bardo_subclasses() -> void:
 
-	## COLEGIO DE ARCANIS (= Colegio del Conocimiento)
-	## La Aguja de Marfil de Arcanis envía bardos diplomáticos. Johannes fue uno de ellos
-	## antes de que algo lo sacara de la academia.
-	_s("colegio_arcanis", "Colegio de Arcanis", "bardo",
-		"La Aguja de Marfil enseña que el conocimiento es el arma más peligrosa. " \
-		"Johannes lo sabe. Por eso se fue ”” y por eso no puede olvidarlo.",
+	## COLEGIO DE ILVERNIS (= Colegio del Conocimiento)
+	## Los bardos que buscan verdades ocultas. No estudian en La Aguja — la buscan.
+	## El conocimiento que más importa es el que alguien decidió que no debías tener.
+	_s(“colegio_ilvernis”, “Colegio de Ilvernis”, “bardo”,
+		“La Aguja de Marfil no forma a sus bardos “” los atrae. “ \
+		“Quienes siguen esta tradición llegaron solos al conocimiento, buscando lo que se les negó.”,
 		[],
 		{
 			3: [
 				_f("palabras_cortantes", "Palabras Cortantes",
 					"Bonus action: imponer -1d6 a una tirada de ataque, salvación o check de una criatura (ya hecha). 1/turno.",
 					"bonus", "none", "bardic_inspiration"),
-				_f("secretos_adicionales", "Secretos de Arcanis",
+				_f("secretos_adicionales", "Secretos de Ilvernis",
 					"Aprende 3 conjuros de cualquier lista de clase que no sean de bardo.",
 					"none", "none", ""),
 			],
 			6: [
-				_f("funcion_extra_arcanis", "Función Extra",
+				_f("funcion_extra_ilvernis", "Función Extra",
 					"Puedes usar la Inspiración Bárdica para darte el dado a ti mismo.",
 					"none", "none", ""),
 			],
@@ -227,11 +227,12 @@ func _reg_bardo_subclasses() -> void:
 		}
 	)
 
-	## COLEGIO DE LOS VIENTOS (= Colegio de la Danza)
-	## Los bardos de Meredan que llevan mensajes entre facciones. Bailarines y espías.
-	## Algunos trabajan para Calder Reth sin saberlo.
+	## COLEGIO DE MIRSEL (= Colegio de la Danza)
+	## Los bardos viajeros de la tradición de Mirsel los Siete Mares. JOHANNES.
+	## Nacen en movimiento. Algunos trabajan para Calder Reth sin saberlo.
 	_s("colegio_mirsel", "Colegio de Mirsel", "bardo",
-		"Meredan cría bardos que se mueven como el mar: impredecibles, fluidos, siempre en otro sitio cuando llega la tormenta.",
+		"Johannes creció en una caravana. Aprendió que moverse es sobrevivir "" " \
+		"y que la música es lo único que no te pueden quitar cuando no tienes nada más.",
 		[],
 		{
 			3: [
@@ -255,7 +256,7 @@ func _reg_bardo_subclasses() -> void:
 	## COLEGIO DEL ESPEJO (= Colegio del Glamour)
 	## Los bardos que sirven a los poderosos usando ilusión y encantamiento.
 	## Vaela Mirage (Cadena 6) vino de aquí ”” o de algo peor.
-	_s("colegio_keth", "Colegio de Keth el Oculto", "bardo",
+	_s("colegio_selven", "Colegio de Selven el Oculto", "bardo",
 		"Vaela Mirage fue su alumna más brillante. O quizás la crearon ellos. " \
 		"La diferencia entre una ilusión perfecta y la realidad es solo perspectiva.",
 		[],
@@ -394,10 +395,10 @@ func _reg_guerrero_subclasses() -> void:
 	)
 
 	## CABALLERO DE LA AGUJA (= Caballero Arcano)
-	## Los guardianes de la Aguja de Marfil en Arcanis. Arcano + acero.
+	## Los guardianes de la Aguja de Marfil en Ilvernis. Arcano + acero.
 	## Algunos sospechan que hay algo más que conocimiento bajo la torre.
 	_s("caballero_aguja", "Caballero de la Aguja", "guerrero",
-		"Arcanis tiene sus propios guerreros. No los envía a la guerra ”” los usa para " \
+		"Ilvernis tiene sus propios guerreros. No los envía a la guerra ”” los usa para " \
 		"proteger lo que hay bajo la Aguja. Nadie pregunta qué es exactamente.",
 		[],
 		{
@@ -480,8 +481,8 @@ func _reg_explorador_subclasses() -> void:
 	## CAZADOR DE CORRUPCIÃ“N (= Acechador en la Penumbra)
 	## LYTH. La Iglesia de Cazadores de Meredan. Entrenan para rastrear lo que
 	## la Corrupción de Kethara crea. Garreth Ashveil es el objetivo máximo.
-	_s("senda_garek", "Senda de Garek", "explorador",
-		"Garek el Primero fundó la Iglesia de Cazadores de Meredan hace 500 años. " \
+	_s("senda_kolvek", "Senda de Kolvek", "explorador",
+		"Kolvek el Primero fundó la Iglesia de Cazadores de Meredan hace 500 años. " \
 		"Sus tres principios: Rastrear, Evaluar, Decidir. El tercero sigue siendo debatido.",
 		[],
 		{
@@ -578,7 +579,7 @@ func _reg_explorador_subclasses() -> void:
 	## VINCULADO A LA VIDA (= Señor de las Bestias)
 	## Los que sienten el murmullo de El Antiguo de la Vida y lo expresan
 	## a través del vínculo con criaturas. Vael lo siente diferente ”” estos lo viven.
-	_s("senda_reth", "Senda de Reth la Primera", "explorador",
+	_s("senda_tavar", "Senda de Tavar la Primera", "explorador",
 		"El Antiguo de la Vida habla en ecos. Algunos exploradores aprenden a escuchar " \
 		"esos ecos en las bestias que los rodean. No es magia ”” es parentesco.",
 		[],
@@ -686,8 +687,8 @@ func _reg_picaro_subclasses() -> void:
 	## DISCÃPULO DE ARCANIS (= Embaucador Arcano)
 	## Los estudiantes de segunda categoría de la Aguja de Marfil que no llegaron a magos
 	## pero encontraron otro camino. Más peligrosos de lo que parecen.
-	_s("discipulo_arcanis_pic", "Discípulo de Arcanis", "picaro",
-		"No todos los que estudian en Arcanis acaban siendo magos. " \
+	_s("discipulo_ilvernis_pic", "Discípulo de Ilvernis", "picaro",
+		"No todos los que estudian en Ilvernis acaban siendo magos. " \
 		"Algunos aprenden que es más útil saber cuándo lanzar que cómo hacerlo.",
 		[],
 		{
@@ -1064,10 +1065,10 @@ func _reg_hechicero_subclasses() -> void:
 	)
 
 	## TOQUE DE LAS PROFUNDIDADES (= Hechicería Aberrante)
-	## El fragmento de Las Profundidades está bajo Arcanis. Su influencia llega
+	## El fragmento de Las Profundidades está bajo Ilvernis. Su influencia llega
 	## a los hechiceros de la isla en formas que los académicos prefieren ignorar.
 	_s("toque_profundidades", "Toque de las Profundidades", "hechicero",
-		"El sello bajo la Aguja de Marfil se debilita. Los hechiceros de Arcanis " \
+		"El sello bajo la Aguja de Marfil se debilita. Los hechiceros de Ilvernis " \
 		"que estudian demasiado cerca desarrollan... peculiaridades.",
 		["detectar_pensamientos", "abrir", "telepatia", "dominar_persona"],
 		{
@@ -1098,7 +1099,7 @@ func _reg_hechicero_subclasses() -> void:
 	## No hay dragones conocidos en Vestigios actualmente ”” pero el linaje persiste.
 	## Algunos dicen que el linaje dracónico viene de algo anterior incluso a los Cinco Antiguos.
 	_s("linaje_erdrath", "Linaje de Erdrath", "hechicero",
-		"Erdrath el Escarlata fue el último dragón en el mundo conocido, hace 1000 años. " \
+		"Erdrath el Escarlata fue uno de los dragones más importantes documentados, hace 1000 años. " \
 		"No murió — se transformó en algo que los mortales no pueden percibir. " \
 		"Su sangre sigue apareciendo en hechiceros. No es herencia. Es contacto.",
 		[],
@@ -1130,10 +1131,10 @@ func _reg_hechicero_subclasses() -> void:
 	)
 
 	## AUTÃ“MATAS DE ARCANIS (= Hechicería Mecánica)
-	## Los ingenieros mágicos de Arcanis que combinan tecnología y conjuros.
+	## Los ingenieros mágicos de Ilvernis que combinan tecnología y conjuros.
 	## Bofri Ironmantle los financia. Nadie sabe exactamente para qué.
-	_s("automatas_arcanis", "Autómatas de Arcanis", "hechicero",
-		"Arcanis construye cosas que la magia no debería poder construir. " \
+	_s("automatas_ilvernis", "Autómatas de Ilvernis", "hechicero",
+		"Ilvernis construye cosas que la magia no debería poder construir. " \
 		"Los hechiceros de la Hechicería Mecánica son su experimento más peligroso.",
 		["detectar_magia", "identificar", "abrir", "fabricar", "muro_de_fuerza"],
 		{
@@ -1432,7 +1433,7 @@ func _reg_druida_subclasses() -> void:
 
 	## CÃRCULO DE LA MAREA (= Círculo de la Luna)
 	_s("circulo_marea", "Círculo de la Marea", "druida",
-		"El mar entre Meredan y Arcanis tiene memoria propia. " \
+		"El mar entre Meredan e Ilvernis tiene memoria propia. " \
 		"Los druidas de la Marea se transforman en criaturas del mar y tormentas.",
 		[],
 		{
@@ -1488,9 +1489,9 @@ func _reg_druida_subclasses() -> void:
 		}
 	)
 
-	## CÃRCULO DE LA BÃ“VEDA (= Círculo de las Estrellas) ”” Arcanis, observatorio
+	## CÃRCULO DE LA BÃ“VEDA (= Círculo de las Estrellas) ”” Ilvernis, observatorio
 	_s("circulo_sol", "Círculo de Sól", "druida",
-		"Sól la Inmortal fundó este círculo en el Observatorio de Arcanis hace siglos. " \
+		"Sól la Inmortal fundó este círculo en el Observatorio de Ilvernis hace siglos. " \
 		"Sabe lo que hay bajo la Aguja de Marfil. No lo dice voluntariamente.",
 		[],
 		{
@@ -1522,7 +1523,7 @@ func _reg_druida_subclasses() -> void:
 
 	## CÃRCULO DEL ABISMO (= Círculo del Mar) ”” Las Profundidades
 	_s("circulo_abismo", "Círculo del Abismo", "druida",
-		"El fragmento de Las Profundidades bajo Arcanis filtra influencia. " \
+		"El fragmento de Las Profundidades bajo Ilvernis filtra influencia. " \
 		"Algunos druidas la recogen sin entender de dónde viene.",
 		["niebla", "invocar_bestia", "desplazarse_agua", "llamar_relampago", "invocar_elementales"],
 		{
@@ -1557,7 +1558,7 @@ func _reg_mago_subclasses() -> void:
 
 	## ESCUELA DEL SELLO (= Abjurador) ”” los que sellan a los Cinco Antiguos
 	_s("escuela_sevryn", "Escuela de Sevryn el Sellador", "mago",
-		"La magia que mantiene sellado el fragmento de Las Profundidades bajo Arcanis " \
+		"La magia que mantiene sellado el fragmento de Las Profundidades bajo Ilvernis " \
 		"fue creada por esta escuela. Sus secretos no se enseñan. Se heredan.",
 		[],
 		{
@@ -1587,10 +1588,10 @@ func _reg_mago_subclasses() -> void:
 		}
 	)
 
-	## ESCUELA DEL CRISTAL (= Adivino) ”” Arcanis, investigación
+	## ESCUELA DEL CRISTAL (= Adivino) ”” Ilvernis, investigación
 	_s("escuela_miranbel", "Escuela del Cristal de Miranbel", "mago",
 		"La Aguja de Marfil tiene una sala de cristales que algunos creen encantados. " \
-		"Los adivinos de Arcanis los usan para leer lo que nadie debería poder leer.",
+		"Los adivinos de Ilvernis los usan para leer lo que nadie debería poder leer.",
 		[],
 		{
 			2: [
@@ -1619,7 +1620,7 @@ func _reg_mago_subclasses() -> void:
 	## ESCUELA DEL FULGOR (= Evocador) ”” Kethara, magia de guerra
 	_s("escuela_kest", "Escuela del Fulgor de Kest", "mago",
 		"La magia de guerra de Kethara fue desarrollada aquí ”” o en su equivalente kethariano. " \
-		"La Escuela del Fulgor de Arcanis la estudia, teóricamente, para contrarrestarla.",
+		"La Escuela del Fulgor de Ilvernis la estudia, teóricamente, para contrarrestarla.",
 		[],
 		{
 			2: [
