@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/characters/character_data.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/abilities/ability_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/items/loot_table.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/items/loot_entry.gd" id="4"]
 
 ; Mandoble — 2d6+4 cortante
 [sub_resource type="Resource" id="ability_vorn_1"]
@@ -41,11 +43,25 @@ save_dc = 14
 save_success_damage_multiplier = 0.0
 effects = []
 
+; Loot de Vorn — su espada larga + oro del botín personal
+[sub_resource type="Resource" id="loot_entry_espada"]
+script = ExtResource("4")
+item_id = "espada_larga"
+drop_chance = 1.0
+guaranteed = true
+
+[sub_resource type="Resource" id="loot_vorn"]
+script = ExtResource("3")
+gold_min = 60
+gold_max = 120
+entries = [SubResource("loot_entry_espada")]
+
 [resource]
 script = ExtResource("1")
 character_id = "general_vorn"
 display_name = "General Vorn Ashkael"
 is_hero = false
+is_boss = true
 level = 4
 hit_dice_sides = 10
 proficiency_bonus = 2
@@ -56,9 +72,11 @@ intelligence = 14
 wisdom = 13
 charisma = 16
 armor_class = 18
+equipped_armor_id = "armadura_placas"
 saving_throw_proficiencies = ["str", "con"]
 speed_ft = 30
 max_stress = 100
 xp_reward = 1100
 challenge_rating = 4.0
+loot_table = SubResource("loot_vorn")
 abilities = [SubResource("ability_vorn_1"), SubResource("ability_vorn_2")]

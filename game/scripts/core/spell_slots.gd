@@ -116,6 +116,50 @@ func setup(caster_type: CasterType, class_level: int) -> void:
 	_class_level = clampi(class_level, 1, 20)
 	_rebuild()
 
+## Versión multiclase: combina los niveles de hechicero de AMBAS clases.
+## D&D 2024: niveles de lanzador completo cuentan enteros, medios cuentan la mitad (ceil).
+## Luego se usa la tabla de lanzador completo con el nivel combinado.
+func setup_multiclass(class_id: String, class_lv: int, mc_class_id: String, mc_lv: int) -> void:
+	var combined := _combined_caster_level(class_id, class_lv, mc_class_id, mc_lv)
+
+	# Brujos mantienen su Magia de Pacto separada — aquí calculamos solo los slots normales
+	if class_id == "brujo" or mc_class_id == "brujo":
+		# Los slots de Pacto se gestionan por separado; aquí calculamos el resto
+		var non_warlock_id    := mc_class_id if class_id == "brujo" else class_id
+		var non_warlock_level := mc_lv       if class_id == "brujo" else class_lv
+		if combined > 0:
+			setup(CasterType.FULL, clampi(combined, 1, 20))
+		else:
+			setup(CasterType.NONE, 1)
+		# Añadir slots de Pacto del Brujo separadamente
+		var warlock_lv := class_lv if class_id == "brujo" else mc_lv
+		if warlock_lv > 0:
+			var entry := PACT_MAGIC[clampi(warlock_lv - 1, 0, 19)]
+			_pact_slots_max     = entry["slots"]
+			_pact_slot_level    = entry["level"]
+			_pact_slots_current = _pact_slots_max
+		return
+
+	if combined == 0:
+		setup(CasterType.NONE, 1)
+	else:
+		setup(CasterType.FULL, clampi(combined, 1, 20))
+
+## Calcula el nivel combinado de lanzador para la tabla de multiclase D&D 2024.
+static func _combined_caster_level(class_id: String, class_lv: int, mc_class_id: String, mc_lv: int) -> int:
+	return _caster_contribution(class_id, class_lv) + _caster_contribution(mc_class_id, mc_lv)
+
+static func _caster_contribution(class_id: String, class_lv: int) -> int:
+	match class_id:
+		"bardo", "clerigo", "druida", "hechicero", "mago":
+			return class_lv           # lanzador completo: cuenta entero
+		"paladin", "explorador":
+			return ceili(class_lv / 2.0)  # medio lanzador: cuenta la mitad
+		"brujo":
+			return 0  # Magia de Pacto — no entra en la tabla combinada
+		_:
+			return 0  # no lanzador
+
 func _rebuild() -> void:
 	match _caster_type:
 		CasterType.NONE:

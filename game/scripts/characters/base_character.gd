@@ -54,10 +54,23 @@ func initialize(character_data: CharacterData) -> void:
 	data = character_data
 	is_hero = character_data.is_hero
 	stats.initialize(character_data)
-	spell_slots.setup(
-		SpellSlots.caster_type_for_class(character_data.class_id),
-		character_data.level
-	)
+	_setup_spell_slots(character_data)
+
+func _setup_spell_slots(character_data: CharacterData) -> void:
+	if character_data.multiclass_id.is_empty() or character_data.multiclass_level <= 0:
+		# Clase única — setup normal
+		spell_slots.setup(
+			SpellSlots.caster_type_for_class(character_data.class_id),
+			character_data.class_level(character_data.class_id)
+		)
+	else:
+		# Multiclase — setup combinado D&D 2024
+		spell_slots.setup_multiclass(
+			character_data.class_id,
+			character_data.class_level(character_data.class_id),
+			character_data.multiclass_id,
+			character_data.multiclass_level
+		)
 
 # ============================================================
 # COMBATE — DAÑO Y CURACIÓN

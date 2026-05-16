@@ -125,8 +125,47 @@ func _on_pre_combat_closed(_id: String) -> void:
 
 func _state_combat() -> void:
 	_show_exploration(false)
+	_setup_taberna_cover()
 	_spawn_combat_characters()
 	WorldState.enemy_knowledge.sight_enemy("soldado_taberna")
+
+## Configura la cobertura de la taberna del Ciervo Muerto.
+## Las mesas dan cobertura media, la barra da cobertura tres cuartos.
+func _setup_taberna_cover() -> void:
+	var grid := combat_manager.grid as CombatGrid
+	if grid == null:
+		return
+
+	# Mesas de la taberna — cobertura media (+2 CA)
+	# Posiciones aproximadas en el grid de 20×12 (escala 5ft/casilla)
+	var mesa_cells: Array[Vector2i] = [
+		Vector2i(3, 2), Vector2i(4, 2),  # mesa izquierda
+		Vector2i(7, 2), Vector2i(8, 2),  # mesa centro
+		Vector2i(11, 3), Vector2i(12, 3), # mesa derecha
+	]
+	for cell in mesa_cells:
+		grid.set_cover(cell, CombatGrid.COVER_HALF, false)  # no solid — se puede saltar por encima
+
+	# Barra del fondo — cobertura tres cuartos (+5 CA), sólida
+	var barra_cells: Array[Vector2i] = [
+		Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6),
+		Vector2i(4, 6), Vector2i(5, 6),
+	]
+	for cell in barra_cells:
+		grid.set_cover(cell, CombatGrid.COVER_THREE_QUARTERS, true)
+
+	# Trampa oculta — tablón suelto cerca de la salida (CD 14, 1d6 perforante)
+	grid.set_trap(Vector2i(15, 8), 14, "1d6", "perforante")
+
+	# Objetos del entorno interactuables
+	grid.set_env_object(Vector2i(2, 8),
+		"Barril de aceite",
+		"Si se rompe, crea un charco inflamable 2×2 casillas.",
+		"barrel_oil_explode")
+	grid.set_env_object(Vector2i(9, 1),
+		"Lámpara de aceite",
+		"Si cae al suelo, prende fuego en su casilla (1d4 fuego/turno).",
+		"lamp_fall_fire")
 
 func _spawn_combat_characters() -> void:
 	_heroes.clear()
