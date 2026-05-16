@@ -1,5 +1,5 @@
 # CLAUDE.md — Vestigios
-## Última actualización: 2026-05-15
+## Última actualización: 2026-05-17
 
 ---
 
@@ -8,6 +8,28 @@
 - **Reglas:** D&D 2024 (documentación en `Documentación DND/`)
 - **Arquitectura:** EventBus + StateMachine + Resource-driven data
 - **Proyecto Godot:** en `game/` dentro del repositorio
+
+---
+
+## Arte y herramientas de diseño
+- **Vista:** Isométrica
+- **Estilo personajes:** Pixel art
+- **Herramienta mapas:** Tiled (plugin godot-tiled-importer) → tiles placeholder de Kenney.nl
+- **Herramienta sprites:** Aseprite
+- **Retratos de diálogo:** Midjourney (provisional) → artista comisionado (final)
+
+### Sprites de personajes — convención de 8 direcciones
+Los personajes tienen 8 direcciones de movimiento. Para reducir trabajo se dibujan **5 direcciones** y las otras 3 se obtienen por espejo horizontal en Godot:
+- **Se dibujan:** S, SW, W, NW, N
+- **Se obtienen por flip:** SE (espejo de SW), E (espejo de W), NE (espejo de NW)
+
+**Estados de animación por personaje:** `idle`, `walk`, `attack`, `hit`, `death`, `cast`
+**Nomenclatura de animaciones:** `{estado}_{direccion}` — ej: `idle_s`, `walk_nw`, `attack_sw`
+
+### Pendiente de implementar (cuando se monte el mapa)
+- `CharacterData.sprite` es actualmente una `Texture2D` estática — hay que migrar a `AnimatedSprite2D` con spritesheet direccional
+- Necesita un componente que calcule la dirección del personaje respecto a la cámara isométrica y seleccione la animación correcta
+- El flip horizontal para E, SE, NE se aplica en ese componente automáticamente
 
 ---
 
