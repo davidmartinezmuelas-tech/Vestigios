@@ -42,7 +42,6 @@ func setup(combat_manager: CombatManager) -> void:
 	_combat_manager = combat_manager
 	combat_manager.waiting_for_player_input.connect(_on_player_turn_started)
 	combat_manager.combat_ended.connect(_on_combat_ended)
-	EventBus.health_changed.connect(_on_health_changed) if false else null
 	EventBus.turn_started.connect(_on_turn_started)
 	end_turn_btn.pressed.connect(func(): end_turn_pressed.emit())
 	move_btn.pressed.connect(_on_move_toggled)

@@ -62,7 +62,7 @@ func _reg_paladin_subclasses() -> void:
 	_s("juramento_vida", "Juramento de la Vida", "paladin",
 		"Elegido por El Antiguo de la Vida. Tu cicatriz late ante la Corrupción. " \
 		"Proteger lo vivo es tu ley ”” no importa el coste.",
-		["curar_heridas", "heroismo", "hablar_con_los_animales", "luz_del_dia", "comunion_con_la_naturaleza"],
+		["curar_heridas", "heroismo", "hablar_con_los_animales", "luz_del_dia", "restauracion_mayor"],
 		{
 			3: [
 				_f("encadenamiento_luz", "Encadenamiento de Luz",
