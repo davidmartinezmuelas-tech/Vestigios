@@ -1,4 +1,4 @@
-﻿## spell_database.gd
+## spell_database.gd
 ## Base de datos central de conjuros y trucos (D&D 2024).
 ## Autoload. Uso: SpellDatabase.get("marca_cazador")
 ##

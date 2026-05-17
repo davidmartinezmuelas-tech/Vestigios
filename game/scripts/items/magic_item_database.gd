@@ -1,4 +1,4 @@
-﻿## magic_item_database.gd
+## magic_item_database.gd
 ## Base de datos de objetos mágicos (D&D 2024).
 ## 124 objetos base + descripciones completas letras A–Z.
 
