@@ -93,8 +93,7 @@ func _reg_paladin_subclasses() -> void:
 	## Los Cinco Pilares de Velthar los llaman así: los que mantienen el faro encendido
 	## cuando el mundo se oscurece. Luz contra Corrupción.
 	_s("juramento_faro", "Juramento de Tordran", "paladin",
-		"Los guardianes de Velthar que mantienen encendida la llama de la civilización. " \
-		"Aldric los usa como escudo. Algunos no saben que el rey también es una amenaza.",
+		"Los guardianes de Velthar que mantienen encendida la llama de la civilización. " + "Aldric los usa como escudo. Algunos no saben que el rey también es una amenaza.",
 		["proyectil_magico", "heroismo", "luz", "luz_del_dia", "ojo_de_aguila"],
 		{
 			3: [
@@ -127,8 +126,7 @@ func _reg_paladin_subclasses() -> void:
 	## Cazadores de Corrupción que actúan fuera de la ley de Velthar cuando la ley no basta.
 	## Conocen a Maerek Solden mejor que sus propios hombres.
 	_s("juramento_tejedora", "Juramento de la Tejedora", "paladin",
-		"La justicia que la ley no puede dar. Operan en las sombras de Velthar. " \
-		"Saben que Maerek no es el villano que parece — y eso los complica.",
+		"La justicia que la ley no puede dar. Operan en las sombras de Velthar. " + "Saben que Maerek no es el villano que parece — y eso los complica.",
 		["manos_ardientes", "hechizar_persona", "sugesion", "disipar_magia", "miedo"],
 		{
 			3: [
@@ -161,8 +159,7 @@ func _reg_paladin_subclasses() -> void:
 	## Los campeones ceremoniales de Velthar. Los Pilares los admiran. El rey los exhibe.
 	## Algunos empiezan a cuestionar si la gloria de Velthar justifica sus métodos.
 	_s("juramento_gloria", "Juramento de Gloria", "paladin",
-		"Los campeones del Rey. La cara visible de Velthar en los campos de batalla. " \
-		"Bofri Ironmantle los equipa. Erevan los adorna. Aldric los usa.",
+		"Los campeones del Rey. La cara visible de Velthar en los campos de batalla. " + "Bofri Ironmantle los equipa. Erevan los adorna. Aldric los usa.",
 		["heroismo", "prestidigitacion", "velocidad", "libertad_de_movimiento", "globo_vigilante"],
 		{
 			3: [
@@ -201,8 +198,7 @@ func _reg_bardo_subclasses() -> void:
 	## Los bardos que buscan verdades ocultas. No estudian en La Aguja — la buscan.
 	## El conocimiento que más importa es el que alguien decidió que no debías tener.
 	_s("colegio_ilvernis", "Colegio de Ilvernis", "bardo",
-		"La Aguja de Marfil no forma a sus bardos "" los atrae. " \
-		"Quienes siguen esta tradición llegaron solos al conocimiento, buscando lo que se les negó.",
+		"La Aguja de Marfil no forma a sus bardos "" los atrae. " + "Quienes siguen esta tradición llegaron solos al conocimiento, buscando lo que se les negó.",
 		[],
 		{
 			3: [
@@ -230,8 +226,7 @@ func _reg_bardo_subclasses() -> void:
 	## Los bardos viajeros de la tradición de Mirsel los Siete Mares. JOHANNES.
 	## Nacen en movimiento. Algunos trabajan para Calder Reth sin saberlo.
 	_s("colegio_mirsel", "Colegio de Mirsel", "bardo",
-		"Johannes creció en una caravana. Aprendió que moverse es sobrevivir "" " \
-		"y que la música es lo único que no te pueden quitar cuando no tienes nada más.",
+		"Johannes creció en una caravana. Aprendió que moverse es sobrevivir "" " + "y que la música es lo único que no te pueden quitar cuando no tienes nada más.",
 		[],
 		{
 			3: [
@@ -256,8 +251,7 @@ func _reg_bardo_subclasses() -> void:
 	## Los bardos que sirven a los poderosos usando ilusión y encantamiento.
 	## Vaela Mirage (Cadena 6) vino de aquí — o de algo peor.
 	_s("colegio_selven", "Colegio de Selven el Oculto", "bardo",
-		"Vaela Mirage fue su alumna más brillante. O quizás la crearon ellos. " \
-		"La diferencia entre una ilusión perfecta y la realidad es solo perspectiva.",
+		"Vaela Mirage fue su alumna más brillante. O quizás la crearon ellos. " + "La diferencia entre una ilusión perfecta y la realidad es solo perspectiva.",
 		[],
 		{
 			3: [
@@ -285,8 +279,7 @@ func _reg_bardo_subclasses() -> void:
 	## Bardos militares de Velthar que inspiran tropas en campaña.
 	## Han cantado en las batallas contra Kethara durante décadas.
 	_s("colegio_cinco_pilares", "Colegio de los Cinco Pilares", "bardo",
-		"Cantan en los frentes de guerra de Velthar. Sus baladas mueven ejércitos. " \
-		"Erevan Duskwhisper (Pilar 1) fue uno de ellos antes de ascender.",
+		"Cantan en los frentes de guerra de Velthar. Sus baladas mueven ejércitos. " + "Erevan Duskwhisper (Pilar 1) fue uno de ellos antes de ascender.",
 		[],
 		{
 			3: [
@@ -320,8 +313,7 @@ func _reg_guerrero_subclasses() -> void:
 	## BICHO lleva el Arco Antiguo. Este arquetipo de guerrero canaliza energía antigua
 	## sin necesitar acceso a conjuros. El arma es el canal.
 	_s("arco_antiguo_guerrero", "Portador del Arco Antiguo", "guerrero",
-		"Bicho no eligió este camino. El arco lo eligió a él. Ahora cada golpe resuena " \
-		"con algo que no es exactamente magia — es más antiguo que eso.",
+		"Bicho no eligió este camino. El arco lo eligió a él. Ahora cada golpe resuena " + "con algo que no es exactamente magia — es más antiguo que eso.",
 		[],
 		{
 			3: [
@@ -358,8 +350,7 @@ func _reg_guerrero_subclasses() -> void:
 	## MAESTRE DE ARMAS DE VELTHAR (= Maestro del Combate)
 	## Los instructores de las academias de Velthar. Bofri Ironmantle los aprecia.
 	_s("maestre_armas_velthar", "Maestre de Armas de Velthar", "guerrero",
-		"Las academias militares de Velthar producen los mejores combatientes del mundo conocido. " \
-		"Un Maestre sabe que toda pelea tiene solución técnica.",
+		"Las academias militares de Velthar producen los mejores combatientes del mundo conocido. " + "Un Maestre sabe que toda pelea tiene solución técnica.",
 		[],
 		{
 			3: [
@@ -397,8 +388,7 @@ func _reg_guerrero_subclasses() -> void:
 	## Los guardianes de la Aguja de Marfil en Ilvernis. Arcano + acero.
 	## Algunos sospechan que hay algo más que conocimiento bajo la torre.
 	_s("caballero_aguja", "Caballero de la Aguja", "guerrero",
-		"Ilvernis tiene sus propios guerreros. No los envía a la guerra — los usa para " \
-		"proteger lo que hay bajo la Aguja. Nadie pregunta qué es exactamente.",
+		"Ilvernis tiene sus propios guerreros. No los envía a la guerra — los usa para " + "proteger lo que hay bajo la Aguja. Nadie pregunta qué es exactamente.",
 		[],
 		{
 			3: [
@@ -436,8 +426,7 @@ func _reg_guerrero_subclasses() -> void:
 	## Las Profundidades tienen campeones involuntarios. No todos lo saben.
 	## El conocimiento arcano de Las Profundidades filtra de formas inesperadas.
 	_s("camino_orvyn", "Camino de Orvyn el Sordo", "guerrero",
-		"Las Profundidades actúan sin campeones directos — pero su influencia se filtra. " \
-		"Algunos guerreros descubren que su mente hace cosas que el cuerpo no debería poder.",
+		"Las Profundidades actúan sin campeones directos — pero su influencia se filtra. " + "Algunos guerreros descubren que su mente hace cosas que el cuerpo no debería poder.",
 		[],
 		{
 			3: [
@@ -481,8 +470,7 @@ func _reg_explorador_subclasses() -> void:
 	## LYTH. La Iglesia de Cazadores de Meredan. Entrenan para rastrear lo que
 	## la Corrupción de Kethara crea. Garreth Ashveil es el objetivo máximo.
 	_s("senda_kolvek", "Senda de Kolvek", "explorador",
-		"Kolvek el Primero fundó la Iglesia de Cazadores de Meredan hace 500 años. " \
-		"Sus tres principios: Rastrear, Evaluar, Decidir. El tercero sigue siendo debatido.",
+		"Kolvek el Primero fundó la Iglesia de Cazadores de Meredan hace 500 años. " + "Sus tres principios: Rastrear, Evaluar, Decidir. El tercero sigue siendo debatido.",
 		[],
 		{
 			3: [
@@ -514,8 +502,7 @@ func _reg_explorador_subclasses() -> void:
 	## EXPLORADOR DE FRONTERA (= Cazador)
 	## Los soldados fronterizos de Velthar. Conocen cada paso de montaña entre los reinos.
 	_s("centinelas_aldren", "Centinelas de Aldren", "explorador",
-		"Los ojos de Velthar más allá de sus muros. Saben cuándo los ejércitos de Kethara se mueven " \
-		"antes de que las capitales lo descubran.",
+		"Los ojos de Velthar más allá de sus muros. Saben cuándo los ejércitos de Kethara se mueven " + "antes de que las capitales lo descubran.",
 		[],
 		{
 			3: [
@@ -545,8 +532,7 @@ func _reg_explorador_subclasses() -> void:
 	## Los exploradores que han pasado demasiado tiempo en los Bosques sin Nombre
 	## cerca de Kethara. Algo cambió en ellos. No del todo para mal.
 	_s("senda_bosque_gris", "Senda del Bosque Gris", "explorador",
-		"Los Bosques sin Nombre al norte de Kethara tienen memoria. Los exploradores " \
-		"que los atraviesan demasiadas veces regresan... diferentes.",
+		"Los Bosques sin Nombre al norte de Kethara tienen memoria. Los exploradores " + "que los atraviesan demasiadas veces regresan... diferentes.",
 		["hechizar_persona", "paso_brumoso", "confusion", "mayor_invisibilidad"],
 		{
 			3: [
@@ -579,8 +565,7 @@ func _reg_explorador_subclasses() -> void:
 	## Los que sienten el murmullo de El Antiguo de la Vida y lo expresan
 	## a través del vínculo con criaturas. Vael lo siente diferente — estos lo viven.
 	_s("senda_tavar", "Senda de Tavar la Primera", "explorador",
-		"El Antiguo de la Vida habla en ecos. Algunos exploradores aprenden a escuchar " \
-		"esos ecos en las bestias que los rodean. No es magia — es parentesco.",
+		"El Antiguo de la Vida habla en ecos. Algunos exploradores aprenden a escuchar " + "esos ecos en las bestias que los rodean. No es magia — es parentesco.",
 		[],
 		{
 			3: [
@@ -616,8 +601,7 @@ func _reg_picaro_subclasses() -> void:
 	## Los operativos de la Iglesia de Cazadores de Meredan que no cazan con arco.
 	## Alderich los conoce. Gideon los respeta. Algunos trabajan para Calder Reth.
 	_s("agente_iglesia", "Agente de la Iglesia", "picaro",
-		"La Iglesia de Cazadores tiene dos ramas: los que rastrean y los que eliminan. " \
-		"Los agentes aprenden que a veces la misericordia no existe.",
+		"La Iglesia de Cazadores tiene dos ramas: los que rastrean y los que eliminan. " + "Los agentes aprenden que a veces la misericordia no existe.",
 		[],
 		{
 			3: [
@@ -653,8 +637,7 @@ func _reg_picaro_subclasses() -> void:
 	## Los mejores dedos de la ciudad portuaria. Trabajan para Calder Reth o independientemente.
 	## Johannes conoce a algunos de ellos. Sela también.
 	_s("contrabandista_meredan", "Contrabandista de Meredan", "picaro",
-		"Meredan tiene dos economías: la visible y la que mueve Calder Reth. " \
-		"Los contrabandistas conocen ambas y no sirven a ninguna — salvo al oro.",
+		"Meredan tiene dos economías: la visible y la que mueve Calder Reth. " + "Los contrabandistas conocen ambas y no sirven a ninguna — salvo al oro.",
 		[],
 		{
 			3: [
@@ -687,8 +670,7 @@ func _reg_picaro_subclasses() -> void:
 	## Los estudiantes de segunda categoría de la Aguja de Marfil que no llegaron a magos
 	## pero encontraron otro camino. Más peligrosos de lo que parecen.
 	_s("discipulo_ilvernis_pic", "Discípulo de Ilvernis", "picaro",
-		"No todos los que estudian en Ilvernis acaban siendo magos. " \
-		"Algunos aprenden que es más útil saber cuándo lanzar que cómo hacerlo.",
+		"No todos los que estudian en Ilvernis acaban siendo magos. " + "Algunos aprenden que es más útil saber cuándo lanzar que cómo hacerlo.",
 		[],
 		{
 			3: [
@@ -721,8 +703,7 @@ func _reg_picaro_subclasses() -> void:
 	## Gideon Wulf, campeón del Vacío, no tiene discípulos conocidos.
 	## Pero el Vacío actúa a través de campeones involuntarios.
 	_s("portador_vacio", "Portador del Vacío", "picaro",
-		"El Vacío no tiene fragmento físico. Actúa solo a través de campeones. " \
-		"Gideon lo es conscientemente. Otros son elegidos sin saberlo — y sin poder rechazarlo.",
+		"El Vacío no tiene fragmento físico. Actúa solo a través de campeones. " + "Gideon lo es conscientemente. Otros son elegidos sin saberlo — y sin poder rechazarlo.",
 		[],
 		{
 			3: [
@@ -761,8 +742,7 @@ func _reg_monje_subclasses() -> void:
 	## La Orden de Sylvara (Cadena 5 de Kethara). Mía se fue por conflicto moral.
 	## Pero el entrenamiento no se olvida.
 	_s("discipulos_sylvara", "Discípulos de Sylvara Dusk", "monje",
-		"Sylvara Dusk (Cadena 5) creó esta orden hace décadas. Sus métodos son eficaces. " \
-		"Mía fue su alumna más prometedora antes de que la moral se interpusiera.",
+		"Sylvara Dusk (Cadena 5) creó esta orden hace décadas. Sus métodos son eficaces. " + "Mía fue su alumna más prometedora antes de que la moral se interpusiera.",
 		["pasar_sin_rastro", "invisibilidad", "espiar", "puerta_dimensional"],
 		{
 			3: [
@@ -795,8 +775,7 @@ func _reg_monje_subclasses() -> void:
 	## La orden más antigua del mundo conocido. Neutrales. Aparecen donde el equilibrio
 	## se rompe — y siempre se rompe donde los Cinco Antiguos están involucrados.
 	_s("escuela_tarek", "Escuela de Tarek el Inmóvil", "monje",
-		"Ni Velthar ni Kethara los reclaman. Ni los Cinco Antiguos los controlan. " \
-		"Cuando el equilibrio se rompe, aparecen. Nadie sabe cómo saben.",
+		"Ni Velthar ni Kethara los reclaman. Ni los Cinco Antiguos los controlan. " + "Cuando el equilibrio se rompe, aparecen. Nadie sabe cómo saben.",
 		[],
 		{
 			3: [
@@ -826,8 +805,7 @@ func _reg_monje_subclasses() -> void:
 	## Los monjes que curan en la ciudad portuaria. Conocen los venenos de Kethara mejor
 	## que nadie. También saben aplicarlos.
 	_s("sanadores_meredan", "Sanadores de Meredan", "monje",
-		"Meredan es puerto de entrada para todo — incluyendo las enfermedades de la guerra. " \
-		"Los Sanadores curan lo que pueden y eliminan lo que no tiene cura.",
+		"Meredan es puerto de entrada para todo — incluyendo las enfermedades de la guerra. " + "Los Sanadores curan lo que pueden y eliminan lo que no tiene cura.",
 		["pasar_sin_rastro"],
 		{
 			3: [
@@ -860,8 +838,7 @@ func _reg_monje_subclasses() -> void:
 	## Los monjes que canalizan a los Cinco Antiguos sin ser sus campeones directos.
 	## Peligroso. No siempre controlable.
 	_s("voces_antiguos", "Voces de los Antiguos", "monje",
-		"Los Cinco Antiguos hablan a través de todo — algunos monjes aprenden a escuchar. " \
-		"No son campeones. Son receptores. La diferencia puede no importar cuando el Antiguo habla.",
+		"Los Cinco Antiguos hablan a través de todo — algunos monjes aprenden a escuchar. " + "No son campeones. Son receptores. La diferencia puede no importar cuando el Antiguo habla.",
 		[],
 		{
 			3: [
@@ -897,8 +874,7 @@ func _reg_barbaro_subclasses() -> void:
 	## Bicho lleva el Arco Antiguo, el único capaz de herir a los Cinco Antiguos.
 	## Su senda de bárbaro canaliza esa energía antigua que aún no comprende.
 	_s("senda_arco_antiguo", "Senda del Arco Antiguo", "barbaro",
-		"El Arco Antiguo eligió a Bicho, no al revés. En zonas de Corrupción reacciona solo. " \
-		"Bicho no sabe qué fue antes de que le borraran la memoria. El arco parece saberlo.",
+		"El Arco Antiguo eligió a Bicho, no al revés. En zonas de Corrupción reacciona solo. " + "Bicho no sabe qué fue antes de que le borraran la memoria. El arco parece saberlo.",
 		[],
 		{
 			3: [
@@ -931,8 +907,7 @@ func _reg_barbaro_subclasses() -> void:
 	## Los soldados de Kethara corrompidos por el fragmento de El Poder.
 	## Algunos escapan del control y sirven a quien pueden.
 	_s("senda_soldado_corrompido", "Senda del Soldado Corrompido", "barbaro",
-		"El fragmento de El Poder corrompe a los soldados de Kethara. Algunos luchan contra ello. " \
-		"Muchos no. La línea entre fuerza y locura es más delgada de lo que parece.",
+		"El fragmento de El Poder corrompe a los soldados de Kethara. Algunos luchan contra ello. " + "Muchos no. La línea entre fuerza y locura es más delgada de lo que parece.",
 		[],
 		{
 			3: [
@@ -962,8 +937,7 @@ func _reg_barbaro_subclasses() -> void:
 	## El Antiguo de las Profundidades actúa sin campeones directos — pero su influencia
 	## llega a los que pasan demasiado tiempo cerca de lo antiguo.
 	_s("senda_profundidades_bar", "Senda de las Profundidades", "barbaro",
-		"Las Profundidades llevan eternidades esperando. No necesitan campeones — " \
-		"se filtran en los que están cerca de lo suficientemente viejo.",
+		"Las Profundidades llevan eternidades esperando. No necesitan campeones — " + "se filtran en los que están cerca de lo suficientemente viejo.",
 		[],
 		{
 			3: [
@@ -993,8 +967,7 @@ func _reg_barbaro_subclasses() -> void:
 	## Los que han sentido la presencia de El Poder — el Antiguo que Kethara usa.
 	## Algunos luchan en su nombre conscientes. Otros no saben que sirven a algo mayor.
 	_s("senda_poder", "Senda del Poder", "barbaro",
-		"El Poder no necesita convencerte. Entra cuando bajas la guardia. " \
-		"Los que sirven a Kethara más ferozmente suelen sentir algo que no pueden nombrar.",
+		"El Poder no necesita convencerte. Entra cuando bajas la guardia. " + "Los que sirven a Kethara más ferozmente suelen sentir algo que no pueden nombrar.",
 		[],
 		{
 			3: [
@@ -1033,8 +1006,7 @@ func _reg_hechicero_subclasses() -> void:
 	## El Arquitecto actúa a través de Naeren y Seraphel sin ser su campeón directo.
 	## Naeren perdió la voz cuando su magia psíquica emergió sin control.
 	_s("herencia_arquitecto", "Herencia del Arquitecto", "hechicero",
-		"El Arquitecto toca sin avisar. Naeren no eligió el psionismo — le llegó. " \
-		"Cuando emite su primera Sobrecarga Mental, algo en el tejido de la realidad tiembla.",
+		"El Arquitecto toca sin avisar. Naeren no eligió el psionismo — le llegó. " + "Cuando emite su primera Sobrecarga Mental, algo en el tejido de la realidad tiembla.",
 		[],
 		{
 			1: [
@@ -1067,8 +1039,7 @@ func _reg_hechicero_subclasses() -> void:
 	## El fragmento de Las Profundidades está bajo Ilvernis. Su influencia llega
 	## a los hechiceros de la isla en formas que los académicos prefieren ignorar.
 	_s("toque_profundidades", "Toque de las Profundidades", "hechicero",
-		"El sello bajo la Aguja de Marfil se debilita. Los hechiceros de Ilvernis " \
-		"que estudian demasiado cerca desarrollan... peculiaridades.",
+		"El sello bajo la Aguja de Marfil se debilita. Los hechiceros de Ilvernis " + "que estudian demasiado cerca desarrollan... peculiaridades.",
 		["detectar_pensamientos", "abrir", "telepatia", "dominar_persona"],
 		{
 			1: [
@@ -1098,9 +1069,7 @@ func _reg_hechicero_subclasses() -> void:
 	## No hay dragones conocidos en Vestigios actualmente — pero el linaje persiste.
 	## Algunos dicen que el linaje dracónico viene de algo anterior incluso a los Cinco Antiguos.
 	_s("linaje_erdrath", "Linaje de Erdrath", "hechicero",
-		"Erdrath el Escarlata fue uno de los dragones más importantes documentados, hace 1000 años. " \
-		"No murió — se transformó en algo que los mortales no pueden percibir. " \
-		"Su sangre sigue apareciendo en hechiceros. No es herencia. Es contacto.",
+		"Erdrath el Escarlata fue uno de los dragones más importantes documentados, hace 1000 años. " + "No murió — se transformó en algo que los mortales no pueden percibir. " + "Su sangre sigue apareciendo en hechiceros. No es herencia. Es contacto.",
 		[],
 		{
 			1: [
@@ -1133,8 +1102,7 @@ func _reg_hechicero_subclasses() -> void:
 	## Los ingenieros mágicos de Ilvernis que combinan tecnología y conjuros.
 	## Bofri Ironmantle los financia. Nadie sabe exactamente para qué.
 	_s("automatas_ilvernis", "Autómatas de Ilvernis", "hechicero",
-		"Ilvernis construye cosas que la magia no debería poder construir. " \
-		"Los hechiceros de la Hechicería Mecánica son su experimento más peligroso.",
+		"Ilvernis construye cosas que la magia no debería poder construir. " + "Los hechiceros de la Hechicería Mecánica son su experimento más peligroso.",
 		["detectar_magia", "identificar", "abrir", "fabricar", "muro_de_fuerza"],
 		{
 			1: [
@@ -1170,8 +1138,7 @@ func _reg_brujo_subclasses() -> void:
 	## El Antiguo de la Vida actúa a través de sus campeones directos (Vael).
 	## Pero también puede establecer pactos con mortales que lo merecen.
 	_s("pacto_vida", "Pacto de la Vida", "brujo",
-		"El Antiguo de la Vida elige sus campeones con cuidado. " \
-		"Pero cuando necesita presencia en el mundo, establece pactos con los que sirven a la vida.",
+		"El Antiguo de la Vida elige sus campeones con cuidado. " + "Pero cuando necesita presencia en el mundo, establece pactos con los que sirven a la vida.",
 		["curar_heridas", "luz", "llama_sagrada", "restauracion_menor", "luz_del_dia"],
 		{
 			1: [
@@ -1201,8 +1168,7 @@ func _reg_brujo_subclasses() -> void:
 	## Los Bosques sin Nombre entre Velthar y Kethara tienen entidades que ofrecen pactos.
 	## No son los Cinco Antiguos. Son algo diferente. Más pequeño. Más caprichoso.
 	_s("pacto_bosque", "Pacto del Bosque", "brujo",
-		"Los bosques fronterizos guardan entidades que los Cinco Antiguos ignoraron. " \
-		"Que sean menores no las hace menos peligrosas.",
+		"Los bosques fronterizos guardan entidades que los Cinco Antiguos ignoraron. " + "Que sean menores no las hace menos peligrosas.",
 		["hechizar_persona", "paso_brumoso", "confusión", "mayor_invisibilidad"],
 		{
 			1: [
@@ -1232,8 +1198,7 @@ func _reg_brujo_subclasses() -> void:
 	## El fragmento de El Poder en Kethara ofrece pactos a los desesperados.
 	## Maerek Solden lo usa con plena consciencia del coste. Otros no.
 	_s("pacto_poder", "Pacto del Poder", "brujo",
-		"El fragmento de El Poder en Kethara otorga fuerza a cambio de algo que no siempre se ve venir. " \
-		"Maerek lo sabe. Sus soldados corrompidos también lo aprenden — tarde.",
+		"El fragmento de El Poder en Kethara otorga fuerza a cambio de algo que no siempre se ve venir. " + "Maerek lo sabe. Sus soldados corrompidos también lo aprenden — tarde.",
 		["manos_ardientes", "represalia_infernal", "bola_fuego", "campo_anticreacion"],
 		{
 			1: [
@@ -1263,8 +1228,7 @@ func _reg_brujo_subclasses() -> void:
 	## El Antiguo de las Profundidades es lo más alien de los cinco.
 	## Sus pactos son los más peligrosos porque sus motivos son incomprensibles.
 	_s("pacto_ysara", "Pacto de Ysara", "brujo",
-		"Las Profundidades llevan eternidades esperando sin impaciencia. " \
-		"Cuando ofrecen un pacto, no es porque lo necesiten. Es porque algo cambió en su plan.",
+		"Las Profundidades llevan eternidades esperando sin impaciencia. " + "Cuando ofrecen un pacto, no es porque lo necesiten. Es porque algo cambió en su plan.",
 		["crear_o_destruir_agua", "tormenta_de_nieve", "control_agua", "invocar_elementales"],
 		{
 			1: [
@@ -1301,8 +1265,7 @@ func _reg_clerigo_subclasses() -> void:
 	## Los sacerdotes que bendicen los ejércitos de Velthar. Aldric los financia.
 	## No todos saben que el rey al que sirven puede ser parte del problema.
 	_s("dominio_velthar", "Dominio de Velthar", "clerigo",
-		"Los sacerdotes de guerra de Velthar bendicen cada espada antes de las batallas. " \
-		"La pregunta que no hacen: Â¿y si la espada apunta a los inocentes?",
+		"Los sacerdotes de guerra de Velthar bendicen cada espada antes de las batallas. " + "La pregunta que no hacen: Â¿y si la espada apunta a los inocentes?",
 		["escudo_de_la_fe", "castigo_furioso", "arma_espiritual", "cruzada_espiritual", "llama_santa"],
 		{
 			3: [
@@ -1333,8 +1296,7 @@ func _reg_clerigo_subclasses() -> void:
 
 	## DOMINIO DE LA VIDA (= Dominio de la Vida) — conexión directa con El Antiguo de la Vida
 	_s("dominio_vida_cle", "Dominio de la Vida", "clerigo",
-		"El Antiguo de la Vida habla a través de sus sacerdotes. No todos son elegidos — " \
-		"pero todos los que toman este dominio sienten algo que no se puede describir con palabras.",
+		"El Antiguo de la Vida habla a través de sus sacerdotes. No todos son elegidos — " + "pero todos los que toman este dominio sienten algo que no se puede describir con palabras.",
 		["bendicion", "curar_heridas", "auxilio", "restauracion_menor", "revivir"],
 		{
 			3: [
@@ -1362,8 +1324,7 @@ func _reg_clerigo_subclasses() -> void:
 
 	## DOMINIO DEL FARO (= Dominio de la Luz) — Meredan, el faro, esperanza
 	_s("dominio_faro_cle", "Dominio del Faro", "clerigo",
-		"El Faro de Meredan no es solo un edificio. Es una idea: que la luz persiste. " \
-		"Los clérigos del Faro encienden esa luz donde la oscuridad más aprieta.",
+		"El Faro de Meredan no es solo un edificio. Es una idea: que la luz persiste. " + "Los clérigos del Faro encienden esa luz donde la oscuridad más aprieta.",
 		["luz", "quemar_manos", "disipar_magia", "bola_de_fuego", "llama_santa"],
 		{
 			3: [
@@ -1394,8 +1355,7 @@ func _reg_clerigo_subclasses() -> void:
 
 	## DOMINIO DE LA SOMBRA (= Dominio del Engaño) — Kethara, Maerek, las Cadenas
 	_s("dominio_sombra_cle", "Dominio de la Sombra", "clerigo",
-		"Kethara tiene sus propios dioses — o algo que los imita. " \
-		"Maerek Solden reza en la oscuridad. Sus sacerdotes hacen el trabajo sucio que él no puede hacer.",
+		"Kethara tiene sus propios dioses — o algo que los imita. " + "Maerek Solden reza en la oscuridad. Sus sacerdotes hacen el trabajo sucio que él no puede hacer.",
 		["encanto", "imagen_silenciosa", "pasar_sin_rastro", "mayor_invisibilidad", "dominar_persona"],
 		{
 			3: [
@@ -1432,8 +1392,7 @@ func _reg_druida_subclasses() -> void:
 
 	## CÃRCULO DE LA MAREA (= Círculo de la Luna)
 	_s("circulo_marea", "Círculo de la Marea", "druida",
-		"El mar entre Meredan e Ilvernis tiene memoria propia. " \
-		"Los druidas de la Marea se transforman en criaturas del mar y tormentas.",
+		"El mar entre Meredan e Ilvernis tiene memoria propia. " + "Los druidas de la Marea se transforman en criaturas del mar y tormentas.",
 		[],
 		{
 			2: [
@@ -1461,8 +1420,7 @@ func _reg_druida_subclasses() -> void:
 
 	## CÃRCULO DEL BOSQUE OSCURO (= Círculo de la Tierra)
 	_s("circulo_bosque_oscuro", "Círculo del Bosque Oscuro", "druida",
-		"Los Bosques sin Nombre entre Velthar y Kethara guardan secretos. " \
-		"Estos druidas son los custodios de lo que no debería salir de esos bosques.",
+		"Los Bosques sin Nombre entre Velthar y Kethara guardan secretos. " + "Estos druidas son los custodios de lo que no debería salir de esos bosques.",
 		[],
 		{
 			2: [
@@ -1490,8 +1448,7 @@ func _reg_druida_subclasses() -> void:
 
 	## CÃRCULO DE LA BÃ"VEDA (= Círculo de las Estrellas) — Ilvernis, observatorio
 	_s("circulo_sol", "Círculo de Sól", "druida",
-		"Sól la Inmortal fundó este círculo en el Observatorio de Ilvernis hace siglos. " \
-		"Sabe lo que hay bajo la Aguja de Marfil. No lo dice voluntariamente.",
+		"Sól la Inmortal fundó este círculo en el Observatorio de Ilvernis hace siglos. " + "Sabe lo que hay bajo la Aguja de Marfil. No lo dice voluntariamente.",
 		[],
 		{
 			2: [
@@ -1522,8 +1479,7 @@ func _reg_druida_subclasses() -> void:
 
 	## CÃRCULO DEL ABISMO (= Círculo del Mar) — Las Profundidades
 	_s("circulo_abismo", "Círculo del Abismo", "druida",
-		"El fragmento de Las Profundidades bajo Ilvernis filtra influencia. " \
-		"Algunos druidas la recogen sin entender de dónde viene.",
+		"El fragmento de Las Profundidades bajo Ilvernis filtra influencia. " + "Algunos druidas la recogen sin entender de dónde viene.",
 		["niebla", "invocar_bestia", "desplazarse_agua", "llamar_relampago", "invocar_elementales"],
 		{
 			2: [
@@ -1557,8 +1513,7 @@ func _reg_mago_subclasses() -> void:
 
 	## ESCUELA DEL SELLO (= Abjurador) — los que sellan a los Cinco Antiguos
 	_s("escuela_sevryn", "Escuela de Sevryn el Sellador", "mago",
-		"La magia que mantiene sellado el fragmento de Las Profundidades bajo Ilvernis " \
-		"fue creada por esta escuela. Sus secretos no se enseñan. Se heredan.",
+		"La magia que mantiene sellado el fragmento de Las Profundidades bajo Ilvernis " + "fue creada por esta escuela. Sus secretos no se enseñan. Se heredan.",
 		[],
 		{
 			2: [
@@ -1589,8 +1544,7 @@ func _reg_mago_subclasses() -> void:
 
 	## ESCUELA DEL CRISTAL (= Adivino) — Ilvernis, investigación
 	_s("escuela_miranbel", "Escuela del Cristal de Miranbel", "mago",
-		"La Aguja de Marfil tiene una sala de cristales que algunos creen encantados. " \
-		"Los adivinos de Ilvernis los usan para leer lo que nadie debería poder leer.",
+		"La Aguja de Marfil tiene una sala de cristales que algunos creen encantados. " + "Los adivinos de Ilvernis los usan para leer lo que nadie debería poder leer.",
 		[],
 		{
 			2: [
@@ -1618,8 +1572,7 @@ func _reg_mago_subclasses() -> void:
 
 	## ESCUELA DEL FULGOR (= Evocador) — Kethara, magia de guerra
 	_s("escuela_kest", "Escuela del Fulgor de Kest", "mago",
-		"La magia de guerra de Kethara fue desarrollada aquí — o en su equivalente kethariano. " \
-		"La Escuela del Fulgor de Ilvernis la estudia, teóricamente, para contrarrestarla.",
+		"La magia de guerra de Kethara fue desarrollada aquí — o en su equivalente kethariano. " + "La Escuela del Fulgor de Ilvernis la estudia, teóricamente, para contrarrestarla.",
 		[],
 		{
 			2: [
@@ -1650,8 +1603,7 @@ func _reg_mago_subclasses() -> void:
 
 	## ESCUELA DEL ESPEJO (= Ilusionista) — Vaela Mirage, las Cadenas
 	_s("escuela_vaelindra", "Escuela de Vaelindra", "mago",
-		"Vaela Mirage (Cadena 6) lleva tanto tiempo habitando ilusiones que no recuerda su forma real. " \
-		"Los magos del Espejo aprenden que la diferencia entre lo real y lo irreal es más delgada de lo pensado.",
+		"Vaela Mirage (Cadena 6) lleva tanto tiempo habitando ilusiones que no recuerda su forma real. " + "Los magos del Espejo aprenden que la diferencia entre lo real y lo irreal es más delgada de lo pensado.",
 		[],
 		{
 			2: [
