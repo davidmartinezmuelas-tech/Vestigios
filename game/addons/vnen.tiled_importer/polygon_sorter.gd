@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 # Sorter for polygon vertices
-tool
+@tool
 extends Reference
 
 var center

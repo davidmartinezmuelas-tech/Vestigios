@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-tool
+@tool
 extends Reference
 
 # Constants for tile flipping
@@ -342,7 +342,7 @@ func make_layer(layer, parent, root, data):
 		object_layer.set("editor/display_folded", true)
 		parent.add_child(object_layer)
 		object_layer.set_owner(root)
-		if "name" in layer and not str(layer.name).empty():
+		if "name" in layer and not str(layer.name).is_empty():
 			object_layer.set_name(str(layer.name))
 
 		if not "draworder" in layer or layer.draworder == "topdown":
@@ -371,9 +371,9 @@ func make_layer(layer, parent, root, data):
 				point.visible = bool(object.visible) if "visible" in object else true
 				object_layer.add_child(point)
 				point.set_owner(root)
-				if "name" in object and not str(object.name).empty():
+				if "name" in object and not str(object.name).is_empty():
 					point.set_name(str(object.name))
-				elif "id" in object and not str(object.id).empty():
+				elif "id" in object and not str(object.id).is_empty():
 					point.set_name(str(object.id))
 				if options.save_tiled_properties:
 					set_tiled_properties_as_meta(point, object)
@@ -408,9 +408,9 @@ func make_layer(layer, parent, root, data):
 					occluder.position = pos
 					occluder.rotation_degrees = rot
 					occluder.occluder = shape
-					if "name" in object and not str(object.name).empty():
+					if "name" in object and not str(object.name).is_empty():
 						occluder.set_name(str(object.name))
-					elif "id" in object and not str(object.id).empty():
+					elif "id" in object and not str(object.id).is_empty():
 						occluder.set_name(str(object.id))
 
 					if options.save_tiled_properties:
@@ -482,9 +482,9 @@ func make_layer(layer, parent, root, data):
 					if options.custom_properties:
 						set_custom_properties(body, object)
 
-					if "name" in object and not str(object.name).empty():
+					if "name" in object and not str(object.name).is_empty():
 						body.set_name(str(object.name))
-					elif "id" in object and not str(object.id).empty():
+					elif "id" in object and not str(object.id).is_empty():
 						body.set_name(str(object.id))
 					body.visible = bool(object.visible) if "visible" in object else true
 					body.position = pos
@@ -555,9 +555,9 @@ func make_layer(layer, parent, root, data):
 						obj_root.add_child(collision_node)
 						collision_node.owner = root
 
-				if "name" in object and not str(object.name).empty():
+				if "name" in object and not str(object.name).is_empty():
 					obj_root.set_name(str(object.name))
-				elif "id" in object and not str(object.id).empty():
+				elif "id" in object and not str(object.id).is_empty():
 					obj_root.set_name(str(object.id))
 
 				obj_root.position = pos
@@ -600,7 +600,7 @@ func make_layer(layer, parent, root, data):
 		if options.custom_properties:
 			set_custom_properties(group, layer)
 
-		if "name" in layer and not str(layer.name).empty():
+		if "name" in layer and not str(layer.name).is_empty():
 			group.set_name(str(layer.name))
 
 		group.set("editor/display_folded", true)
@@ -643,7 +643,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 				print_error("Missing or invalid firstgid tileset property.")
 				return ERR_INVALID_DATA
 
-			ts_source_path = source_path.get_base_dir().plus_file(ts.source)
+			ts_source_path = source_path.get_base_dir().path_join(ts.source)
 			# Used later for templates
 			_tileset_path_to_first_gid[ts_source_path] = tileset.firstgid
 
@@ -654,18 +654,17 @@ func build_tileset_for_scene(tilesets, source_path, options):
 					# Error happened
 					return ts
 			else: # JSON Tileset
-				var f = File.new()
-				err = f.open(ts_source_path, File.READ)
-				if err != OK:
+				var f = FileAccess.open(ts_source_path, FileAccess.READ)
+				if f == null:
 					print_error("Error opening tileset '%s'." % [ts.source])
 					return err
 
-				var json_res = JSON.parse(f.get_as_text())
+				var json_res = JSON.parse_string(f.get_as_text())
 				if json_res.error != OK:
 					print_error("Error parsing tileset '%s' JSON: %s" % [ts.source, json_res.error_string])
 					return ERR_INVALID_DATA
 
-				ts = json_res.result
+				ts = json_res
 				if typeof(ts) != TYPE_DICTIONARY:
 					print_error("Tileset '%s' is not a dictionary." % [ts.source])
 					return ERR_INVALID_DATA
@@ -749,7 +748,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 					for g in ts.tiles[rel_id].animation:
 						var frameTex = tilesetTexture.get_rect(tileRegions[(int(g.tileid))])
 						var newTex = ImageTexture.new()
-						newTex.create_from_image(frameTex, flags)
+						newTex.create_from_image(frameTex)
 						animated_tex.set_frame_texture(c, newTex)
 						animated_tex.set_frame_delay(c, float(g.duration) * 0.001)
 						c += 1
@@ -867,11 +866,10 @@ func load_image(rel_path, source_path, options):
 
 	var total_path = rel_path
 	if rel_path.is_rel_path():
-		total_path = ProjectSettings.globalize_path(source_path.get_base_dir()).plus_file(rel_path)
+		total_path = ProjectSettings.globalize_path(source_path.get_base_dir()).path_join(rel_path)
 	total_path = ProjectSettings.localize_path(total_path)
 
-	var dir = Directory.new()
-	if not dir.file_exists(total_path):
+	if not FileAccess.file_exists(total_path):
 		print_error("Image not found: %s" % [total_path])
 		return ERR_FILE_NOT_FOUND
 
@@ -884,11 +882,10 @@ func load_image(rel_path, source_path, options):
 		var img = Image.new()
 		img.load(total_path)
 		image = ImageTexture.new()
-		image.create_from_image(img, flags)
+		image.create_from_image(img)
 	else:
 		image = ResourceLoader.load(total_path, "ImageTexture")
 		if image != null:
-			image.set_flags(flags)
 
 	return image
 
@@ -905,17 +902,16 @@ func read_file(path):
 		return data
 
 	# Not TMX, must be JSON
-	var file = File.new()
-	var err = file.open(path, File.READ)
-	if err != OK:
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file == null:
 		return err
 
-	var content = JSON.parse(file.get_as_text())
+	var content = JSON.parse_string(file.get_as_text())
 	if content.error != OK:
 		print_error("Error parsing JSON: " + content.error_string)
 		return content.error
 
-	return content.result
+	return content
 
 # Reads a tileset file and return its contents as a dictionary
 # Returns an error code if fails
@@ -930,17 +926,16 @@ func read_tileset_file(path):
 		return data
 
 	# Not TSX, must be JSON
-	var file = File.new()
-	var err = file.open(path, File.READ)
-	if err != OK:
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file == null:
 		return err
 
-	var content = JSON.parse(file.get_as_text())
+	var content = JSON.parse_string(file.get_as_text())
 	if content.error != OK:
 		print_error("Error parsing JSON: " + content.error_string)
 		return content.error
 
-	return content.result
+	return content
 
 # Creates a shape from an object data
 # Returns a valid shape depending on the object type (collision/occluder/navigation)
@@ -1294,17 +1289,16 @@ func get_template(path):
 
 		# IS JSON
 		else:
-			var file = File.new()
-			var err = file.open(path, File.READ)
-			if err != OK:
+			var file = FileAccess.open(path, FileAccess.READ)
+			if file == null:
 				return err
 
-			var json_res = JSON.parse(file.get_as_text())
+			var json_res = JSON.parse_string(file.get_as_text())
 			if json_res.error != OK:
 				print_error("Error parsing JSON template map file '%s'." % [path])
 				return json_res.error
 
-			var result = json_res.result
+			var result = json_res
 			if typeof(result) != TYPE_DICTIONARY:
 				print_error("Error parsing JSON template map file '%s'." % [path])
 				return ERR_INVALID_DATA
@@ -1375,14 +1369,12 @@ static func remove_filename_from_path(path):
 	return file_path
 
 static func is_same_file(path1, path2):
-	var file1 = File.new()
-	var err = file1.open(path1, File.READ)
-	if err != OK:
+	var file1 = FileAccess.open(path1, FileAccess.READ)
+	if file1 == null:
 		return err
 
-	var file2 = File.new()
-	err = file2.open(path2, File.READ)
-	if err != OK:
+	var file2 = FileAccess.open(path2, FileAccess.READ)
+	if file2 == null:
 		return err
 
 	var file1_str = file1.get_as_text()
