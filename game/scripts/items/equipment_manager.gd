@@ -103,7 +103,7 @@ static func _resolve_item(item_id: String) -> ItemData:
 	var item := ItemDatabase.get_item(item_id)
 	if item != null:
 		return item
-	return MagicItemDatabase.get(item_id)
+	return MagicItemDatabase.find(item_id)
 
 static func _validate_slot_compatibility(item: ItemData, slot: EquipmentSlot.Slot) -> EquipResult:
 	match slot:

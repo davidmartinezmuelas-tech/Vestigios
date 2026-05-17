@@ -221,7 +221,8 @@ func _is_choice_available(choice: DialogueChoice) -> bool:
 
 ## Bonus de habilidad: mod de característica + bonificador de competencia.
 func _ability_bonus(character: CharacterData, ability: String) -> int:
-	return CharacterData.ability_modifier(character.get(ability, 10)) + character.proficiency_bonus
+	var _ability_val = character.get(ability); if _ability_val == null: _ability_val = 10
+	return CharacterData.ability_modifier(_ability_val) + character.proficiency_bonus
 
 ## Comprueba si el hablante tiene desventaja en una habilidad por sus condiciones persistentes.
 func _speaker_has_skill_disadvantage(character: CharacterData, skill_name: String) -> bool:

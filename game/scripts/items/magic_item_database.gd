@@ -33,7 +33,7 @@ func _ready() -> void:
 	_register_descriptions_W()
 	_register_descriptions_extra()
 
-func get(item_id: String) -> MagicItemData: return _items.get(item_id)
+func find(item_id: String) -> MagicItemData: return _items.get(item_id)
 func get_all() -> Array[MagicItemData]: return _items.values()
 func get_by_rarity(r: ItemData.Rarity) -> Array[MagicItemData]:
 	return _items.values().filter(func(x: MagicItemData) -> bool: return x.rarity == r)

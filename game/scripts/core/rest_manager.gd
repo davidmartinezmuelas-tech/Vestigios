@@ -33,7 +33,8 @@ func _on_attunement_requested(character_id: String, item_id: String, attune: boo
 	if not _attunement_queue.has(character_id):
 		_attunement_queue[character_id] = []
 	# Reemplazar solicitud previa para el mismo item (evita duplicados)
-	_attunement_queue[character_id] = (_attunement_queue[character_id] as Array).filter(
+	var _queue_arr: Array = _attunement_queue[character_id]
+	_attunement_queue[character_id] = _queue_arr.filter(
 		func(r: Dictionary) -> bool: return r["item_id"] != item_id
 	)
 	_attunement_queue[character_id].append({"item_id": item_id, "attune": attune})
@@ -69,8 +70,8 @@ func short_rest(party: Array[BaseCharacter], hit_dice_to_spend: Dictionary = {})
 func _spend_hit_dice(character: BaseCharacter, count: int) -> void:
 	if character.data == null:
 		return
-	var con_mod := character.stats.get_modifier("con")
-	var total_healed := 0
+	var con_mod: int = character.stats.get_modifier("con")
+	var total_healed: int = 0
 	for i in count:
 		var roll := RngManager.randi_range(1, character.stats.hit_dice_sides)
 		var healed := maxi(1, roll + con_mod)
@@ -100,7 +101,7 @@ func long_rest(party: Array[BaseCharacter]) -> void:
 			continue
 
 		# PG al máximo
-		var old_hp := character.stats.current_health
+		var old_hp: int = character.stats.current_health
 		character.stats.current_health = character.stats.max_health
 		if character.stats.current_health != old_hp:
 			character.health_changed.emit(character.stats.current_health, character.stats.max_health)
@@ -165,7 +166,7 @@ func _process_pending_attunements(character: BaseCharacter) -> void:
 func _try_attune(character: BaseCharacter, item_id: String) -> void:
 	if character.data == null:
 		return
-	var magic := MagicItemDatabase.get(item_id)
+	var magic := MagicItemDatabase.find(item_id)
 	if magic == null or magic.attunement == MagicItemData.Attunement.NONE:
 		return
 	if not character.data.can_attune_item(magic):

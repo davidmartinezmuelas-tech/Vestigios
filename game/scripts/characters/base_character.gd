@@ -256,9 +256,6 @@ func end_turn() -> void:
 func can_move() -> bool:
 	return _tiles_moved < stats.speed_ft / CombatGrid.FEET_PER_TILE
 
-func can_act() -> bool:
-	return not _has_acted
-
 func tiles_remaining() -> int:
 	return (stats.speed_ft / CombatGrid.FEET_PER_TILE) - _tiles_moved
 

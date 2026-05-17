@@ -14,7 +14,6 @@
 ## Threshold nivel 1→2: 300 XP   (hazañas taberna+bosque = 250, combate cubre el resto)
 ## Threshold nivel 2→3: 900 XP   (hazaña fuerte = 650, combate cubre el resto)
 
-class_name LevelManager
 extends Node
 
 # ============================================================

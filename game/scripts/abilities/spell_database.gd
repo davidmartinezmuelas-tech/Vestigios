@@ -1,6 +1,6 @@
 ## spell_database.gd
 ## Base de datos central de conjuros y trucos (D&D 2024).
-## Autoload. Uso: SpellDatabase.get("marca_cazador")
+## Autoload. Uso: SpellDatabase.find("marca_cazador")
 ##
 ## FUENTE: Documentación DND/Hechizos/CONJUROS.txt
 ## Los conjuros se registran con sus stats exactos del libro.
@@ -22,7 +22,7 @@ var _spells: Dictionary = {}
 # API PÚBLICA
 # ============================================================
 
-func get(spell_id: String) -> SpellData:
+func find(spell_id: String) -> SpellData:
 	return _spells.get(spell_id)
 
 func get_all_cantrips() -> Array[SpellData]:

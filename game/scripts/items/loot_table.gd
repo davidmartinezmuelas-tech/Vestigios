@@ -46,5 +46,5 @@ func _resolve_item(item_id: String) -> ItemData:
 	var from_items := ItemDatabase.get_item(item_id)
 	if from_items:
 		return from_items
-	var from_magic := MagicItemDatabase.get(item_id)
+	var from_magic := MagicItemDatabase.find(item_id)
 	return from_magic

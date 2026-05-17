@@ -72,12 +72,14 @@ func can_multiclass_into(new_class_id: String) -> bool:
 	# Requisitos de la clase actual
 	var current_reqs := ClassDefinition.get_multiclass_requirements(class_id)
 	for ability in current_reqs:
-		if get(ability, 10) < current_reqs[ability]:
+		var _cur_val = get(ability); if _cur_val == null: _cur_val = 10
+		if _cur_val < current_reqs[ability]:
 			return false
 	# Requisitos de la clase nueva
 	var new_reqs := ClassDefinition.get_multiclass_requirements(new_class_id)
 	for ability in new_reqs:
-		if get(ability, 10) < new_reqs[ability]:
+		var _new_val = get(ability); if _new_val == null: _new_val = 10
+		if _new_val < new_reqs[ability]:
 			return false
 	return true
 
@@ -87,11 +89,13 @@ func multiclass_blocked_reason(new_class_id: String) -> String:
 		return "Ya eres %s." % class_id
 	var current_reqs := ClassDefinition.get_multiclass_requirements(class_id)
 	for ability in current_reqs:
-		if get(ability, 10) < current_reqs[ability]:
+		var _cur_val2 = get(ability); if _cur_val2 == null: _cur_val2 = 10
+		if _cur_val2 < current_reqs[ability]:
 			return "Tu clase actual requiere %s %d." % [ability.to_upper(), current_reqs[ability]]
 	var new_reqs := ClassDefinition.get_multiclass_requirements(new_class_id)
 	for ability in new_reqs:
-		if get(ability, 10) < new_reqs[ability]:
+		var _new_val2 = get(ability); if _new_val2 == null: _new_val2 = 10
+		if _new_val2 < new_reqs[ability]:
 			return "%s requiere %s %d." % [new_class_id, ability.to_upper(), new_reqs[ability]]
 	return ""
 
@@ -322,7 +326,7 @@ func equipment_from_dict(data: Dictionary) -> void:
 func get_cantrips() -> Array[SpellData]:
 	var result: Array[SpellData] = []
 	for id in cantrip_ids:
-		var s := SpellDatabase.get(id)
+		var s := SpellDatabase.find(id)
 		if s:
 			result.append(s)
 	return result
@@ -331,7 +335,7 @@ func get_cantrips() -> Array[SpellData]:
 func get_spells() -> Array[SpellData]:
 	var result: Array[SpellData] = []
 	for id in spell_ids:
-		var s := SpellDatabase.get(id)
+		var s := SpellDatabase.find(id)
 		if s:
 			result.append(s)
 	return result

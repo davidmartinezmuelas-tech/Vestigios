@@ -51,17 +51,17 @@ func _register_all() -> void:
 	_reg_mago_subclasses()
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# PALADÃƒÂ�N â€�â€� JURAMENTOS
+# PALADÃƒÂ�N "" JURAMENTOS
 # Niveles de rasgo: 3, 7, 15, 20
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_paladin_subclasses() -> void:
 
 	## JURAMENTO DE LA VIDA (= Juramento de los Antiguos)
 	## Vael es el paradigma. Paladines elegidos por El Antiguo de la Vida.
-	## Su cicatriz detecta la CorrupciÃ³n â€�â€� y el Juramento los compromete a erradicarla.
+	## Su cicatriz detecta la CorrupciÃ³n "" y el Juramento los compromete a erradicarla.
 	_s("juramento_vida", "Juramento de la Vida", "paladin",
 		"Elegido por El Antiguo de la Vida. Tu cicatriz late ante la CorrupciÃ³n. " \
-		"Proteger lo vivo es tu ley â€�â€� no importa el coste.",
+		"Proteger lo vivo es tu ley "" no importa el coste.",
 		["curar_heridas", "heroismo", "hablar_con_los_animales", "luz_del_dia", "restauracion_mayor"],
 		{
 			3: [
@@ -129,7 +129,7 @@ func _reg_paladin_subclasses() -> void:
 	## Conocen a Maerek Solden mejor que sus propios hombres.
 	_s("juramento_tejedora", "Juramento de la Tejedora", "paladin",
 		"La justicia que la ley no puede dar. Operan en las sombras de Velthar. " \
-		"Saben que Maerek no es el villano que parece â€�â€� y eso los complica.",
+		"Saben que Maerek no es el villano que parece "" y eso los complica.",
 		["manos_ardientes", "hechizar_persona", "sugesion", "disipar_magia", "miedo"],
 		{
 			3: [
@@ -193,7 +193,7 @@ func _reg_paladin_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# BARDO â€�â€� COLEGIOS
+# BARDO "" COLEGIOS
 # Niveles de rasgo: 3, 6, 14
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_bardo_subclasses() -> void:
@@ -201,9 +201,9 @@ func _reg_bardo_subclasses() -> void:
 	## COLEGIO DE ILVERNIS (= Colegio del Conocimiento)
 	## Los bardos que buscan verdades ocultas. No estudian en La Aguja â€” la buscan.
 	## El conocimiento que mÃ¡s importa es el que alguien decidiÃ³ que no debÃ­as tener.
-	_s(â€œcolegio_ilvernisâ€�, â€œColegio de Ilvernisâ€�, â€œbardoâ€�,
-		â€œLa Aguja de Marfil no forma a sus bardos â€œâ€� los atrae. â€œ \
-		â€œQuienes siguen esta tradiciÃ³n llegaron solos al conocimiento, buscando lo que se les negÃ³.â€�,
+	_s("colegio_ilvernis", "Colegio de Ilvernis", "bardo",
+		"La Aguja de Marfil no forma a sus bardos "" los atrae. " \
+		"Quienes siguen esta tradiciÃ³n llegaron solos al conocimiento, buscando lo que se les negÃ³.",
 		[],
 		{
 			3: [
@@ -255,7 +255,7 @@ func _reg_bardo_subclasses() -> void:
 
 	## COLEGIO DEL ESPEJO (= Colegio del Glamour)
 	## Los bardos que sirven a los poderosos usando ilusiÃ³n y encantamiento.
-	## Vaela Mirage (Cadena 6) vino de aquÃ­ â€�â€� o de algo peor.
+	## Vaela Mirage (Cadena 6) vino de aquÃ­ "" o de algo peor.
 	_s("colegio_selven", "Colegio de Selven el Oculto", "bardo",
 		"Vaela Mirage fue su alumna mÃ¡s brillante. O quizÃ¡s la crearon ellos. " \
 		"La diferencia entre una ilusiÃ³n perfecta y la realidad es solo perspectiva.",
@@ -312,7 +312,7 @@ func _reg_bardo_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# GUERRERO â€�â€� ARQUETIPO
+# GUERRERO "" ARQUETIPO
 # Niveles de rasgo: 3, 7, 10, 15, 18
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_guerrero_subclasses() -> void:
@@ -322,7 +322,7 @@ func _reg_guerrero_subclasses() -> void:
 	## sin necesitar acceso a conjuros. El arma es el canal.
 	_s("arco_antiguo_guerrero", "Portador del Arco Antiguo", "guerrero",
 		"Bicho no eligiÃ³ este camino. El arco lo eligiÃ³ a Ã©l. Ahora cada golpe resuena " \
-		"con algo que no es exactamente magia â€�â€� es mÃ¡s antiguo que eso.",
+		"con algo que no es exactamente magia "" es mÃ¡s antiguo que eso.",
 		[],
 		{
 			3: [
@@ -398,7 +398,7 @@ func _reg_guerrero_subclasses() -> void:
 	## Los guardianes de la Aguja de Marfil en Ilvernis. Arcano + acero.
 	## Algunos sospechan que hay algo mÃ¡s que conocimiento bajo la torre.
 	_s("caballero_aguja", "Caballero de la Aguja", "guerrero",
-		"Ilvernis tiene sus propios guerreros. No los envÃ­a a la guerra â€�â€� los usa para " \
+		"Ilvernis tiene sus propios guerreros. No los envÃ­a a la guerra "" los usa para " \
 		"proteger lo que hay bajo la Aguja. Nadie pregunta quÃ© es exactamente.",
 		[],
 		{
@@ -437,7 +437,7 @@ func _reg_guerrero_subclasses() -> void:
 	## Las Profundidades tienen campeones involuntarios. No todos lo saben.
 	## El conocimiento arcano de Las Profundidades filtra de formas inesperadas.
 	_s("camino_orvyn", "Camino de Orvyn el Sordo", "guerrero",
-		"Las Profundidades actÃºan sin campeones directos â€�â€� pero su influencia se filtra. " \
+		"Las Profundidades actÃºan sin campeones directos "" pero su influencia se filtra. " \
 		"Algunos guerreros descubren que su mente hace cosas que el cuerpo no deberÃ­a poder.",
 		[],
 		{
@@ -473,12 +473,12 @@ func _reg_guerrero_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# EXPLORADOR â€�â€� ARQUETIPO
+# EXPLORADOR "" ARQUETIPO
 # Niveles de rasgo: 3, 7, 11, 15
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_explorador_subclasses() -> void:
 
-	## CAZADOR DE CORRUPCIÃƒâ€œN (= Acechador en la Penumbra)
+	## CAZADOR DE CORRUPCIÃƒ"N (= Acechador en la Penumbra)
 	## LYTH. La Iglesia de Cazadores de Meredan. Entrenan para rastrear lo que
 	## la CorrupciÃ³n de Kethara crea. Garreth Ashveil es el objetivo mÃ¡ximo.
 	_s("senda_kolvek", "Senda de Kolvek", "explorador",
@@ -578,10 +578,10 @@ func _reg_explorador_subclasses() -> void:
 
 	## VINCULADO A LA VIDA (= SeÃ±or de las Bestias)
 	## Los que sienten el murmullo de El Antiguo de la Vida y lo expresan
-	## a travÃ©s del vÃ­nculo con criaturas. Vael lo siente diferente â€�â€� estos lo viven.
+	## a travÃ©s del vÃ­nculo con criaturas. Vael lo siente diferente "" estos lo viven.
 	_s("senda_tavar", "Senda de Tavar la Primera", "explorador",
 		"El Antiguo de la Vida habla en ecos. Algunos exploradores aprenden a escuchar " \
-		"esos ecos en las bestias que los rodean. No es magia â€�â€� es parentesco.",
+		"esos ecos en las bestias que los rodean. No es magia "" es parentesco.",
 		[],
 		{
 			3: [
@@ -608,7 +608,7 @@ func _reg_explorador_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# PÃƒÂ�CARO â€�â€� ARQUETIPO
+# PÃƒÂ�CARO "" ARQUETIPO
 # Niveles de rasgo: 3, 9, 13, 17
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_picaro_subclasses() -> void:
@@ -655,7 +655,7 @@ func _reg_picaro_subclasses() -> void:
 	## Johannes conoce a algunos de ellos. Sela tambiÃ©n.
 	_s("contrabandista_meredan", "Contrabandista de Meredan", "picaro",
 		"Meredan tiene dos economÃ­as: la visible y la que mueve Calder Reth. " \
-		"Los contrabandistas conocen ambas y no sirven a ninguna â€�â€� salvo al oro.",
+		"Los contrabandistas conocen ambas y no sirven a ninguna "" salvo al oro.",
 		[],
 		{
 			3: [
@@ -723,7 +723,7 @@ func _reg_picaro_subclasses() -> void:
 	## Pero el VacÃ­o actÃºa a travÃ©s de campeones involuntarios.
 	_s("portador_vacio", "Portador del VacÃ­o", "picaro",
 		"El VacÃ­o no tiene fragmento fÃ­sico. ActÃºa solo a travÃ©s de campeones. " \
-		"Gideon lo es conscientemente. Otros son elegidos sin saberlo â€�â€� y sin poder rechazarlo.",
+		"Gideon lo es conscientemente. Otros son elegidos sin saberlo "" y sin poder rechazarlo.",
 		[],
 		{
 			3: [
@@ -753,12 +753,12 @@ func _reg_picaro_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# MONJE â€�â€� TRADICIÃƒâ€œN
+# MONJE "" TRADICIÃƒ"N
 # Niveles de rasgo: 3, 6, 11, 17
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_monje_subclasses() -> void:
 
-	## DISCÃƒÂ�PULOS DE SYLVARA DUSK (= Guerrero de la Sombra) â€�â€� MÃƒÂ�A
+	## DISCÃƒÂ�PULOS DE SYLVARA DUSK (= Guerrero de la Sombra) "" MÃƒÂ�A
 	## La Orden de Sylvara (Cadena 5 de Kethara). MÃ­a se fue por conflicto moral.
 	## Pero el entrenamiento no se olvida.
 	_s("discipulos_sylvara", "DiscÃ­pulos de Sylvara Dusk", "monje",
@@ -794,7 +794,7 @@ func _reg_monje_subclasses() -> void:
 
 	## ORDEN DEL EQUILIBRIO (= Guerrero de la Mano Abierta)
 	## La orden mÃ¡s antigua del mundo conocido. Neutrales. Aparecen donde el equilibrio
-	## se rompe â€�â€� y siempre se rompe donde los Cinco Antiguos estÃ¡n involucrados.
+	## se rompe "" y siempre se rompe donde los Cinco Antiguos estÃ¡n involucrados.
 	_s("escuela_tarek", "Escuela de Tarek el InmÃ³vil", "monje",
 		"Ni Velthar ni Kethara los reclaman. Ni los Cinco Antiguos los controlan. " \
 		"Cuando el equilibrio se rompe, aparecen. Nadie sabe cÃ³mo saben.",
@@ -827,7 +827,7 @@ func _reg_monje_subclasses() -> void:
 	## Los monjes que curan en la ciudad portuaria. Conocen los venenos de Kethara mejor
 	## que nadie. TambiÃ©n saben aplicarlos.
 	_s("sanadores_meredan", "Sanadores de Meredan", "monje",
-		"Meredan es puerto de entrada para todo â€�â€� incluyendo las enfermedades de la guerra. " \
+		"Meredan es puerto de entrada para todo "" incluyendo las enfermedades de la guerra. " \
 		"Los Sanadores curan lo que pueden y eliminan lo que no tiene cura.",
 		["pasar_sin_rastro"],
 		{
@@ -861,7 +861,7 @@ func _reg_monje_subclasses() -> void:
 	## Los monjes que canalizan a los Cinco Antiguos sin ser sus campeones directos.
 	## Peligroso. No siempre controlable.
 	_s("voces_antiguos", "Voces de los Antiguos", "monje",
-		"Los Cinco Antiguos hablan a travÃ©s de todo â€�â€� algunos monjes aprenden a escuchar. " \
+		"Los Cinco Antiguos hablan a travÃ©s de todo "" algunos monjes aprenden a escuchar. " \
 		"No son campeones. Son receptores. La diferencia puede no importar cuando el Antiguo habla.",
 		[],
 		{
@@ -889,12 +889,12 @@ func _reg_monje_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# BÃƒÂ�RBARO â€�â€� SENDAS
+# BÃƒÂ�RBARO "" SENDAS
 # Niveles de rasgo: 3, 6, 10, 14
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_barbaro_subclasses() -> void:
 
-	## SENDA DEL ARCO ANTIGUO (= ÃƒÂ�rbol del Mundo) â€�â€� BICHO
+	## SENDA DEL ARCO ANTIGUO (= ÃƒÂ�rbol del Mundo) "" BICHO
 	## Bicho lleva el Arco Antiguo, el Ãºnico capaz de herir a los Cinco Antiguos.
 	## Su senda de bÃ¡rbaro canaliza esa energÃ­a antigua que aÃºn no comprende.
 	_s("senda_arco_antiguo", "Senda del Arco Antiguo", "barbaro",
@@ -960,10 +960,10 @@ func _reg_barbaro_subclasses() -> void:
 	)
 
 	## SENDA DE LAS PROFUNDIDADES (= CorazÃ³n Salvaje)
-	## El Antiguo de las Profundidades actÃºa sin campeones directos â€�â€� pero su influencia
+	## El Antiguo de las Profundidades actÃºa sin campeones directos "" pero su influencia
 	## llega a los que pasan demasiado tiempo cerca de lo antiguo.
 	_s("senda_profundidades_bar", "Senda de las Profundidades", "barbaro",
-		"Las Profundidades llevan eternidades esperando. No necesitan campeones â€�â€� " \
+		"Las Profundidades llevan eternidades esperando. No necesitan campeones "" " \
 		"se filtran en los que estÃ¡n cerca de lo suficientemente viejo.",
 		[],
 		{
@@ -991,7 +991,7 @@ func _reg_barbaro_subclasses() -> void:
 	)
 
 	## SENDA DEL PODER (= FanÃ¡tico / Zealot)
-	## Los que han sentido la presencia de El Poder â€�â€� el Antiguo que Kethara usa.
+	## Los que han sentido la presencia de El Poder "" el Antiguo que Kethara usa.
 	## Algunos luchan en su nombre conscientes. Otros no saben que sirven a algo mayor.
 	_s("senda_poder", "Senda del Poder", "barbaro",
 		"El Poder no necesita convencerte. Entra cuando bajas la guardia. " \
@@ -1003,7 +1003,7 @@ func _reg_barbaro_subclasses() -> void:
 					"En Furia: +1d6 radiante o necrÃ³tico a 1 ataque/turno.",
 					"none", "none", "rage_uses"),
 				_f("guerrero_de_los_dioses", "Guerrero del Poder",
-					"No mueres por caer a 0 PG durante la Furia â€�â€� pero caes al final de ella.",
+					"No mueres por caer a 0 PG durante la Furia "" pero caes al final de ella.",
 					"none", "none", "rage_uses"),
 			],
 			6: [
@@ -1025,16 +1025,16 @@ func _reg_barbaro_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# HECHICERO â€�â€� ORIGEN
+# HECHICERO "" ORIGEN
 # Niveles de rasgo: 1, 6, 14, 18
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_hechicero_subclasses() -> void:
 
-	## HERENCIA DEL ARQUITECTO (= Magia Salvaje) â€�â€� NAEREN
+	## HERENCIA DEL ARQUITECTO (= Magia Salvaje) "" NAEREN
 	## El Arquitecto actÃºa a travÃ©s de Naeren y Seraphel sin ser su campeÃ³n directo.
 	## Naeren perdiÃ³ la voz cuando su magia psÃ­quica emergiÃ³ sin control.
 	_s("herencia_arquitecto", "Herencia del Arquitecto", "hechicero",
-		"El Arquitecto toca sin avisar. Naeren no eligiÃ³ el psionismo â€�â€� le llegÃ³. " \
+		"El Arquitecto toca sin avisar. Naeren no eligiÃ³ el psionismo "" le llegÃ³. " \
 		"Cuando emite su primera Sobrecarga Mental, algo en el tejido de la realidad tiembla.",
 		[],
 		{
@@ -1095,8 +1095,8 @@ func _reg_hechicero_subclasses() -> void:
 		}
 	)
 
-	## LINAJE DE DRAGÃƒâ€œN (= Linaje DracÃ³nico)
-	## No hay dragones conocidos en Vestigios actualmente â€�â€� pero el linaje persiste.
+	## LINAJE DE DRAGÃƒ"N (= Linaje DracÃ³nico)
+	## No hay dragones conocidos en Vestigios actualmente "" pero el linaje persiste.
 	## Algunos dicen que el linaje dracÃ³nico viene de algo anterior incluso a los Cinco Antiguos.
 	_s("linaje_erdrath", "Linaje de Erdrath", "hechicero",
 		"Erdrath el Escarlata fue uno de los dragones mÃ¡s importantes documentados, hace 1000 aÃ±os. " \
@@ -1130,7 +1130,7 @@ func _reg_hechicero_subclasses() -> void:
 		}
 	)
 
-	## AUTÃƒâ€œMATAS DE ARCANIS (= HechicerÃ­a MecÃ¡nica)
+	## AUTÃƒ"MATAS DE ARCANIS (= HechicerÃ­a MecÃ¡nica)
 	## Los ingenieros mÃ¡gicos de Ilvernis que combinan tecnologÃ­a y conjuros.
 	## Bofri Ironmantle los financia. Nadie sabe exactamente para quÃ©.
 	_s("automatas_ilvernis", "AutÃ³matas de Ilvernis", "hechicero",
@@ -1162,7 +1162,7 @@ func _reg_hechicero_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# BRUJO â€�â€� PATRÃƒâ€œN
+# BRUJO "" PATRÃƒ"N
 # Niveles de rasgo: 1, 6, 10, 14
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_brujo_subclasses() -> void:
@@ -1234,7 +1234,7 @@ func _reg_brujo_subclasses() -> void:
 	## Maerek Solden lo usa con plena consciencia del coste. Otros no.
 	_s("pacto_poder", "Pacto del Poder", "brujo",
 		"El fragmento de El Poder en Kethara otorga fuerza a cambio de algo que no siempre se ve venir. " \
-		"Maerek lo sabe. Sus soldados corrompidos tambiÃ©n lo aprenden â€�â€� tarde.",
+		"Maerek lo sabe. Sus soldados corrompidos tambiÃ©n lo aprenden "" tarde.",
 		["manos_ardientes", "represalia_infernal", "bola_fuego", "campo_anticreacion"],
 		{
 			1: [
@@ -1292,7 +1292,7 @@ func _reg_brujo_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# CLÃ‰RIGO â€�â€� DOMINIO
+# CLÃ‰RIGO "" DOMINIO
 # Niveles de rasgo: 3, 6, 8, 17
 # (conjuros siempre preparados a niveles 1,3,5,7,9)
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
@@ -1332,9 +1332,9 @@ func _reg_clerigo_subclasses() -> void:
 		}
 	)
 
-	## DOMINIO DE LA VIDA (= Dominio de la Vida) â€�â€� conexiÃ³n directa con El Antiguo de la Vida
+	## DOMINIO DE LA VIDA (= Dominio de la Vida) "" conexiÃ³n directa con El Antiguo de la Vida
 	_s("dominio_vida_cle", "Dominio de la Vida", "clerigo",
-		"El Antiguo de la Vida habla a travÃ©s de sus sacerdotes. No todos son elegidos â€�â€� " \
+		"El Antiguo de la Vida habla a travÃ©s de sus sacerdotes. No todos son elegidos "" " \
 		"pero todos los que toman este dominio sienten algo que no se puede describir con palabras.",
 		["bendicion", "curar_heridas", "auxilio", "restauracion_menor", "revivir"],
 		{
@@ -1361,7 +1361,7 @@ func _reg_clerigo_subclasses() -> void:
 		}
 	)
 
-	## DOMINIO DEL FARO (= Dominio de la Luz) â€�â€� Meredan, el faro, esperanza
+	## DOMINIO DEL FARO (= Dominio de la Luz) "" Meredan, el faro, esperanza
 	_s("dominio_faro_cle", "Dominio del Faro", "clerigo",
 		"El Faro de Meredan no es solo un edificio. Es una idea: que la luz persiste. " \
 		"Los clÃ©rigos del Faro encienden esa luz donde la oscuridad mÃ¡s aprieta.",
@@ -1393,9 +1393,9 @@ func _reg_clerigo_subclasses() -> void:
 		}
 	)
 
-	## DOMINIO DE LA SOMBRA (= Dominio del EngaÃ±o) â€�â€� Kethara, Maerek, las Cadenas
+	## DOMINIO DE LA SOMBRA (= Dominio del EngaÃ±o) "" Kethara, Maerek, las Cadenas
 	_s("dominio_sombra_cle", "Dominio de la Sombra", "clerigo",
-		"Kethara tiene sus propios dioses â€�â€� o algo que los imita. " \
+		"Kethara tiene sus propios dioses "" o algo que los imita. " \
 		"Maerek Solden reza en la oscuridad. Sus sacerdotes hacen el trabajo sucio que Ã©l no puede hacer.",
 		["encanto", "imagen_silenciosa", "pasar_sin_rastro", "mayor_invisibilidad", "dominar_persona"],
 		{
@@ -1426,7 +1426,7 @@ func _reg_clerigo_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# DRUIDA â€�â€� CÃƒÂ�RCULO
+# DRUIDA "" CÃƒÂ�RCULO
 # Niveles de rasgo: 2, 6, 10, 14
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_druida_subclasses() -> void:
@@ -1489,7 +1489,7 @@ func _reg_druida_subclasses() -> void:
 		}
 	)
 
-	## CÃƒÂ�RCULO DE LA BÃƒâ€œVEDA (= CÃ­rculo de las Estrellas) â€�â€� Ilvernis, observatorio
+	## CÃƒÂ�RCULO DE LA BÃƒ"VEDA (= CÃ­rculo de las Estrellas) "" Ilvernis, observatorio
 	_s("circulo_sol", "CÃ­rculo de SÃ³l", "druida",
 		"SÃ³l la Inmortal fundÃ³ este cÃ­rculo en el Observatorio de Ilvernis hace siglos. " \
 		"Sabe lo que hay bajo la Aguja de Marfil. No lo dice voluntariamente.",
@@ -1521,7 +1521,7 @@ func _reg_druida_subclasses() -> void:
 		}
 	)
 
-	## CÃƒÂ�RCULO DEL ABISMO (= CÃ­rculo del Mar) â€�â€� Las Profundidades
+	## CÃƒÂ�RCULO DEL ABISMO (= CÃ­rculo del Mar) "" Las Profundidades
 	_s("circulo_abismo", "CÃ­rculo del Abismo", "druida",
 		"El fragmento de Las Profundidades bajo Ilvernis filtra influencia. " \
 		"Algunos druidas la recogen sin entender de dÃ³nde viene.",
@@ -1551,12 +1551,12 @@ func _reg_druida_subclasses() -> void:
 	)
 
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
-# MAGO â€�â€� TRADICIÃƒâ€œN ARCANA
+# MAGO "" TRADICIÃƒ"N ARCANA
 # Niveles de rasgo: 2, 6, 10, 14
 # Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�Ã¢â€¢Â�
 func _reg_mago_subclasses() -> void:
 
-	## ESCUELA DEL SELLO (= Abjurador) â€�â€� los que sellan a los Cinco Antiguos
+	## ESCUELA DEL SELLO (= Abjurador) "" los que sellan a los Cinco Antiguos
 	_s("escuela_sevryn", "Escuela de Sevryn el Sellador", "mago",
 		"La magia que mantiene sellado el fragmento de Las Profundidades bajo Ilvernis " \
 		"fue creada por esta escuela. Sus secretos no se enseÃ±an. Se heredan.",
@@ -1588,7 +1588,7 @@ func _reg_mago_subclasses() -> void:
 		}
 	)
 
-	## ESCUELA DEL CRISTAL (= Adivino) â€�â€� Ilvernis, investigaciÃ³n
+	## ESCUELA DEL CRISTAL (= Adivino) "" Ilvernis, investigaciÃ³n
 	_s("escuela_miranbel", "Escuela del Cristal de Miranbel", "mago",
 		"La Aguja de Marfil tiene una sala de cristales que algunos creen encantados. " \
 		"Los adivinos de Ilvernis los usan para leer lo que nadie deberÃ­a poder leer.",
@@ -1617,9 +1617,9 @@ func _reg_mago_subclasses() -> void:
 		}
 	)
 
-	## ESCUELA DEL FULGOR (= Evocador) â€�â€� Kethara, magia de guerra
+	## ESCUELA DEL FULGOR (= Evocador) "" Kethara, magia de guerra
 	_s("escuela_kest", "Escuela del Fulgor de Kest", "mago",
-		"La magia de guerra de Kethara fue desarrollada aquÃ­ â€�â€� o en su equivalente kethariano. " \
+		"La magia de guerra de Kethara fue desarrollada aquÃ­ "" o en su equivalente kethariano. " \
 		"La Escuela del Fulgor de Ilvernis la estudia, teÃ³ricamente, para contrarrestarla.",
 		[],
 		{
@@ -1649,7 +1649,7 @@ func _reg_mago_subclasses() -> void:
 		}
 	)
 
-	## ESCUELA DEL ESPEJO (= Ilusionista) â€�â€� Vaela Mirage, las Cadenas
+	## ESCUELA DEL ESPEJO (= Ilusionista) "" Vaela Mirage, las Cadenas
 	_s("escuela_vaelindra", "Escuela de Vaelindra", "mago",
 		"Vaela Mirage (Cadena 6) lleva tanto tiempo habitando ilusiones que no recuerda su forma real. " \
 		"Los magos del Espejo aprenden que la diferencia entre lo real y lo irreal es mÃ¡s delgada de lo pensado.",

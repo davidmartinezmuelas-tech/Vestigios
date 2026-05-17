@@ -1,6 +1,6 @@
 ## feat_database.gd
 ## Base de datos de dotes D&D 2024. Autoload.
-## Uso: FeatDatabase.get("alerta")
+## Uso: FeatDatabase.find("alerta")
 
 extends Node
 
@@ -12,7 +12,7 @@ func _ready() -> void:
 	_register_combat_style_feats()
 	_register_epic_gifts()
 
-func get(feat_id: String) -> FeatData: return _feats.get(feat_id)
+func find(feat_id: String) -> FeatData: return _feats.get(feat_id)
 func get_all() -> Array[FeatData]: return _feats.values()
 func get_by_category(cat: FeatData.FeatCategory) -> Array[FeatData]:
 	return _feats.values().filter(func(f: FeatData) -> bool: return f.category == cat)

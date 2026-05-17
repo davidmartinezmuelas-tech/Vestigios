@@ -419,7 +419,7 @@ func _apply_all_equipment_bonuses(data: CharacterData) -> void:
 
 ## Aplica el bonus de enhancement_bonus de un objeto mágico si procede.
 func _try_apply_magic_bonus(item_id: String, data: CharacterData) -> void:
-	var magic := MagicItemDatabase.get(item_id)
+	var magic := MagicItemDatabase.find(item_id)
 	if magic == null or magic.enhancement_bonus == 0:
 		return
 	if magic.attunement != MagicItemData.Attunement.NONE and not data.is_attuned(item_id):
@@ -487,7 +487,7 @@ func get_weapon_enhancement_bonus(data: CharacterData) -> int:
 	var id := data.slot_mano_principal
 	if id.is_empty():
 		return 0
-	var magic := MagicItemDatabase.get(id)
+	var magic := MagicItemDatabase.find(id)
 	if magic == null:
 		return 0
 	if magic.attunement != MagicItemData.Attunement.NONE and not data.is_attuned(id):
