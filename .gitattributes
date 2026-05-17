@@ -1,0 +1,24 @@
+# Forzar LF para todos los archivos de texto en Godot
+# Godot 4.6 no acepta CRLF en scripts GDScript
+
+*.gd        text eol=lf
+*.tscn      text eol=lf
+*.tres      text eol=lf
+*.godot     text eol=lf
+*.cfg       text eol=lf
+*.import    text eol=lf
+*.md        text eol=lf
+*.json      text eol=lf
+*.tmx       text eol=lf
+*.tsx       text eol=lf
+
+# Binarios — sin conversión
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.svg       binary
+*.ttf       binary
+*.otf       binary
+*.wav       binary
+*.ogg       binary
+*.mp3       binary
