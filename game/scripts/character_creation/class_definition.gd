@@ -43,7 +43,7 @@ extends Resource
 func can_multiclass_into(data: CharacterData) -> bool:
 	for ability in multiclass_min_requirements:
 		var required: int = multiclass_min_requirements[ability]
-		var score: int = data.get(ability, 10)
+		var score: int = (data.get(ability) if data.get(ability) != null else 10)
 		if score < required:
 			return false
 	return true

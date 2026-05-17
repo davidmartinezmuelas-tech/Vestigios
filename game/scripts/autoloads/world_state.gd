@@ -120,7 +120,7 @@ func has_disadvantage_on_attacks() -> bool:
 func get_active_conditions() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	for id in party_conditions:
-		var entry := party_conditions[id].duplicate()
+		var entry: Dictionary = party_conditions[id].duplicate()
 		entry["id"] = id
 		result.append(entry)
 	return result

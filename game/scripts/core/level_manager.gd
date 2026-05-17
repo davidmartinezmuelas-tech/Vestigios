@@ -88,7 +88,7 @@ func complete_hazana(hazana_id: String) -> void:
 	if hazana_id in completed_hazanas:
 		return
 	completed_hazanas.append(hazana_id)
-	var xp := HAZANA_XP.get(hazana_id, 0)
+	var xp := (HAZANA_XP.get(hazana_id) if HAZANA_XP.get(hazana_id) != null else 0)
 	if xp > 0:
 		_add_xp(xp)
 		hazana_completed.emit(hazana_id, xp)

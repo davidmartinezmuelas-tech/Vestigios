@@ -11,7 +11,7 @@ enum Attunement {
 	SPECIFIC,    # clase/raza específica (ver attunement_note)
 }
 
-@export var rarity: ItemData.Rarity = ItemData.Rarity.COMUN
+## rarity se hereda de ItemData — no redeclarar aquí
 @export var attunement: Attunement = Attunement.NONE
 @export var attunement_note: String = ""  # ej: "paladín", "druida o clérigo"
 

@@ -128,14 +128,14 @@ var _class_resource_max: Dictionary = {}
 func init_class_resources(class_id: String, char_data: CharacterData) -> void:
 	# Clase principal
 	var primary_level := char_data.class_level(class_id)
-	var resource_map  := ClassFeatureDatabase.get_class_resources(class_id, primary_level, char_data)
+	var resource_map: Dictionary = ClassFeatureDatabase.get_class_resources(class_id, primary_level, char_data)
 	for key in resource_map:
 		_class_resource_max[key] = resource_map[key]
 		_class_resources[key]    = resource_map[key]
 
 	# Clase secundaria (multiclase) — añade sus recursos propios
 	if not char_data.multiclass_id.is_empty() and char_data.multiclass_level > 0:
-		var secondary_map := ClassFeatureDatabase.get_class_resources(
+		var secondary_map: Dictionary = ClassFeatureDatabase.get_class_resources(
 			char_data.multiclass_id, char_data.multiclass_level, char_data
 		)
 		for key in secondary_map:
@@ -230,7 +230,7 @@ static func modifier_for(score: int) -> int:
 
 ## Devuelve el modificador de una característica por nombre, incluyendo efectos temporales.
 func get_modifier(ability: String) -> int:
-	var score := _get_score(ability) + _temp_modifiers.get(ability, 0)
+	var score: int = _get_score(ability) + _temp_modifiers.get(ability, 0)
 	return modifier_for(score)
 
 func get_score(ability: String) -> int:

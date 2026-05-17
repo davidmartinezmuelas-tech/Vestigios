@@ -228,13 +228,13 @@ func _bresenham_line(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 	var dx := abs(to.x - from.x);  var dy := abs(to.y - from.y)
 	var sx := 1 if from.x < to.x else -1
 	var sy := 1 if from.y < to.y else -1
-	var err := dx - dy
+	var err: int = dx - dy
 
 	while true:
 		cells.append(Vector2i(x, y))
 		if x == to.x and y == to.y:
 			break
-		var e2 := 2 * err
+		var e2: int = 2 * err
 		if e2 > -dy:
 			err -= dy
 			x += sx
