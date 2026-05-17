@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 @tool
-extends Reference
+extends RefCounted
 
 # Reads a TMX file from a path and return a Dictionary with the same structure
 # as the JSON map format

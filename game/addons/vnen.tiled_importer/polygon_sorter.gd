@@ -22,7 +22,7 @@
 
 # Sorter for polygon vertices
 @tool
-extends Reference
+extends RefCounted
 
 var center
 
