@@ -19,6 +19,7 @@ enum CastingTime {
 	MINUTO_1,
 	MINUTO_10,
 	HORA_1,
+	HORA_8,           # conjuros de ritual largo
 }
 
 enum AreaShape { NONE, ESFERA, CONO, CUBO, CILINDRO, LINEA, EMANACION }

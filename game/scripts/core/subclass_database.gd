@@ -60,8 +60,7 @@ func _reg_paladin_subclasses() -> void:
 	## Vael es el paradigma. Paladines elegidos por El Antiguo de la Vida.
 	## Su cicatriz detecta la Corrupción — y el Juramento los compromete a erradicarla.
 	_s("juramento_vida", "Juramento de la Vida", "paladin",
-		"Elegido por El Antiguo de la Vida. Tu cicatriz late ante la Corrupción. " \
-		"Proteger lo vivo es tu ley — no importa el coste.",
+		"Elegido por El Antiguo de la Vida. Tu cicatriz late ante la Corrupción. Proteger lo vivo es tu ley — no importa el coste.",
 		["curar_heridas", "heroismo", "hablar_con_los_animales", "luz_del_dia", "restauracion_mayor"],
 		{
 			3: [
