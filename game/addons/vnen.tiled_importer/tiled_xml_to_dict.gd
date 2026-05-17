@@ -43,7 +43,9 @@ func read_tmx(path):
 		printerr("Error parsing TMX file '%s'. Expected 'map' element.")
 		return ERR_INVALID_DATA
 
-	var data = attributes_to_dict(parser)
+	var data: Dictionary = attributes_to_dict(parser)
+	if typeof(data) != TYPE_DICTIONARY:
+		data = {}
 	if not "infinite" in data:
 		data.infinite = false
 	data.type = "map"
@@ -142,7 +144,9 @@ func read_tsx(path):
 # Return an error code if fails
 func parse_tileset(parser):
 	var err = OK
-	var data = attributes_to_dict(parser)
+	var data: Dictionary = attributes_to_dict(parser)
+	if typeof(data) != TYPE_DICTIONARY:
+		data = {}
 	data.tiles = {}
 
 	err = parser.read()
@@ -559,7 +563,7 @@ static func attributes_to_dict(parser):
 	for i in range(parser.get_attribute_count()):
 		var attr = parser.get_attribute_name(i)
 		var val = parser.get_attribute_value(i)
-		if val.is_valid_integer():
+		if val.is_valid_int():
 			val = int(val)
 		elif val.is_valid_float():
 			val = float(val)
