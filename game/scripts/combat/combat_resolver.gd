@@ -327,8 +327,10 @@ func _try_sneak_attack(user: BaseCharacter, target: BaseCharacter, ability: Abil
 	var sneak_dice := user.stats.get_sneak_attack_dice()
 	if sneak_dice == 0:
 		return 0
-	# Solo con arma sutil o a distancia
-	if ability.range_tiles <= 1 and not ability.is_finesse:
+	# Solo con arma sutil o a distancia (comprobar también el arma equipada)
+	var weapon := _resolve_weapon(user, ability)
+	var is_finesse := ability.is_finesse or (weapon != null and weapon.is_finesse)
+	if ability.range_tiles <= 1 and not is_finesse:
 		return 0
 	# ¿Tiene ventaja en el ataque O hay aliado adyacente?
 	var has_advantage := user.stats.has_attack_advantage()
@@ -354,14 +356,46 @@ func _attack_bonus(user: BaseCharacter, ability: AbilityData) -> int:
 	var bonus := user.stats.get_modifier(ability.attack_ability)
 	if ability.uses_proficiency:
 		bonus += user.stats.proficiency_bonus
+	# Enhancement bonus de arma mágica equipada
+	if user.data != null:
+		bonus += user.stats.get_weapon_enhancement_bonus(user.data)
 	return bonus
 
 func _roll_damage(user: BaseCharacter, ability: AbilityData, is_critical: bool) -> int:
-	var count := ability.damage_dice_count * 2 if is_critical else ability.damage_dice_count
-	var dmg   := _roll_dice(count, ability.damage_dice_sides)
+	var weapon := _resolve_weapon(user, ability)
+	var dice_count: int
+	var dice_sides: int
+	if weapon != null:
+		# Usar los dados del arma equipada
+		dice_count = weapon.damage_dice_count
+		dice_sides = weapon.damage_dice_sides
+	else:
+		dice_count = ability.damage_dice_count
+		dice_sides = ability.damage_dice_sides
+	var count := dice_count * 2 if is_critical else dice_count
+	var dmg   := _roll_dice(count, dice_sides)
 	if not ability.damage_ability.is_empty():
 		dmg += user.stats.get_modifier(ability.damage_ability)
+	# Enhancement bonus al daño
+	if user.data != null:
+		dmg += user.stats.get_weapon_enhancement_bonus(user.data)
 	return maxi(1, dmg)
+
+## Devuelve el WeaponData que el personaje usa para este ability.
+## Solo aplica a abilities de tipo ATTACK; devuelve null para conjuros y curaciones.
+func _resolve_weapon(user: BaseCharacter, ability: AbilityData) -> WeaponData:
+	if user.data == null:
+		return null
+	if ability.ability_type != AbilityData.AbilityType.ATTACK:
+		return null
+	var main_weapon := user.stats.get_equipped_weapon(user.data)
+	# Si el ability es de largo alcance y la mano principal es cuerpo a cuerpo,
+	# intentar el slot COMPLEMENTO (ej: arco secundario)
+	if ability.range_tiles > 2 and main_weapon != null and not main_weapon.is_ranged:
+		var comp := user.stats.get_complement_weapon(user.data)
+		if comp != null and comp.is_ranged:
+			return comp
+	return main_weapon
 
 func _roll_dice(count: int, sides: int) -> int:
 	if count <= 0 or sides <= 0:

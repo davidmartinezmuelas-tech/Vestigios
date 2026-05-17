@@ -4,6 +4,12 @@
 ##
 ## FUENTE: Documentación DND/Hechizos/CONJUROS.txt
 ## Los conjuros se registran con sus stats exactos del libro.
+##
+## CONJUROS ELIMINADOS (imposibles en videojuego sin DJ):
+## comunion, comunion_con_la_naturaleza, contactar_con_otro_plano, geas,
+## reencarnar, simulacro, clon, semiplano, puerta_arcana,
+## cambiar_de_forma, cautiverio, polimorfar_verdadero, portal,
+## proyeccion_astral, resurreccion_verdadera
 
 extends Node
 
@@ -1849,16 +1855,6 @@ func _register_nivel_5_auto() -> void:
 		attack_ability = "cha", save_ability = "none",
 		description = "CÍRCULO DE TELETRANSPORTACIÓN (conjuracion 5) — bardo, brujo, hechicero, mago",
 	})
-	_s("comunion", "COMUNIÓN", 5, School.ADIVINACION, CastingTime.MINUTO_1, ["V","S"], 0, "1 minuto", false, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "COMUNIÓN (adivinacion 5) — clérigo",
-	})
-	_s("comunion_con_la_naturaleza", "COMUNIÓN CON LA NATURALEZA", 5, School.ADIVINACION, CastingTime.MINUTO_1, ["V","S"], 0, "Instantáneo", false, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "COMUNIÓN CON LA NATURALEZA (adivinacion 5) — druida, explorador",
-	})
 	_s("conjurar_elemental", "CONJURAR ELEMENTAL", 5, School.CONJURACION, CastingTime.ACCION, ["V","S"], 59, "Concentración, hasta 10 minutos", true, {
 		ability_type = AbilityData.AbilityType.SPELL_ATTACK, target_type = AbilityData.TargetType.SINGLE_ENEMY,
 		attack_ability = "cha", save_ability = "none",
@@ -1887,12 +1883,6 @@ func _register_nivel_5_auto() -> void:
 		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
 		attack_ability = "cha", save_ability = "none",
 		description = "CONSAGRAR (abjuracion 5) — clérigo",
-	})
-	_s("contactar_con_otro_plano", "CONTACTAR CON OTRO PLANO", 5, School.ADIVINACION, CastingTime.MINUTO_1, ["V","S"], 0, "1 minuto", false, {
-		ability_type = AbilityData.AbilityType.SAVING_THROW, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "int",
-		damage_dice_count = 6, damage_dice_sides = 6, damage_type = "none",
-		description = "CONTACTAR CON OTRO PLANO (adivinacion 5) — brujo, mago",
 	})
 	_s("contagio", "CONTAGIO", 5, School.NECROMANCIA, CastingTime.ACCION, ["V","S"], 0, "7 días", false, {
 		ability_type = AbilityData.AbilityType.SAVING_THROW, target_type = AbilityData.TargetType.SINGLE_ENEMY,
@@ -1952,12 +1942,6 @@ func _register_nivel_5_auto() -> void:
 		attack_ability = "cha", save_ability = "int",
 		damage_dice_count = 8, damage_dice_sides = 6, damage_type = "none",
 		description = "ESTÁTICA SINÁPTICA (encantamiento 5) — bardo, brujo, hechicero, mago",
-	})
-	_s("geas", "GEAS", 5, School.ENCANTAMIENTO, CastingTime.MINUTO_1, ["V","S"], 59, "30 días", false, {
-		ability_type = AbilityData.AbilityType.SAVING_THROW, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "wis",
-		damage_dice_count = 5, damage_dice_sides = 10, damage_type = "none",
-		description = "GEAS (encantamiento 5) — bardo, clérigo, druida, mago, paladín",
 	})
 	_s("golpe_de_viento_acerado", "GOLPE DE VIENTO ACERADO", 5, School.CONJURACION, CastingTime.ACCION, ["V","S"], 30, "Instantáneo", false, {
 		ability_type = AbilityData.AbilityType.SPELL_ATTACK, target_type = AbilityData.TargetType.SINGLE_ENEMY,
@@ -2031,11 +2015,6 @@ func _register_nivel_5_auto() -> void:
 		ability_type = AbilityData.AbilityType.SAVING_THROW, target_type = AbilityData.TargetType.SINGLE_ENEMY,
 		attack_ability = "cha", save_ability = "wis",
 		description = "PRESENCIA REGIA DE YOLANDE (encantamiento 5) — bardo, mago",
-	})
-	_s("reencarnar", "REENCARNAR", 5, School.NECROMANCIA, CastingTime.HORA_1, ["V","S"], 0, "Instantáneo", false, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "REENCARNAR (necromancia 5) — druida",
 	})
 	_s("restablecimiento_mayor", "RESTABLECIMIENTO MAYOR", 5, School.ABJURACION, CastingTime.ACCION, ["V","S"], 0, "Instantáneo", false, {
 		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
@@ -2182,11 +2161,6 @@ func _register_nivel_6_auto() -> void:
 		damage_dice_count = 5, damage_dice_sides = 10, damage_type = "none",
 		description = "PROHIBICIÓN (abjuracion 6) — clérigo",
 	})
-	_s("puerta_arcana", "PUERTA ARCANA", 6, School.CONJURACION, CastingTime.ACCION, ["V","S"], 492, "Concentración, hasta 10 minutos", true, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "PUERTA ARCANA (conjuracion 6) — brujo, hechicero, mago",
-	})
 	_s("rayo_solar", "RAYO SOLAR", 6, School.EVOCACION, CastingTime.ACCION, ["V","S"], 0, "Concentración, hasta 1 minuto", true, {
 		ability_type = AbilityData.AbilityType.SAVING_THROW, target_type = AbilityData.TargetType.SINGLE_ENEMY,
 		attack_ability = "cha", save_ability = "con",
@@ -2315,11 +2289,6 @@ func _register_nivel_7_auto() -> void:
 		damage_dice_count = 10, damage_dice_sides = 10, damage_type = "none",
 		description = "SÍMBOLO (abjuracion 7) — bardo, clérigo, druida, mago",
 	})
-	_s("simulacro", "SIMULACRO", 7, School.ILUSION, CastingTime.ACCION, ["V","S"], 0, "Hasta que sea disipado", false, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "SIMULACRO (ilusion 7) — mago",
-	})
 	_s("teletransporte", "TELETRANSPORTE", 7, School.CONJURACION, CastingTime.ACCION, ["V","S"], 10, "Instantáneo", false, {
 		ability_type = AbilityData.AbilityType.SPELL_ATTACK, target_type = AbilityData.TargetType.SINGLE_ENEMY,
 		attack_ability = "cha", save_ability = "none",
@@ -2353,11 +2322,6 @@ func _register_nivel_8_auto() -> void:
 		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
 		attack_ability = "cha", save_ability = "none",
 		description = "CAMPO ANTIMAGIA (abjuracion 8) — clérigo, mago",
-	})
-	_s("clon", "CLON", 8, School.NECROMANCIA, CastingTime.HORA_1, ["V","S"], 0, "Instantáneo", false, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "CLON (necromancia 8) — mago",
 	})
 	_s("controlar_el_clima", "CONTROLAR EL CLIMA", 8, School.TRANSMUTACION, CastingTime.MINUTO_10, ["V","S"], 0, "Concentración, hasta 8 horas", true, {
 		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
@@ -2400,11 +2364,6 @@ func _register_nivel_8_auto() -> void:
 		attack_ability = "cha", save_ability = "none",
 		description = "OFUSCACIÓN (encantamiento 8) — bardo, brujo, druida, mago",
 	})
-	_s("semiplano", "SEMIPLANO", 8, School.CONJURACION, CastingTime.ACCION, ["V","S"], 59, "1 hora", false, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "SEMIPLANO (conjuracion 8) — brujo, hechicero, mago",
-	})
 	_s("telepatia", "TELEPATÍA", 8, School.ADIVINACION, CastingTime.ACCION, ["V","S"], 59, "Concentración, hasta 10 minutos", true, {
 		ability_type = AbilityData.AbilityType.SAVING_THROW, target_type = AbilityData.TargetType.SINGLE_ENEMY,
 		attack_ability = "cha", save_ability = "str",
@@ -2418,16 +2377,6 @@ func _register_nivel_8_auto() -> void:
 	})
 
 func _register_nivel_9_auto() -> void:
-	_s("cambiar_de_forma", "CAMBIAR DE FORMA", 9, School.TRANSMUTACION, CastingTime.ACCION, ["V","S"], 0, "Concentración, hasta 1 hora", true, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "CAMBIAR DE FORMA (transmutacion 9) — druida, mago",
-	})
-	_s("cautiverio", "CAUTIVERIO", 9, School.ABJURACION, CastingTime.MINUTO_1, ["V","S"], 30, "Hasta que sea disipado", false, {
-		ability_type = AbilityData.AbilityType.SAVING_THROW, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "wis",
-		description = "CAUTIVERIO (abjuracion 9) — brujo, mago",
-	})
 	_s("curar_en_masa", "CURAR EN MASA", 9, School.ABJURACION, CastingTime.ACCION, ["V","S"], 59, "Instantáneo", false, {
 		ability_type = AbilityData.AbilityType.HEAL, target_type = AbilityData.TargetType.SINGLE_ENEMY,
 		attack_ability = "cha", save_ability = "none",
@@ -2444,30 +2393,10 @@ func _register_nivel_9_auto() -> void:
 		attack_ability = "cha", save_ability = "none",
 		description = "PARAR EL TIEMPO (transmutacion 9) — hechicero, mago",
 	})
-	_s("polimorfar_verdadero", "POLIMORFAR VERDADERO", 9, School.TRANSMUTACION, CastingTime.ACCION, ["V","S"], 30, "Concentración, hasta 1 hora", true, {
-		ability_type = AbilityData.AbilityType.SAVING_THROW, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "wis",
-		description = "POLIMORFAR VERDADERO (transmutacion 9) — bardo, brujo, mago",
-	})
-	_s("portal", "PORTAL", 9, School.CONJURACION, CastingTime.ACCION, ["V","S"], 59, "Concentración, hasta 1 minuto", true, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "PORTAL (conjuracion 9) — brujo, clérigo, hechicero, mago",
-	})
 	_s("presciencia", "PRESCIENCIA", 9, School.ADIVINACION, CastingTime.MINUTO_1, ["V","S"], 0, "8 horas", false, {
 		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
 		attack_ability = "cha", save_ability = "none",
 		description = "PRESCIENCIA (adivinacion 9) — bardo, brujo, druida, mago",
-	})
-	_s("proyeccion_astral", "PROYECCIÓN ASTRAL", 9, School.NECROMANCIA, CastingTime.HORA_1, ["V","S"], 10, "Hasta que sea disipado", false, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "PROYECCIÓN ASTRAL (necromancia 9) — brujo, clérigo, mago",
-	})
-	_s("resurreccion_verdadera", "RESURRECCIÓN VERDADERA", 9, School.NECROMANCIA, CastingTime.HORA_1, ["V","S"], 0, "Instantáneo", false, {
-		ability_type = AbilityData.AbilityType.BUFF, target_type = AbilityData.TargetType.SINGLE_ENEMY,
-		attack_ability = "cha", save_ability = "none",
-		description = "RESURRECCIÓN VERDADERA (necromancia 9) — clérigo, druida",
 	})
 	_s("terror_abyecto", "TERROR ABYECTO", 9, School.ILUSION, CastingTime.ACCION, ["V","S"], 118, "Concentración, hasta 1 minuto", true, {
 		ability_type = AbilityData.AbilityType.SAVING_THROW, target_type = AbilityData.TargetType.SINGLE_ENEMY,

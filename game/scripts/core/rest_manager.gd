@@ -21,6 +21,24 @@ signal short_rest_completed(characters: Array[BaseCharacter])
 signal long_rest_completed(characters: Array[BaseCharacter])
 
 # ============================================================
+# SINTONÍA — cola de cambios pendientes para el descanso largo
+## Clave: character_id | Valor: Array[{item_id: String, attune: bool}]
+# ============================================================
+var _attunement_queue: Dictionary = {}
+
+func _ready() -> void:
+	EventBus.attunement_change_requested.connect(_on_attunement_requested)
+
+func _on_attunement_requested(character_id: String, item_id: String, attune: bool) -> void:
+	if not _attunement_queue.has(character_id):
+		_attunement_queue[character_id] = []
+	# Reemplazar solicitud previa para el mismo item (evita duplicados)
+	_attunement_queue[character_id] = (_attunement_queue[character_id] as Array).filter(
+		func(r: Dictionary) -> bool: return r["item_id"] != item_id
+	)
+	_attunement_queue[character_id].append({"item_id": item_id, "attune": attune})
+
+# ============================================================
 # DESCANSO CORTO
 # ============================================================
 
@@ -99,6 +117,9 @@ func long_rest(party: Array[BaseCharacter]) -> void:
 		# Limpiar condiciones que terminan con descanso largo
 		_clear_long_rest_conditions(character)
 
+		# Procesar sintonías solicitadas por el jugador
+		_process_pending_attunements(character)
+
 		# Persistir cambios en CharacterData
 		if character.data:
 			character.data.persistent_conditions = character.stats.get_active_conditions().filter(
@@ -122,3 +143,50 @@ func _clear_long_rest_conditions(character: BaseCharacter) -> void:
 	# Las condiciones de corta duración (veneno, etc.) dependen de su fuente;
 	# aquí solo limpiamos las que expresamente duran hasta descanso largo
 	character.stats.clear_post_combat_conditions()
+
+# ============================================================
+# SINTONÍA — procesamiento al completar descanso largo
+# ============================================================
+
+func _process_pending_attunements(character: BaseCharacter) -> void:
+	if character.data == null:
+		return
+	var char_id := character.data.character_id
+	var requests: Array = _attunement_queue.get(char_id, [])
+	for req in requests:
+		var item_id: String = req["item_id"]
+		var should_attune: bool = req["attune"]
+		if should_attune:
+			_try_attune(character, item_id)
+		else:
+			_do_unattune(character, item_id)
+	_attunement_queue.erase(char_id)
+
+func _try_attune(character: BaseCharacter, item_id: String) -> void:
+	if character.data == null:
+		return
+	var magic := MagicItemDatabase.get(item_id)
+	if magic == null or magic.attunement == MagicItemData.Attunement.NONE:
+		return
+	if not character.data.can_attune_item(magic):
+		EventBus.narrator_bark.emit(
+			"%s no puede sintonizar más objetos (máximo 3)." % character.get_display_name(), 3.0
+		)
+		return
+	character.data.attune(item_id)
+	# Si el objeto está equipado, aplicar su bonus ahora
+	character.stats.apply_equipment_bonus(item_id, character.data)
+	EventBus.item_attuned.emit(character.data.character_id, item_id)
+	EventBus.narrator_bark.emit(
+		"%s sintoniza: %s." % [character.get_display_name(), item_id], 2.5
+	)
+
+func _do_unattune(character: BaseCharacter, item_id: String) -> void:
+	if character.data == null:
+		return
+	character.stats.remove_equipment_bonus(item_id)
+	character.data.unattune(item_id)
+	EventBus.item_unattuned.emit(character.data.character_id, item_id)
+	EventBus.narrator_bark.emit(
+		"%s pierde la sintonía con: %s." % [character.get_display_name(), item_id], 2.5
+	)
