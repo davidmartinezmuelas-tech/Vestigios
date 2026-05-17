@@ -198,7 +198,7 @@ func _reg_bardo_subclasses() -> void:
 	## Los bardos que buscan verdades ocultas. No estudian en La Aguja — la buscan.
 	## El conocimiento que más importa es el que alguien decidió que no debías tener.
 	_s("colegio_ilvernis", "Colegio de Ilvernis", "bardo",
-		"La Aguja de Marfil no forma a sus bardos "" los atrae. " + "Quienes siguen esta tradición llegaron solos al conocimiento, buscando lo que se les negó.",
+		"La Aguja de Marfil no forma a sus bardos — los atrae. " + "Quienes siguen esta tradición llegaron solos al conocimiento, buscando lo que se les negó.",
 		[],
 		{
 			3: [
@@ -226,7 +226,7 @@ func _reg_bardo_subclasses() -> void:
 	## Los bardos viajeros de la tradición de Mirsel los Siete Mares. JOHANNES.
 	## Nacen en movimiento. Algunos trabajan para Calder Reth sin saberlo.
 	_s("colegio_mirsel", "Colegio de Mirsel", "bardo",
-		"Johannes creció en una caravana. Aprendió que moverse es sobrevivir "" " + "y que la música es lo único que no te pueden quitar cuando no tienes nada más.",
+		"Johannes creció en una caravana. Aprendió que moverse es sobrevivir — " + "y que la música es lo único que no te pueden quitar cuando no tienes nada más.",
 		[],
 		{
 			3: [
