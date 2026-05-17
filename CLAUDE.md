@@ -33,6 +33,29 @@ Los personajes tienen 8 direcciones de movimiento. Para reducir trabajo se dibuj
 
 ---
 
+## Sistema de movimiento
+
+### Controles
+- **Click to move** en todo el juego (no WASD para personajes)
+- **WASD / click derecho + arrastrar** → mover cámara isométrica
+- **Click en casilla** → mover personaje activo
+- **Click en enemigo** → atacar
+- **Click derecho** → menú contextual (acciones, habilidades)
+
+### Exploración (fuera de combate)
+- Click en terreno → el **protagonista** se mueve
+- El **grupo entero sigue en formación** automáticamente (`FormationManager`)
+- **Separar grupo (split party):** toggle que permite seleccionar y mover personajes individualmente — útil para sigilo, flanquear, activar mecanismos simultáneos
+- Al desactivar split party el grupo vuelve a seguir al protagonista
+
+### Combate
+- Turno por turno según **orden de iniciativa** (gestionado por `TurnManager`)
+- En tu turno: click en casilla para mover al personaje activo dentro de su velocidad
+- Las casillas alcanzables se iluminan (`CombatGrid`)
+- El protagonista no tiene turno especial — participa en el orden de iniciativa como los demás
+
+---
+
 ## Convenciones de código
 - `snake_case` para variables, funciones y nombres de archivo
 - `PascalCase` para clases y nodos en escena
@@ -117,7 +140,7 @@ game/
 | Momento | Personaje | Raza | Clase | Subclase | ID subclase |
 |---|---|---|---|---|---|
 | **Misión Fuerte** | **Lyth** | Harengon | Exploradora | Senda de Kolvek | `senda_kolvek` |
-| **Misión Fuerte** | **Naeren** | Humana | Hechicera | Herencia del Arquitecto | `herencia_arquitecto` |
+| **Misión Fuerte** | **Naeren** | Tiefling | Hechicera | Herencia del Arquitecto | `herencia_arquitecto` |
 | **Misión Fuerte** | **Johannes** | Semielfo (medio drow, no lo sabe) | Bardo | Colegio de Mirsel | `colegio_mirsel` |
 | **Misión Fuerte** | **Mía** | Humana | Monje | Discípulos de Sylvara Dusk | `discipulos_sylvara` |
 | **Misión Ilvernis — llegada** | **Vael** | Humano | Paladín | Juramento de la Vida | `juramento_vida` |
