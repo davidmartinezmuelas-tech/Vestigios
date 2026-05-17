@@ -162,12 +162,12 @@ func use_action_surge() -> bool:
 
 ## BARDO: Inspiración Bárdica
 ## Bonus: da a un aliado un dado de inspiración (d6-d12).
+## El tamaño del dado se codifica en el nombre de la condición para recuperarlo al consumir.
 func give_bardic_inspiration(target: BaseCharacter) -> bool:
 	if not stats.spend_class_resource("bardic_inspiration"):
 		return false
 	var die_sides := stats.get_bardic_die()
-	target.stats.add_condition("bardic_inspired_%s" % name, -1)
-	# Almacenamos el dado como tag en la condición; la UI lo mostrará
+	target.stats.add_condition("bardic_inspired_%d" % die_sides, -1)
 	EventBus.narrator_bark.emit(
 		"%s inspira a %s (d%d)." % [get_display_name(), target.get_display_name(), die_sides],
 		2.5
@@ -175,7 +175,8 @@ func give_bardic_inspiration(target: BaseCharacter) -> bool:
 	use_bonus_action()
 	return true
 
-## Consume la Inspiración Bárdica de un personaje y devuelve el resultado del dado.
+## Consume la Inspiración Bárdica y devuelve el resultado del dado correcto.
+## Devuelve 0 si el personaje no tiene Inspiración Bárdica.
 func consume_bardic_inspiration() -> int:
 	var condition_key := ""
 	for cond in stats.get_active_conditions():
@@ -184,8 +185,12 @@ func consume_bardic_inspiration() -> int:
 			break
 	if condition_key.is_empty():
 		return 0
+	# Extraer el tamaño del dado del nombre: "bardic_inspired_8" → 8
+	var die_sides := condition_key.trim_prefix("bardic_inspired_").to_int()
+	if die_sides <= 0:
+		die_sides = 6  # fallback seguro
 	stats.remove_condition(condition_key)
-	return RngManager.randi_range(1, 6)  # TODO: usar el dado correcto del inspirador
+	return RngManager.randi_range(1, die_sides)
 
 ## MONJE/KI: Usar punto de Energía Marcial.
 func use_ki(amount: int = 1) -> bool:
