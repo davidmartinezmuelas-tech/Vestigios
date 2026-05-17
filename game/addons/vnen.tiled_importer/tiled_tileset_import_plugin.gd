@@ -68,7 +68,7 @@ func get_import_options(preset):
 		},
 		{
 			"name": "image_flags",
-			"default_value": 0 if preset == PRESET_PIXEL_ART else Texture.FLAGS_DEFAULT,
+			"default_value": 0 if preset == PRESET_PIXEL_ART else 0,
 			"property_hint": PROPERTY_HINT_FLAGS,
 			"hint_string": "Mipmaps,Repeat,Filter,Anisotropic,sRGB,Mirrored Repeat"
 		},
@@ -118,4 +118,4 @@ func import(source_file, save_path, options, r_platform_variants, r_gen_files):
 			printerr("Invalid TileSet returned from post import script.")
 			return ERR_INVALID_DATA
 
-	return ResourceSaver.save("%s.%s" % [save_path, get_save_extension()], tileset)
+	return ResourceSaver.save(tileset, "%s.%s" % [save_path, get_save_extension()])
