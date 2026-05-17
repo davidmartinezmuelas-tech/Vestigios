@@ -13,6 +13,10 @@
 
 extends Node
 
+# Aliases para los enums de SpellData — usados en las funciones de registro automático
+const School = SpellData.School
+const CastingTime = SpellData.CastingTime
+
 # ============================================================
 # REGISTRO INDEXADO POR spell_id
 # ============================================================

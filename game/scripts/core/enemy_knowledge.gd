@@ -24,14 +24,14 @@ var _knowledge: Dictionary = {}
 func sight_enemy(enemy_id: String) -> void:
 	if not _knowledge.has(enemy_id):
 		_knowledge[enemy_id] = _empty_entry()
-	var entry := _knowledge[enemy_id]
+	var entry: Dictionary = _knowledge[enemy_id]
 	if entry["level"] < KnowledgeLevel.SIGHTED:
 		entry["level"] = KnowledgeLevel.SIGHTED
 
 ## Llama esto cuando un enemigo usa una habilidad en combate.
 func reveal_ability(enemy_id: String, ability_id: String, ability_name: String) -> void:
 	_ensure_entry(enemy_id)
-	var entry := _knowledge[enemy_id]
+	var entry: Dictionary = _knowledge[enemy_id]
 	if ability_id not in entry["known_abilities"]:
 		entry["known_abilities"][ability_id] = ability_name
 	if entry["level"] < KnowledgeLevel.FAMILIAR:
@@ -40,7 +40,7 @@ func reveal_ability(enemy_id: String, ability_id: String, ability_name: String) 
 ## Llama esto al completar una investigación (Library/Trophy Room).
 func study_enemy(enemy_id: String, resistances: Array[String], weaknesses: Array[String]) -> void:
 	_ensure_entry(enemy_id)
-	var entry := _knowledge[enemy_id]
+	var entry: Dictionary = _knowledge[enemy_id]
 	entry["known_resistances"] = resistances.duplicate()
 	entry["known_weaknesses"]  = weaknesses.duplicate()
 	entry["level"] = KnowledgeLevel.STUDIED

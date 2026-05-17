@@ -225,7 +225,7 @@ func is_in_bounds(cell: Vector2i) -> bool:
 func _bresenham_line(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 	var cells: Array[Vector2i] = []
 	var x := from.x;  var y := from.y
-	var dx := abs(to.x - from.x);  var dy := abs(to.y - from.y)
+	var dx: int = abs(to.x - from.x);  var dy: int = abs(to.y - from.y)
 	var sx := 1 if from.x < to.x else -1
 	var sy := 1 if from.y < to.y else -1
 	var err: int = dx - dy

@@ -154,14 +154,14 @@ func get_class_resource_max(resource_id: String) -> int:
 	return _class_resource_max.get(resource_id, 0)
 
 func spend_class_resource(resource_id: String, amount: int = 1) -> bool:
-	var current := _class_resources.get(resource_id, 0)
+	var current: int = _class_resources.get(resource_id, 0)
 	if current < amount:
 		return false
 	_class_resources[resource_id] = current - amount
 	return true
 
 func restore_class_resource(resource_id: String, amount: int = 9999) -> void:
-	var max_val := _class_resource_max.get(resource_id, 0)
+	var max_val: int = _class_resource_max.get(resource_id, 0)
 	_class_resources[resource_id] = mini(_class_resources.get(resource_id, 0) + amount, max_val)
 
 func restore_all_class_resources() -> void:
