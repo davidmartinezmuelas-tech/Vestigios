@@ -1773,8 +1773,7 @@ func load_image(rel_path, source_path, options):
 		image = ResourceLoader.load(total_path, "ImageTexture")
 
 		if image != null:
-
-
+			pass  # imagen cargada correctamente
 
 	return image
 
@@ -1890,7 +1889,7 @@ func shape_from_object(object):
 
 	if "polygon" in object or "polyline" in object:
 
-		var vertices = PoolVector2Array()
+		var vertices = PackedVector2Array()
 
 
 
@@ -1952,7 +1951,7 @@ func shape_from_object(object):
 
 				segments.push_back(vertices[0])
 
-				shape.segments = PoolVector2Array(segments)
+				shape.segments = PackedVector2Array(segments)
 
 
 
@@ -2016,7 +2015,7 @@ func shape_from_object(object):
 
 			# Those types only accept polygons, so make one from the rectangle
 
-			var vertices = PoolVector2Array([
+			var vertices = PackedVector2Array([
 
 					Vector2(0, 0),
 
@@ -2138,7 +2137,7 @@ func read_base64_layer_data(layer_data):
 
 
 
-# Reads a PoolByteArray and returns the layer array
+# Reads a PackedByteArray and returns the layer array
 
 # Used for base64 encoded and compressed layers
 
