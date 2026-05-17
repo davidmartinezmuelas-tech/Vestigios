@@ -30,3 +30,8 @@ enum Attunement {
 
 ## Si requiere que se porte/lleve para funcionar
 @export var requires_wearing: bool = true
+
+## Stat de _temp_modifiers que modifica este objeto cuando está equipado.
+## Vacío = inferido por item_type (ARMOR/SHIELD → "ac", WEAPON → "" gestionado en CombatResolver).
+## Valores posibles: "str", "dex", "con", "int", "wis", "cha", "ac", "speed", ""
+@export var affected_stat: String = ""

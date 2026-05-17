@@ -218,6 +218,9 @@ func initialize(data: CharacterData) -> void:
 	# Si FUE < requisito: velocidad -10ft (penalización de movimiento)
 	_apply_armor_str_penalty(data)
 
+	# Aplicar bonificadores de objetos mágicos equipados
+	_apply_all_equipment_bonuses(data)
+
 # ============================================================
 # MODIFICADORES DE CARACTERÍSTICA (estático, útil desde cualquier sitio)
 # ============================================================
@@ -380,9 +383,9 @@ func _get_score(ability: String) -> int:
 ## Comprueba si la armadura equipada requiere más FUE de la que tiene el personaje.
 ## Si es así, aplica -10ft de velocidad (D&D 2024).
 func _apply_armor_str_penalty(data: CharacterData) -> void:
-	if data.equipped_armor_id.is_empty():
+	if data.slot_armadura.is_empty():
 		return
-	var armor := ItemDatabase.get_armor(data.equipped_armor_id)
+	var armor := ItemDatabase.get_armor(data.slot_armadura)
 	if armor == null:
 		return
 	var required_str := armor.requires_strength
@@ -391,9 +394,102 @@ func _apply_armor_str_penalty(data: CharacterData) -> void:
 
 ## Devuelve true si el personaje cumple el requisito de FUE para su armadura equipada.
 func meets_armor_str_requirement(data: CharacterData) -> bool:
-	if data.equipped_armor_id.is_empty():
+	if data.slot_armadura.is_empty():
 		return true
-	var armor := ItemDatabase.get_armor(data.equipped_armor_id)
+	var armor := ItemDatabase.get_armor(data.slot_armadura)
 	if armor == null:
 		return true
 	return data.strength >= armor.requires_strength
+
+# ============================================================
+# EQUIPAMIENTO — bonuses mágicos
+# ============================================================
+
+## Bonificadores actuales aplicados por objetos mágicos equipados.
+## Clave: item_id | Valor: {key: String, value: int}
+var _equipment_bonuses: Dictionary = {}
+
+## Recorre todos los slots y aplica los bonificadores mágicos a _temp_modifiers.
+func _apply_all_equipment_bonuses(data: CharacterData) -> void:
+	_equipment_bonuses.clear()
+	for slot in EquipmentSlot.Slot.values():
+		var item_id := data.get_slot(slot as EquipmentSlot.Slot)
+		if not item_id.is_empty():
+			_try_apply_magic_bonus(item_id, data)
+
+## Aplica el bonus de enhancement_bonus de un objeto mágico si procede.
+func _try_apply_magic_bonus(item_id: String, data: CharacterData) -> void:
+	var magic := MagicItemDatabase.get(item_id)
+	if magic == null or magic.enhancement_bonus == 0:
+		return
+	if magic.attunement != MagicItemData.Attunement.NONE and not data.is_attuned(item_id):
+		return
+	var key := _magic_item_stat_key(magic)
+	if key.is_empty() or not _temp_modifiers.has(key):
+		return
+	_temp_modifiers[key] += magic.enhancement_bonus
+	_equipment_bonuses[item_id] = {"key": key, "value": magic.enhancement_bonus}
+
+## Determina a qué stat de _temp_modifiers aplica un objeto mágico.
+func _magic_item_stat_key(magic: MagicItemData) -> String:
+	if not magic.affected_stat.is_empty():
+		return magic.affected_stat
+	match magic.item_type:
+		ItemData.ItemType.ARMOR, ItemData.ItemType.SHIELD:
+			return "ac"
+		_:
+			return ""
+
+## Aplica el bonus de un objeto recién equipado sin reinicializar todo (para equip en runtime).
+func apply_equipment_bonus(item_id: String, data: CharacterData) -> void:
+	if _equipment_bonuses.has(item_id):
+		return
+	_try_apply_magic_bonus(item_id, data)
+
+## Elimina el bonus de un objeto desequipado.
+func remove_equipment_bonus(item_id: String) -> void:
+	if not _equipment_bonuses.has(item_id):
+		return
+	var entry: Dictionary = _equipment_bonuses[item_id]
+	var key: String = entry["key"]
+	var value: int  = entry["value"]
+	if _temp_modifiers.has(key):
+		_temp_modifiers[key] -= value
+	_equipment_bonuses.erase(item_id)
+
+# ============================================================
+# EQUIPAMIENTO — acceso a armas para CombatResolver
+# ============================================================
+
+## Devuelve el WeaponData del arma en mano principal, o null.
+func get_equipped_weapon(data: CharacterData) -> WeaponData:
+	var id := data.slot_mano_principal
+	if id.is_empty():
+		return null
+	return ItemDatabase.get_weapon(id)
+
+## Devuelve el WeaponData del arma en mano secundaria, o null.
+func get_offhand_weapon(data: CharacterData) -> WeaponData:
+	var id := data.slot_mano_secundaria
+	if id.is_empty():
+		return null
+	return ItemDatabase.get_weapon(id)
+
+## Devuelve el WeaponData del slot COMPLEMENTO (ej: arco secundario), o null.
+func get_complement_weapon(data: CharacterData) -> WeaponData:
+	var id := data.slot_complemento
+	if id.is_empty():
+		return null
+	return ItemDatabase.get_weapon(id)
+
+## Devuelve el enhancement_bonus del arma en mano principal (0 si no mágica o no sintonizada).
+func get_weapon_enhancement_bonus(data: CharacterData) -> int:
+	var id := data.slot_mano_principal
+	if id.is_empty():
+		return 0
+	var magic := MagicItemDatabase.get(id)
+	if magic == null:
+		return 0
+	if magic.attunement != MagicItemData.Attunement.NONE and not data.is_attuned(id):
+		return 0
+	return magic.enhancement_bonus

@@ -45,9 +45,27 @@ signal loot_found(items: Array)
 # ECONOMÍA / INVENTARIO
 # ============================================================
 signal gold_changed(amount: int, total: int)
-signal item_added(item: Dictionary)
+signal item_added(item: Dictionary)  ## Deprecado — usar camp_chest_changed
 signal item_used(item: Dictionary, target: BaseCharacter)
 signal item_removed(item: Dictionary)
+
+# ============================================================
+# EQUIPAMIENTO
+# ============================================================
+## Un personaje equipó un objeto en un slot (slot como int del enum EquipmentSlot.Slot).
+signal item_equipped(character_id: String, item_id: String, slot: int)
+## Un personaje desequipó un objeto de un slot.
+signal item_unequipped(character_id: String, item_id: String, slot: int)
+## Un personaje pasó un objeto a otro.
+signal item_passed(from_character_id: String, to_character_id: String, item_id: String)
+## El cofre del campamento cambió. items = lista completa actual de item_ids.
+signal camp_chest_changed(items: Array)
+## Un personaje sintonizó un objeto (al completar descanso largo).
+signal item_attuned(character_id: String, item_id: String)
+## Un personaje perdió la sintonía con un objeto.
+signal item_unattuned(character_id: String, item_id: String)
+## Solicitud de cambio de sintonía pendiente para el próximo descanso largo.
+signal attunement_change_requested(character_id: String, item_id: String, attune: bool)
 
 # ============================================================
 # NARRACIÓN

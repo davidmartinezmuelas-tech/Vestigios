@@ -75,6 +75,16 @@ const STARTING_GOLD: int = 500
 const MAX_INVENTORY_SLOTS: int = 12
 
 # ============================================================
+# EQUIPAMIENTO
+# ============================================================
+## Máximo de objetos sintonizados por personaje (D&D 2024)
+const MAX_ATTUNED_ITEMS: int = 3
+## Máximo de objetos en el inventario personal de un personaje
+const MAX_PERSONAL_INVENTORY: int = 20
+## Coste en Acciones de pasar un objeto a un compañero en combate
+const ITEM_PASS_ACTION_COST: int = 1
+
+# ============================================================
 # GUARDADO
 # ============================================================
 const SAVE_SLOTS: int = 3

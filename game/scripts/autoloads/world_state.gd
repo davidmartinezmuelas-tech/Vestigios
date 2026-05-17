@@ -30,7 +30,10 @@ var _active_party: Array[String] = []
 # RECURSOS
 # ============================================================
 var gold: int = 0
-var inventory: Array[Dictionary] = []
+
+## Cofre compartido del campamento. Almacena item_ids.
+## La data real de cada objeto vive en ItemDatabase / MagicItemDatabase.
+var camp_chest: Array[String] = []
 
 # ============================================================
 # PROGRESO DE MUNDO
@@ -177,9 +180,49 @@ func spend_gold(amount: int) -> bool:
 	EventBus.gold_changed.emit(-amount, gold)
 	return true
 
+# ============================================================
+# API PÚBLICA — COFRE DEL CAMPAMENTO
+# ============================================================
+
+func add_to_camp_chest(item_id: String) -> void:
+	camp_chest.append(item_id)
+	EventBus.camp_chest_changed.emit(camp_chest.duplicate())
+
+func remove_from_camp_chest(item_id: String) -> bool:
+	var idx := camp_chest.find(item_id)
+	if idx == -1:
+		return false
+	camp_chest.remove_at(idx)
+	EventBus.camp_chest_changed.emit(camp_chest.duplicate())
+	return true
+
+func camp_chest_has(item_id: String) -> bool:
+	return item_id in camp_chest
+
+func get_camp_chest() -> Array[String]:
+	return camp_chest.duplicate()
+
+## Mueve un objeto del cofre al inventario personal de un personaje.
+func take_from_camp_chest(item_id: String, char_data: CharacterData) -> bool:
+	if not remove_from_camp_chest(item_id):
+		return false
+	if not char_data.inventory_add(item_id):
+		add_to_camp_chest(item_id)  # rollback
+		return false
+	return true
+
+## Mueve un objeto del inventario personal al cofre.
+func deposit_to_camp_chest(item_id: String, char_data: CharacterData) -> bool:
+	if not char_data.inventory_remove(item_id):
+		return false
+	add_to_camp_chest(item_id)
+	return true
+
+## Compatibilidad hacia atrás con el antiguo add_item(Dictionary).
 func add_item(item: Dictionary) -> void:
-	inventory.append(item)
-	EventBus.item_added.emit(item)
+	var id: String = item.get("item_id", "")
+	if not id.is_empty():
+		add_to_camp_chest(id)
 
 # ============================================================
 # API PÚBLICA — FLAGS DE LORE
@@ -230,18 +273,18 @@ func get_pending_combat() -> Dictionary:
 
 func to_dict() -> Dictionary:
 	return {
-		"roster":           _roster,
-		"protagonist_id":   protagonist_id,
-		"active_party":     _active_party,
-		"gold":             gold,
-		"inventory":        inventory,
+		"roster":             _roster,
+		"protagonist_id":     protagonist_id,
+		"active_party":       _active_party,
+		"gold":               gold,
+		"camp_chest":         camp_chest,
 		"completed_dungeons": completed_dungeons,
-		"cleared_rooms":    cleared_rooms,
-		"journal_entries":  journal_entries,
-		"lore_flags":       lore_flags,
-		"level_manager":    LevelManager.to_dict(),
-		"bastion_manager":  BastionManager.to_dict(),
-		"enemy_knowledge":  enemy_knowledge.to_dict(),
+		"cleared_rooms":      cleared_rooms,
+		"journal_entries":    journal_entries,
+		"lore_flags":         lore_flags,
+		"level_manager":      LevelManager.to_dict(),
+		"bastion_manager":    BastionManager.to_dict(),
+		"enemy_knowledge":    enemy_knowledge.to_dict(),
 	}
 
 func from_dict(data: Dictionary) -> void:
@@ -249,7 +292,14 @@ func from_dict(data: Dictionary) -> void:
 	protagonist_id = data.get("protagonist_id", "")
 	_active_party  = data.get("active_party", [])
 	gold           = data.get("gold", 0)
-	inventory      = data.get("inventory", [])
+	# "camp_chest" nuevo; "inventory" es la clave antigua — compatibilidad hacia atrás
+	var chest_raw: Array = data.get("camp_chest", data.get("inventory", []))
+	camp_chest = []
+	for entry in chest_raw:
+		if entry is String:
+			camp_chest.append(entry)
+		elif entry is Dictionary and entry.has("item_id"):
+			camp_chest.append(str(entry["item_id"]))
 	completed_dungeons = data.get("completed_dungeons", [])
 	cleared_rooms  = data.get("cleared_rooms", [])
 	journal_entries = data.get("journal_entries", [])
