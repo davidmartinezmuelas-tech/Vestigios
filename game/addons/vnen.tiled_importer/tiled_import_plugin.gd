@@ -59,7 +59,8 @@ func _get_preset_name(preset):
 		PRESET_DEFAULT: return "Default"
 		PRESET_PIXEL_ART: return "Pixel Art"
 
-func _get_import_options(preset):
+func _get_import_options(path: String, preset_index: int) -> Array[Dictionary]:
+	var preset := preset_index
 	return [
 		{
 			"name": "custom_properties",
@@ -104,7 +105,7 @@ func _get_import_options(preset):
 		}
 	]
 
-func _get_option_visibility(option, options):
+func _get_option_visibility(path: String, option_name: StringName, options: Dictionary) -> bool:
 	return true
 
 func _import(source_file, save_path, options, r_platform_variants, r_gen_files):
@@ -136,4 +137,4 @@ func _import(source_file, save_path, options, r_platform_variants, r_gen_files):
 
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(scene)
-	return ResourceSaver.save(packed_scene, "%s.%s" % [save_path, get_save_extension()])
+	return ResourceSaver.save(packed_scene, "%s.%s" % [save_path, _get_save_extension()])
