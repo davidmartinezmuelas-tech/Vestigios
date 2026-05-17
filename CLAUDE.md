@@ -4,7 +4,7 @@
 ---
 
 ## Stack
-- **Motor:** Godot 4.3 con GDScript tipado estricto
+- **Motor:** Godot 4.6.2 con GDScript tipado estricto
 - **Reglas:** D&D 2024 (documentación en `Documentación DND/`)
 - **Arquitectura:** EventBus + StateMachine + Resource-driven data
 - **Proyecto Godot:** en `game/` dentro del repositorio
@@ -63,6 +63,61 @@ Los personajes tienen 8 direcciones de movimiento. Para reducir trabajo se dibuj
 - Tipos explícitos en todas las variables: `var hp: int = 0`
 - Señales nombradas en pasado: `damage_dealt`, no `deal_damage`
 - Funciones privadas con prefijo `_`: `func _calculate_damage()`
+
+---
+
+## Reglas GDScript — compatibilidad Godot 4.6 (aprendidas en depuración)
+
+Estas reglas evitan los errores que costaron horas de debugging al portar a 4.6:
+
+### Encoding de archivos
+- Todos los `.gd` deben ser **UTF-8 sin BOM**. Un BOM (byte `EF BB BF` al inicio) causa "Parse error" inmediato.
+- Usar solo **comillas ASCII** `"` (0x22) como delimitadores de string. Las comillas tipográficas `"` `"` (U+201C/U+201D) NO funcionan como delimitadores en GDScript.
+- No usar `""` (doble comilla) como sustituto de em-dash dentro de strings — rompe el parser. Usar `—` (U+2014) directamente.
+
+### Continuación de strings multilínea
+- **NO usar `\` al final de línea** para continuar strings en Godot 4.6 con archivos CRLF. El parser falla silenciosamente.
+- Usar **`+` explícito** para concatenar strings en múltiples líneas:
+  ```gdscript
+  # MAL (falla con CRLF):
+  var x = "parte uno " \
+      "parte dos"
+  # BIEN:
+  var x = "parte uno " + \
+      "parte dos"
+  # O mejor aún, en una sola línea si es corto.
+  ```
+
+### No sobreescribir métodos nativos de Object
+- **No nombrar funciones `get()`** en clases que extienden Node/Resource. En Godot 4.6 es error sobreescribir `Object.get()`. Usar `find()`, `get_by_id()` u otro nombre.
+- **`Object.get(key, default)`** ya no acepta 2 argumentos. Reemplazar con:
+  ```gdscript
+  # MAL: var x := my_dict.get("key", 0)   ← Variant, warning-as-error
+  # BIEN:
+  var x: int = my_dict.get("key", 0)
+  # O si es Object.get():
+  var raw = my_obj.get("key")
+  var x: int = raw if raw != null else 0
+  ```
+
+### Inferencia de tipos estricta
+- Godot 4.6 trata como error el warning `The variable type is being inferred from a Variant value`. Siempre declarar tipo explícito cuando la expresión devuelve Variant:
+  ```gdscript
+  # MAL: var score := _get_score(ability)  ← puede inferir Variant
+  # BIEN: var score: int = _get_score(ability)
+  ```
+- Especialmente peligroso con: `Dictionary.get()`, indexación de diccionarios `dict[key]`, y funciones que retornan `Variant`.
+
+### class_name y autoloads
+- **No usar el mismo nombre** para `class_name` y un autoload registrado en project.godot. Causa `Class hides an autoload singleton`. Si el script está registrado como autoload, no necesita `class_name`.
+
+### Enums de clases internas
+- Para usar enums de otra clase sin prefijo, declarar alias constante:
+  ```gdscript
+  # En spell_database.gd para usar School.X en lugar de SpellData.School.X:
+  const School = SpellData.School
+  const CastingTime = SpellData.CastingTime
+  ```
 
 ---
 
