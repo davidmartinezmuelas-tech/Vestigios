@@ -27,39 +27,39 @@ enum { PRESET_DEFAULT, PRESET_PIXEL_ART }
 
 const TiledMapReader = preload("tiled_map_reader.gd")
 
-func get_importer_name():
+func _get_importer_name():
 	return "vnen.tiled_importer"
 
-func get_visible_name():
+func _get_visible_name():
 	return "Scene from Tiled"
 
-func get_recognized_extensions():
+func _get_recognized_extensions():
 	if ProjectSettings.get_setting("tiled_importer/enable_json_format"):
 		return ["json", "tmx"]
 	else:
 		return ["tmx"]
 
-func get_save_extension():
+func _get_save_extension():
 	return "scn"
 
-func get_priority():
+func _get_priority():
 	return 1
 
-func get_import_order():
+func _get_import_order():
 	return 101
 
-func get_resource_type():
+func _get_resource_type():
 	return "PackedScene"
 
-func get_preset_count():
+func _get_preset_count():
 	return 2
 
-func get_preset_name(preset):
+func _get_preset_name(preset):
 	match preset:
 		PRESET_DEFAULT: return "Default"
 		PRESET_PIXEL_ART: return "Pixel Art"
 
-func get_import_options(preset):
+func _get_import_options(preset):
 	return [
 		{
 			"name": "custom_properties",
@@ -104,10 +104,10 @@ func get_import_options(preset):
 		}
 	]
 
-func get_option_visibility(option, options):
+func _get_option_visibility(option, options):
 	return true
 
-func import(source_file, save_path, options, r_platform_variants, r_gen_files):
+func _import(source_file, save_path, options, r_platform_variants, r_gen_files):
 	var map_reader = TiledMapReader.new()
 
 	var scene = map_reader.build(source_file, options)

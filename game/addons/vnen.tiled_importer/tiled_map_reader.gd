@@ -182,9 +182,9 @@ func build(source_path, options):
 
 	var cell_size = Vector2(int(map.tilewidth), int(map.tileheight))
 
-	var map_mode = TileMap.MODE_SQUARE
+	var map_mode = 0
 
-	var map_offset = TileMap.HALF_OFFSET_DISABLED
+	var map_offset = 0
 
 	var map_pos_offset = Vector2()
 
@@ -198,7 +198,7 @@ func build(source_path, options):
 
 			"isometric":
 
-				map_mode = TileMap.MODE_ISOMETRIC
+				map_mode = 1
 
 			"staggered":
 
@@ -208,7 +208,7 @@ func build(source_path, options):
 
 					"x":
 
-						map_offset = TileMap.HALF_OFFSET_Y
+						map_offset = 1
 
 						cell_size.x /= 2.0
 
@@ -220,7 +220,7 @@ func build(source_path, options):
 
 					"y":
 
-						map_offset = TileMap.HALF_OFFSET_X
+						map_offset = 2
 
 						cell_size.y /= 2.0
 
@@ -242,7 +242,7 @@ func build(source_path, options):
 
 					"x":
 
-						map_offset = TileMap.HALF_OFFSET_Y
+						map_offset = 1
 
 						cell_size.x = int((cell_size.x + map.hexsidelength) / 2)
 
@@ -254,7 +254,7 @@ func build(source_path, options):
 
 					"y":
 
-						map_offset = TileMap.HALF_OFFSET_X
+						map_offset = 2
 
 						cell_size.y = int((cell_size.y + map.hexsidelength) / 2)
 
@@ -566,7 +566,7 @@ func make_layer(layer, parent, root, data):
 
 				var cell_y = cell_offset.y + chunk.y + int(count / chunk.width)
 
-				tilemap.set_cell(cell_x, cell_y, gid, flipped_h, flipped_v, flipped_d)
+				tilemap.set_cell(cell_x, cell_y, gid, flipped_h, flipped_v)
 
 
 
@@ -630,7 +630,7 @@ func make_layer(layer, parent, root, data):
 
 
 
-		var sprite = Sprite.new()
+		var sprite = Sprite2D.new()
 
 		sprite.set_name(str(layer.name))
 
@@ -728,7 +728,7 @@ func make_layer(layer, parent, root, data):
 
 			if "point" in object and object.point:
 
-				var point = Position2D.new()
+				var point = Marker2D.new()
 
 				if not "x" in object or not "y" in object:
 
@@ -996,7 +996,7 @@ func make_layer(layer, parent, root, data):
 
 				var has_collisions = collisions > 0 && object.has("type") && object.type != "sprite"
 
-				var sprite = Sprite.new()
+				var sprite = Sprite2D.new()
 
 				var pos = Vector2()
 
@@ -1058,7 +1058,7 @@ func make_layer(layer, parent, root, data):
 
 						"area": obj_root = Area2D.new()
 
-						"kinematic": obj_root = KinematicBody2D.new()
+						"kinematic": obj_root = CharacterBody2D.new()
 
 						"rigid": obj_root = RigidBody2D.new()
 
@@ -1280,7 +1280,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 
 		if "source" in ts:
 
-			if not "firstgid" in tileset or not str(tileset.firstgid).is_valid_integer():
+			if not "firstgid" in tileset or not str(tileset.firstgid).is_valid_int():
 
 				print_error("Missing or invalid firstgid tileset property.")
 
@@ -1356,13 +1356,13 @@ func build_tileset_for_scene(tilesets, source_path, options):
 
 
 
-		var spacing = int(ts.spacing) if "spacing" in ts and str(ts.spacing).is_valid_integer() else 0
+		var spacing = int(ts.spacing) if "spacing" in ts and str(ts.spacing).is_valid_int() else 0
 
-		var margin = int(ts.margin) if "margin" in ts and str(ts.margin).is_valid_integer() else 0
+		var margin = int(ts.margin) if "margin" in ts and str(ts.margin).is_valid_int() else 0
 
 		var firstgid = int(ts.firstgid)
 
-		var columns = int(ts.columns) if "columns" in ts and str(ts.columns).is_valid_integer() else -1
+		var columns = int(ts.columns) if "columns" in ts and str(ts.columns).is_valid_int() else -1
 
 
 
@@ -1809,7 +1809,7 @@ func read_file(path):
 
 	if file == null:
 
-		return err
+		return ERR_FILE_NOT_FOUND
 
 
 
@@ -1857,7 +1857,7 @@ func read_tileset_file(path):
 
 	if file == null:
 
-		return err
+		return ERR_FILE_NOT_FOUND
 
 
 
@@ -2113,7 +2113,7 @@ func decompress_layer_data(layer_data, compression, map_size):
 
 
 
-	var compression_type = File.COMPRESSION_DEFLATE if compression == "zlib" else File.COMPRESSION_GZIP
+	var compression_type = FileAccess.COMPRESSION_DEFLATE if compression == "zlib" else FileAccess.COMPRESSION_GZIP
 
 	var expected_size = int(map_size.x) * int(map_size.y) * 4
 
@@ -2287,13 +2287,13 @@ func validate_map(map):
 
 		return ERR_INVALID_DATA
 
-	elif not "tileheight" in map or not str(map.tileheight).is_valid_integer():
+	elif not "tileheight" in map or not str(map.tileheight).is_valid_int():
 
 		print_error("Missing or invalid tileheight property.")
 
 		return ERR_INVALID_DATA
 
-	elif not "tilewidth" in map or not str(map.tilewidth).is_valid_integer():
+	elif not "tilewidth" in map or not str(map.tilewidth).is_valid_int():
 
 		print_error("Missing or invalid tilewidth property.")
 
@@ -2335,19 +2335,19 @@ func validate_map(map):
 
 func validate_tileset(tileset):
 
-	if not "firstgid" in tileset or not str(tileset.firstgid).is_valid_integer():
+	if not "firstgid" in tileset or not str(tileset.firstgid).is_valid_int():
 
 		print_error("Missing or invalid firstgid tileset property.")
 
 		return ERR_INVALID_DATA
 
-	elif not "tilewidth" in tileset or not str(tileset.tilewidth).is_valid_integer():
+	elif not "tilewidth" in tileset or not str(tileset.tilewidth).is_valid_int():
 
 		print_error("Missing or invalid tilewidth tileset property.")
 
 		return ERR_INVALID_DATA
 
-	elif not "tileheight" in tileset or not str(tileset.tileheight).is_valid_integer():
+	elif not "tileheight" in tileset or not str(tileset.tileheight).is_valid_int():
 
 		print_error("Missing or invalid tileheight tileset property.")
 
@@ -2363,13 +2363,13 @@ func validate_tileset(tileset):
 
 				return ERR_INVALID_DATA
 
-			elif not "imagewidth" in tileset.tiles[tile] or not str(tileset.tiles[tile].imagewidth).is_valid_integer():
+			elif not "imagewidth" in tileset.tiles[tile] or not str(tileset.tiles[tile].imagewidth).is_valid_int():
 
 				print_error("Missing or invalid imagewidth tileset property 1.")
 
 				return ERR_INVALID_DATA
 
-			elif not "imageheight" in tileset.tiles[tile] or not str(tileset.tiles[tile].imageheight).is_valid_integer():
+			elif not "imageheight" in tileset.tiles[tile] or not str(tileset.tiles[tile].imageheight).is_valid_int():
 
 				print_error("Missing or invalid imageheight tileset property.")
 
@@ -2377,13 +2377,13 @@ func validate_tileset(tileset):
 
 	else:
 
-		if not "imagewidth" in tileset or not str(tileset.imagewidth).is_valid_integer():
+		if not "imagewidth" in tileset or not str(tileset.imagewidth).is_valid_int():
 
 			print_error("Missing or invalid imagewidth tileset property 2.")
 
 			return ERR_INVALID_DATA
 
-		elif not "imageheight" in tileset or not str(tileset.imageheight).is_valid_integer():
+		elif not "imageheight" in tileset or not str(tileset.imageheight).is_valid_int():
 
 			print_error("Missing or invalid imageheight tileset property.")
 
@@ -2415,13 +2415,13 @@ func validate_layer(layer):
 
 		"tilelayer":
 
-			if not "height" in layer or not str(layer.height).is_valid_integer():
+			if not "height" in layer or not str(layer.height).is_valid_int():
 
 				print_error("Missing or invalid layer height property.")
 
 				return ERR_INVALID_DATA
 
-			elif not "width" in layer or not str(layer.width).is_valid_integer():
+			elif not "width" in layer or not str(layer.width).is_valid_int():
 
 				print_error("Missing or invalid layer width property.")
 
@@ -2505,25 +2505,25 @@ func validate_chunk(chunk):
 
 		return ERR_INVALID_DATA
 
-	elif not "height" in chunk or not str(chunk.height).is_valid_integer():
+	elif not "height" in chunk or not str(chunk.height).is_valid_int():
 
 		print_error("Missing or invalid height chunk property.")
 
 		return ERR_INVALID_DATA
 
-	elif not "width" in chunk or not str(chunk.width).is_valid_integer():
+	elif not "width" in chunk or not str(chunk.width).is_valid_int():
 
 		print_error("Missing or invalid width chunk property.")
 
 		return ERR_INVALID_DATA
 
-	elif not "x" in chunk or not str(chunk.x).is_valid_integer():
+	elif not "x" in chunk or not str(chunk.x).is_valid_int():
 
 		print_error("Missing or invalid x chunk property.")
 
 		return ERR_INVALID_DATA
 
-	elif not "y" in chunk or not str(chunk.y).is_valid_integer():
+	elif not "y" in chunk or not str(chunk.y).is_valid_int():
 
 		print_error("Missing or invalid y chunk property.")
 
@@ -2743,7 +2743,7 @@ static func is_same_file(path1, path2):
 
 	if file1 == null:
 
-		return err
+		return ERR_FILE_NOT_FOUND
 
 
 
@@ -2751,7 +2751,7 @@ static func is_same_file(path1, path2):
 
 	if file2 == null:
 
-		return err
+		return ERR_FILE_NOT_FOUND
 
 
 
