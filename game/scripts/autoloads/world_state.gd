@@ -27,6 +27,33 @@ var protagonist_id: String = ""
 var _active_party: Array[String] = []
 
 # ============================================================
+# SPLIT PARTY — exploración
+# ============================================================
+## Si true: los personajes se mueven individualmente (Tab para alternar).
+var party_split: bool = false
+## ID del personaje actualmente seleccionado en modo split.
+## "" = protagonista (líder por defecto).
+var selected_exploration_character_id: String = ""
+
+## Devuelve el ID del personaje que responde a clicks en exploración.
+func get_selected_explorer() -> String:
+	if selected_exploration_character_id.is_empty():
+		return protagonist_id
+	return selected_exploration_character_id
+
+## Selecciona un personaje individual en split mode.
+func select_explorer(character_id: String) -> void:
+	selected_exploration_character_id = character_id
+	EventBus.explorer_selected.emit(character_id)
+
+## Alterna entre modo grupo y modo split. En reagrupación limpia la selección.
+func toggle_party_split() -> void:
+	party_split = !party_split
+	if not party_split:
+		selected_exploration_character_id = ""
+	EventBus.party_split_changed.emit(party_split)
+
+# ============================================================
 # RECURSOS
 # ============================================================
 var gold: int = 0

@@ -68,6 +68,18 @@ signal item_unattuned(character_id: String, item_id: String)
 signal attunement_change_requested(character_id: String, item_id: String, attune: bool)
 
 # ============================================================
+# EXPLORACIÓN — SPLIT PARTY
+# ============================================================
+## Tab pulsado: alterna modo grupo (false) / modo split (true).
+signal party_split_changed(is_split: bool)
+## Un personaje fue seleccionado individualmente en modo split.
+signal explorer_selected(character_id: String)
+## Orden de movimiento: character_id debe moverse a world_pos.
+signal move_to_requested(character_id: String, world_pos: Vector2)
+## Todos los personajes han reagrupado alrededor del líder.
+signal party_regrouped
+
+# ============================================================
 # NARRACIÓN
 # ============================================================
 signal narrator_bark(text: String, duration: float)
