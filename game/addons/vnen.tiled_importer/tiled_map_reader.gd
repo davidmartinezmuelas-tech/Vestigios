@@ -2583,7 +2583,7 @@ func get_template(path):
 
 			if file == null:
 
-				return err
+				return ERR_FILE_NOT_FOUND
 
 
 
