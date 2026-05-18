@@ -1,0 +1,112 @@
+{
+  "43": {
+    "col": 0,
+    "row": 0,
+    "filename": "stoneWall_W"
+  },
+  "44": {
+    "col": 1,
+    "row": 0,
+    "filename": "stoneWallAged_E"
+  },
+  "45": {
+    "col": 2,
+    "row": 0,
+    "filename": "stoneWallAged_N"
+  },
+  "46": {
+    "col": 3,
+    "row": 0,
+    "filename": "stoneWallAged_S"
+  },
+  "80": {
+    "col": 4,
+    "row": 0,
+    "filename": "stoneWallCorner_E"
+  },
+  "81": {
+    "col": 5,
+    "row": 0,
+    "filename": "stoneWallCorner_N"
+  },
+  "82": {
+    "col": 6,
+    "row": 0,
+    "filename": "stoneWallCorner_S"
+  },
+  "83": {
+    "col": 7,
+    "row": 0,
+    "filename": "stoneWallCorner_W"
+  },
+  "161": {
+    "col": 0,
+    "row": 1,
+    "filename": "tableRoundChairs_N"
+  },
+  "163": {
+    "col": 1,
+    "row": 1,
+    "filename": "tableRoundChairs_W"
+  },
+  "164": {
+    "col": 2,
+    "row": 1,
+    "filename": "tableRoundItemsChairs_E"
+  },
+  "165": {
+    "col": 3,
+    "row": 1,
+    "filename": "tableRoundItemsChairs_N"
+  },
+  "167": {
+    "col": 4,
+    "row": 1,
+    "filename": "tableRoundItemsChairs_W"
+  },
+  "168": {
+    "col": 5,
+    "row": 1,
+    "filename": "tableShort_E"
+  },
+  "169": {
+    "col": 6,
+    "row": 1,
+    "filename": "tableShort_N"
+  },
+  "184": {
+    "col": 7,
+    "row": 1,
+    "filename": "woodenPile_E"
+  },
+  "188": {
+    "col": 0,
+    "row": 2,
+    "filename": "woodenSupportBeams_E"
+  },
+  "200": {
+    "col": 1,
+    "row": 2,
+    "filename": "barrels_W"
+  },
+  "201": {
+    "col": 2,
+    "row": 2,
+    "filename": "barrelsStacked_E"
+  },
+  "203": {
+    "col": 3,
+    "row": 2,
+    "filename": "barrelsStacked_S"
+  },
+  "204": {
+    "col": 4,
+    "row": 2,
+    "filename": "barrelsStacked_W"
+  },
+  "234": {
+    "col": 5,
+    "row": 2,
+    "filename": "planks_N"
+  }
+}
