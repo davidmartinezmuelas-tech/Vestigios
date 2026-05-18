@@ -9,7 +9,7 @@ func _ready() -> void:
 func _build() -> void:
 	for child in get_children():
 		child.queue_free()
-	# --- floor (priority=0) ---
+	# --- floor ---
 	_add_sprite(0, 0, 0, "res://assets/tilesets/kenney_dungeon/Isometric/planks_N.png")
 	_add_sprite(128, 64, 10, "res://assets/tilesets/kenney_dungeon/Isometric/planks_N.png")
 	_add_sprite(256, 128, 20, "res://assets/tilesets/kenney_dungeon/Isometric/planks_N.png")
@@ -110,7 +110,7 @@ func _build() -> void:
 	_add_sprite(-256, 1024, 160, "res://assets/tilesets/kenney_dungeon/Isometric/planks_N.png")
 	_add_sprite(-128, 1088, 170, "res://assets/tilesets/kenney_dungeon/Isometric/planks_N.png")
 	_add_sprite(0, 1152, 180, "res://assets/tilesets/kenney_dungeon/Isometric/planks_N.png")
-	# --- walls (priority=1) ---
+	# --- walls ---
 	_add_sprite(0, 0, 1, "res://assets/tilesets/kenney_dungeon/Isometric/stoneWallCorner_S.png")
 	_add_sprite(128, 64, 11, "res://assets/tilesets/kenney_dungeon/Isometric/stoneWallAged_S.png")
 	_add_sprite(256, 128, 21, "res://assets/tilesets/kenney_dungeon/Isometric/stoneWallAged_S.png")
@@ -147,9 +147,8 @@ func _build() -> void:
 	_add_sprite(-256, 1024, 161, "res://assets/tilesets/kenney_dungeon/Isometric/stoneWallAged_N.png")
 	_add_sprite(-128, 1088, 171, "res://assets/tilesets/kenney_dungeon/Isometric/stoneWallAged_N.png")
 	_add_sprite(0, 1152, 181, "res://assets/tilesets/kenney_dungeon/Isometric/stoneWallCorner_N.png")
-	# --- objects (priority=2) ---
-	_add_sprite(128, 1088, 172, "res://assets/tilesets/kenney_dungeon/Isometric/barrelsStacked_E.png")
-	# --- objects (priority=2) ---
+	# --- objects ---
+	# --- objects ---
 	_add_sprite(0, 0, 2, "res://assets/tilesets/kenney_dungeon/Isometric/woodenPile_E.png")
 	_add_sprite(128, 64, 12, "res://assets/tilesets/kenney_dungeon/Isometric/barrelsStacked_S.png")
 	_add_sprite(-128, 64, 12, "res://assets/tilesets/kenney_dungeon/Isometric/barrels_W.png")
