@@ -54,7 +54,7 @@ func _build_slot_button(slot: int) -> Button:
 func _on_new_game() -> void:
 	# TODO: redirigir a protagonist_select cuando esté listo
 	# Por ahora va directo a la taberna para probar el movimiento
-	GameManager.go_to_scene("res://scenes/taberna_karreth.tscn")
+	GameManager.go_to_scene("res://scenes/world/mission_01/taberna_karreth.tscn")
 
 func _on_load_slot(slot: int) -> void:
 	if SaveManager.load_save(slot):
