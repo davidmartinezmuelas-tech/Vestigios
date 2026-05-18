@@ -49,11 +49,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 			and event.pressed \
 			and event.button_index == MOUSE_BUTTON_LEFT:
-		var world_pos := get_viewport().get_camera_2d().get_global_transform().affine_inverse() \
-			* event.position if get_viewport().get_camera_2d() != null \
-			else event.position
-		# Usar posición global del mouse directamente
-		world_pos = get_viewport().get_mouse_position()
+		# Convertir posición de pantalla a coordenadas globales del mundo
+		var world_pos := get_viewport().get_canvas_transform().affine_inverse() \
+			* event.position
 		if not _is_terrain_click(world_pos):
 			return
 		_handle_terrain_click(world_pos)
