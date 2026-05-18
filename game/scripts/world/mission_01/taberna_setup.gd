@@ -58,22 +58,48 @@ func _add_obstacles() -> void:
 		add_child(obstacle)
 		obstacle.owner = get_tree().edited_scene_root
 
+func _tile_diamond_hole(mx: int, my: int, margin: int = 15) -> PackedVector2Array:
+	## Diamante del tile (mx,my) en sentido antihorario (hueco para NavigationPolygon).
+	## El límite exterior es horario → huecos deben ser antihorarios.
+	## En coordenadas de pantalla (Y hacia abajo):
+	##   Top → Left → Bottom → Right = antihorario
+	var cx: float = (mx - my) * 128.0
+	var cy: float = (mx + my) * 64.0 + 64.0
+	return PackedVector2Array([
+		Vector2(cx,                cy - 64 + margin),  # Arriba
+		Vector2(cx - 128 + margin, cy + margin),       # Izquierda
+		Vector2(cx,                cy + 64 - margin),  # Abajo
+		Vector2(cx + 128 - margin, cy + margin),       # Derecha
+	])
+
 func _add_navigation() -> void:
 	var nav := NavigationRegion2D.new()
 	nav.name = "NavigationRegion2D"
 
 	var poly := NavigationPolygon.new()
 
-	# Polígono del suelo interior (tiles 1,1 a 8,8 para dejar margen de paredes)
-	# + apertura en la pared derecha (filas 4-5 del TMX)
-	var outline := PackedVector2Array()
-	# Esquinas del interior en orden: arriba → derecha → abajo → izquierda
-	outline.append(iso_pos(1, 1) + Vector2(0, 64))   # arriba
-	outline.append(iso_pos(8, 1) + Vector2(64, 32))  # derecha-arriba
-	outline.append(iso_pos(8, 8) + Vector2(0, 64))   # abajo
-	outline.append(iso_pos(1, 8) + Vector2(-64, 32)) # izquierda
+	# ── Límite exterior: horario en coords de pantalla ────────────
+	var outer := PackedVector2Array([
+		iso_pos(1, 1) + Vector2(0,   64),   # NW
+		iso_pos(8, 1) + Vector2(64,  32),   # NE
+		iso_pos(8, 8) + Vector2(0,   64),   # SE
+		iso_pos(1, 8) + Vector2(-64, 32),   # SW
+	])
+	poly.add_outline(outer)
 
-	poly.add_outline(outline)
+	# ── Huecos de objetos: antihorario (opuesto al exterior) ──────
+	var blocked: Array[Vector2i] = [
+		Vector2i(1,2), Vector2i(1,3), Vector2i(1,4),
+		Vector2i(2,1), Vector2i(2,5),
+		Vector2i(3,3), Vector2i(3,7),
+		Vector2i(4,1), Vector2i(4,5),
+		Vector2i(5,3), Vector2i(5,7),
+		Vector2i(6,1), Vector2i(6,5),
+	]
+	for p in blocked:
+		poly.add_outline(_tile_diamond_hole(p.x, p.y))
+
+	# ── Generar polígonos (síncrono, deprecated pero funcional) ───
 	poly.make_polygons_from_outlines()
 	nav.navigation_polygon = poly
 
