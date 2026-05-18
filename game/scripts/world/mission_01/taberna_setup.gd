@@ -50,10 +50,11 @@ func _add_obstacles() -> void:
 
 	for map_pos in object_positions:
 		var obstacle := NavigationObstacle2D.new()
-		obstacle.radius = 80.0         # radio de evitación en píxeles
+		obstacle.radius = 80.0
 		obstacle.avoidance_enabled = true
 		var screen_pos := iso_pos(map_pos.x, map_pos.y)
 		obstacle.position = screen_pos + Vector2(0, 64)
+		# Añadir al árbol antes de asignar owner
 		add_child(obstacle)
 		obstacle.owner = get_tree().edited_scene_root
 
@@ -82,13 +83,17 @@ func _add_navigation() -> void:
 func _add_character() -> void:
 	var char_node := Node2D.new()
 	char_node.name = "Protagonista"
+	char_node.position = iso_pos(4, 4) + Vector2(0, 64)
+
+	# Añadir al árbol PRIMERO para poder asignar owner a los hijos
+	add_child(char_node)
+	char_node.owner = get_tree().edited_scene_root
 
 	# Sprite placeholder con el personaje de Kenney
 	var sprite := Sprite2D.new()
 	sprite.name = "Sprite"
 	sprite.texture = load("res://assets/tilesets/kenney_dungeon/Characters/Male/Male_0_Idle0.png")
-	sprite.offset = Vector2(0, -192)  # Mismo offset que los tiles
-	sprite.z_index = 100  # Por encima de todo
+	sprite.offset = Vector2(0, -192)
 	char_node.add_child(sprite)
 	sprite.owner = get_tree().edited_scene_root
 
@@ -99,12 +104,6 @@ func _add_character() -> void:
 	agent.target_desired_distance = 12.0
 	char_node.add_child(agent)
 	agent.owner = get_tree().edited_scene_root
-
-	# Posición inicial: centro de la taberna
-	char_node.position = iso_pos(4, 4) + Vector2(0, 64)
-
-	add_child(char_node)
-	char_node.owner = get_tree().edited_scene_root
 
 func _add_click_marker() -> void:
 	var marker := Node2D.new()

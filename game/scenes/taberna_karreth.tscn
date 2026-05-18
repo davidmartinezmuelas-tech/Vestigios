@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dcy6kjhnwf2vv" path="res://assets/tilesets/kenney_dungeon/Isometric/stoneWallCorner_N.png" id="24_2cetu"]
 [ext_resource type="Script" uid="uid://w8reju6rm6bl" path="res://scripts/world/mission_01/protagonista_movement.gd" id="25_h8slr"]
 [ext_resource type="Script" uid="uid://i8037ghfbs5o" path="res://scripts/world/party_movement_controller.gd" id="26_8jiod"]
+[ext_resource type="Texture2D" uid="uid://bxprpxtp75sng" path="res://assets/tilesets/kenney_dungeon/Characters/Male/Male_0_Idle0.png" id="26_un4tm"]
 [ext_resource type="Script" uid="uid://dnfprfhqo05db" path="res://scripts/world/mission_01/click_marker.gd" id="27_8jiod"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0ocq"]
@@ -1009,6 +1010,16 @@ navigation_polygon = SubResource("NavigationPolygon_un4tm")
 [node name="Protagonista" type="Node2D" parent="." unique_id=52900923]
 position = Vector2(0, 576)
 script = ExtResource("25_h8slr")
+
+[node name="Sprite" type="Sprite2D" parent="Protagonista" unique_id=181085875]
+texture = ExtResource("26_un4tm")
+offset = Vector2(0, -192)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Protagonista" unique_id=1139303468]
+path_desired_distance = 12.0
+target_desired_distance = 12.0
+avoidance_enabled = true
+radius = 40.0
 
 [node name="PartyMovementController" type="Node" parent="." unique_id=549509499]
 script = ExtResource("26_8jiod")
