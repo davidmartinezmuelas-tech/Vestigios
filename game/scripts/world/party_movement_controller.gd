@@ -50,7 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			and event.pressed \
 			and event.button_index == MOUSE_BUTTON_LEFT:
 		# Convertir posición de pantalla a coordenadas globales del mundo
-		var world_pos := get_viewport().get_canvas_transform().affine_inverse() \
+		var world_pos: Vector2 = get_viewport().get_canvas_transform().affine_inverse() \
 			* event.position
 		if not _is_terrain_click(world_pos):
 			return

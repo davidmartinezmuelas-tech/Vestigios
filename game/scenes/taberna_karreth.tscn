@@ -1,0 +1,1013 @@
+[gd_scene format=3 uid="uid://eeu8mldo3aky"]
+
+[ext_resource type="Texture2D" uid="uid://gvcnq21lvyfq" path="res://assets/tilesets/taberna_atlas.png" id="1_4xx7c"]
+[ext_resource type="Script" uid="uid://drpeunsvnrj" path="res://scripts/world/mission_01/taberna_setup.gd" id="1_nauqi"]
+[ext_resource type="Script" uid="uid://lf12tfwgop4m" path="res://scripts/world/mission_01/taberna_painter.gd" id="2_e0ocq"]
+[ext_resource type="Texture2D" uid="uid://cna200knxsh6t" path="res://assets/tilesets/kenney_dungeon/Isometric/planks_N.png" id="3_nauqi"]
+[ext_resource type="Texture2D" uid="uid://81qc4vdr72mb" path="res://assets/tilesets/kenney_dungeon/Isometric/woodenPile_E.png" id="5_h8slr"]
+[ext_resource type="Texture2D" uid="uid://p2ybborkakek" path="res://assets/tilesets/kenney_dungeon/Isometric/barrelsStacked_S.png" id="6_8jiod"]
+[ext_resource type="Texture2D" uid="uid://212q6byqgqfv" path="res://assets/tilesets/kenney_dungeon/Isometric/barrels_W.png" id="7_un4tm"]
+[ext_resource type="Texture2D" uid="uid://bqbmynlnvs3t7" path="res://assets/tilesets/kenney_dungeon/Isometric/tableRoundItemsChairs_E.png" id="8_s68v6"]
+[ext_resource type="Texture2D" uid="uid://cgfe3mhly8dj1" path="res://assets/tilesets/kenney_dungeon/Isometric/tableRoundChairs_W.png" id="9_7h228"]
+[ext_resource type="Texture2D" uid="uid://dhnvs1absba7r" path="res://assets/tilesets/kenney_dungeon/Isometric/tableShort_N.png" id="10_1u3ai"]
+[ext_resource type="Texture2D" uid="uid://dm8rmq56yufaw" path="res://assets/tilesets/kenney_dungeon/Isometric/tableShort_E.png" id="11_7qpf6"]
+[ext_resource type="Texture2D" uid="uid://dbmb4lio0gsx4" path="res://assets/tilesets/kenney_dungeon/Isometric/tableRoundItemsChairs_W.png" id="12_4daou"]
+[ext_resource type="Texture2D" uid="uid://vdty38hyjynf" path="res://assets/tilesets/kenney_dungeon/Isometric/tableRoundItemsChairs_N.png" id="13_1iyvg"]
+[ext_resource type="Texture2D" uid="uid://ub8kl787xxvc" path="res://assets/tilesets/kenney_dungeon/Isometric/barrelsStacked_W.png" id="14_62vv5"]
+[ext_resource type="Texture2D" uid="uid://dxblrvofycm6w" path="res://assets/tilesets/kenney_dungeon/Isometric/tableRoundChairs_N.png" id="15_mllk8"]
+[ext_resource type="Texture2D" uid="uid://bh4uqcl6qhhq3" path="res://assets/tilesets/kenney_dungeon/Isometric/stoneWallCorner_S.png" id="16_p081f"]
+[ext_resource type="Texture2D" uid="uid://c4vhcw5f3gm20" path="res://assets/tilesets/kenney_dungeon/Isometric/stoneWallAged_S.png" id="17_xnmmm"]
+[ext_resource type="Texture2D" uid="uid://bsug8ahrhqaly" path="res://assets/tilesets/kenney_dungeon/Isometric/stoneWallCorner_W.png" id="18_p4rub"]
+[ext_resource type="Texture2D" uid="uid://bsw1ecuepxf1t" path="res://assets/tilesets/kenney_dungeon/Isometric/stoneWallAged_E.png" id="19_4jhhe"]
+[ext_resource type="Texture2D" uid="uid://b642gi11lhelx" path="res://assets/tilesets/kenney_dungeon/Isometric/stoneWall_W.png" id="20_j2ua1"]
+[ext_resource type="Texture2D" uid="uid://u1d26fygi8dp" path="res://assets/tilesets/kenney_dungeon/Isometric/woodenSupportBeams_E.png" id="21_vweoa"]
+[ext_resource type="Texture2D" uid="uid://b3wpwujspea0n" path="res://assets/tilesets/kenney_dungeon/Isometric/stoneWallCorner_E.png" id="22_fe1qu"]
+[ext_resource type="Texture2D" uid="uid://ii0kk7gnqtwa" path="res://assets/tilesets/kenney_dungeon/Isometric/stoneWallAged_N.png" id="23_5n04p"]
+[ext_resource type="Texture2D" uid="uid://dcy6kjhnwf2vv" path="res://assets/tilesets/kenney_dungeon/Isometric/stoneWallCorner_N.png" id="24_2cetu"]
+[ext_resource type="Script" uid="uid://w8reju6rm6bl" path="res://scripts/world/mission_01/protagonista_movement.gd" id="25_h8slr"]
+[ext_resource type="Script" uid="uid://i8037ghfbs5o" path="res://scripts/world/party_movement_controller.gd" id="26_8jiod"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0ocq"]
+texture = ExtResource("1_4xx7c")
+texture_region_size = Vector2i(256, 512)
+1:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_unihw"]
+tile_shape = 1
+tile_size = Vector2i(256, 128)
+sources/1 = SubResource("TileSetAtlasSource_e0ocq")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_un4tm"]
+vertices = PackedVector2Array(1061.9609, 514.34375, -0.21875, 1076.7969, -1140.8906, 529.97656, -13.0390625, -11.8828125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-13, -23, 1084, 514, 0, 1088, -1164, 530)])
+
+[node name="TabernaKarreth" type="Node2D" unique_id=1173327344]
+script = ExtResource("1_nauqi")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=535667135]
+y_sort_enabled = true
+position = Vector2(-52, 1)
+tile_set = SubResource("TileSet_unihw")
+script = ExtResource("2_e0ocq")
+
+[node name="@Sprite2D@49465" type="Sprite2D" parent="TileMapLayer" unique_id=1975796496]
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49466" type="Sprite2D" parent="TileMapLayer" unique_id=1944010175]
+z_index = 10
+position = Vector2(128, 64)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49467" type="Sprite2D" parent="TileMapLayer" unique_id=185322164]
+z_index = 20
+position = Vector2(256, 128)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49468" type="Sprite2D" parent="TileMapLayer" unique_id=1129115100]
+z_index = 30
+position = Vector2(384, 192)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49469" type="Sprite2D" parent="TileMapLayer" unique_id=1633983832]
+z_index = 40
+position = Vector2(512, 256)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49470" type="Sprite2D" parent="TileMapLayer" unique_id=1422843428]
+z_index = 50
+position = Vector2(640, 320)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49471" type="Sprite2D" parent="TileMapLayer" unique_id=1682834709]
+z_index = 60
+position = Vector2(768, 384)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49472" type="Sprite2D" parent="TileMapLayer" unique_id=361961584]
+z_index = 70
+position = Vector2(896, 448)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49473" type="Sprite2D" parent="TileMapLayer" unique_id=804839744]
+z_index = 80
+position = Vector2(1024, 512)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49474" type="Sprite2D" parent="TileMapLayer" unique_id=813436941]
+z_index = 90
+position = Vector2(1152, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49475" type="Sprite2D" parent="TileMapLayer" unique_id=1520630125]
+z_index = 10
+position = Vector2(-128, 64)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49476" type="Sprite2D" parent="TileMapLayer" unique_id=201094464]
+z_index = 20
+position = Vector2(0, 128)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49477" type="Sprite2D" parent="TileMapLayer" unique_id=1708357666]
+z_index = 30
+position = Vector2(128, 192)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49478" type="Sprite2D" parent="TileMapLayer" unique_id=1397434543]
+z_index = 40
+position = Vector2(256, 256)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49479" type="Sprite2D" parent="TileMapLayer" unique_id=886904905]
+z_index = 50
+position = Vector2(384, 320)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49480" type="Sprite2D" parent="TileMapLayer" unique_id=1650721287]
+z_index = 60
+position = Vector2(512, 384)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49481" type="Sprite2D" parent="TileMapLayer" unique_id=985694225]
+z_index = 70
+position = Vector2(640, 448)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49482" type="Sprite2D" parent="TileMapLayer" unique_id=951105472]
+z_index = 80
+position = Vector2(768, 512)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49483" type="Sprite2D" parent="TileMapLayer" unique_id=1013055941]
+z_index = 90
+position = Vector2(896, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49484" type="Sprite2D" parent="TileMapLayer" unique_id=1122138761]
+z_index = 100
+position = Vector2(1024, 640)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49485" type="Sprite2D" parent="TileMapLayer" unique_id=816949624]
+z_index = 20
+position = Vector2(-256, 128)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49486" type="Sprite2D" parent="TileMapLayer" unique_id=923570941]
+z_index = 30
+position = Vector2(-128, 192)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49487" type="Sprite2D" parent="TileMapLayer" unique_id=65053816]
+z_index = 40
+position = Vector2(0, 256)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49488" type="Sprite2D" parent="TileMapLayer" unique_id=1951185842]
+z_index = 50
+position = Vector2(128, 320)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49489" type="Sprite2D" parent="TileMapLayer" unique_id=1108386554]
+z_index = 60
+position = Vector2(256, 384)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49490" type="Sprite2D" parent="TileMapLayer" unique_id=386351112]
+z_index = 70
+position = Vector2(384, 448)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49491" type="Sprite2D" parent="TileMapLayer" unique_id=1268287050]
+z_index = 80
+position = Vector2(512, 512)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49492" type="Sprite2D" parent="TileMapLayer" unique_id=1689317775]
+z_index = 90
+position = Vector2(640, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49493" type="Sprite2D" parent="TileMapLayer" unique_id=1873372599]
+z_index = 100
+position = Vector2(768, 640)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49494" type="Sprite2D" parent="TileMapLayer" unique_id=1585108095]
+z_index = 110
+position = Vector2(896, 704)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49495" type="Sprite2D" parent="TileMapLayer" unique_id=458456253]
+z_index = 30
+position = Vector2(-384, 192)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49496" type="Sprite2D" parent="TileMapLayer" unique_id=732729150]
+z_index = 40
+position = Vector2(-256, 256)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49497" type="Sprite2D" parent="TileMapLayer" unique_id=1661772468]
+z_index = 50
+position = Vector2(-128, 320)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49498" type="Sprite2D" parent="TileMapLayer" unique_id=748067885]
+z_index = 60
+position = Vector2(0, 384)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49499" type="Sprite2D" parent="TileMapLayer" unique_id=1089409921]
+z_index = 70
+position = Vector2(128, 448)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49500" type="Sprite2D" parent="TileMapLayer" unique_id=430027264]
+z_index = 80
+position = Vector2(256, 512)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49501" type="Sprite2D" parent="TileMapLayer" unique_id=855361131]
+z_index = 90
+position = Vector2(384, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49502" type="Sprite2D" parent="TileMapLayer" unique_id=1446928489]
+z_index = 100
+position = Vector2(512, 640)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49503" type="Sprite2D" parent="TileMapLayer" unique_id=2030199590]
+z_index = 110
+position = Vector2(640, 704)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49504" type="Sprite2D" parent="TileMapLayer" unique_id=532409921]
+z_index = 120
+position = Vector2(768, 768)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49505" type="Sprite2D" parent="TileMapLayer" unique_id=475613679]
+z_index = 40
+position = Vector2(-512, 256)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49506" type="Sprite2D" parent="TileMapLayer" unique_id=240488486]
+z_index = 50
+position = Vector2(-384, 320)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49507" type="Sprite2D" parent="TileMapLayer" unique_id=541723625]
+z_index = 60
+position = Vector2(-256, 384)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49508" type="Sprite2D" parent="TileMapLayer" unique_id=59800446]
+z_index = 70
+position = Vector2(-128, 448)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49509" type="Sprite2D" parent="TileMapLayer" unique_id=993586224]
+z_index = 80
+position = Vector2(0, 512)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49510" type="Sprite2D" parent="TileMapLayer" unique_id=1086362583]
+z_index = 90
+position = Vector2(128, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49511" type="Sprite2D" parent="TileMapLayer" unique_id=637667488]
+z_index = 100
+position = Vector2(256, 640)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49512" type="Sprite2D" parent="TileMapLayer" unique_id=1574503682]
+z_index = 110
+position = Vector2(384, 704)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49513" type="Sprite2D" parent="TileMapLayer" unique_id=2067005743]
+z_index = 120
+position = Vector2(512, 768)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49514" type="Sprite2D" parent="TileMapLayer" unique_id=228177684]
+z_index = 130
+position = Vector2(640, 832)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49515" type="Sprite2D" parent="TileMapLayer" unique_id=683832140]
+z_index = 50
+position = Vector2(-640, 320)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49516" type="Sprite2D" parent="TileMapLayer" unique_id=458072779]
+z_index = 60
+position = Vector2(-512, 384)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49517" type="Sprite2D" parent="TileMapLayer" unique_id=1975618695]
+z_index = 70
+position = Vector2(-384, 448)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49518" type="Sprite2D" parent="TileMapLayer" unique_id=416659386]
+z_index = 80
+position = Vector2(-256, 512)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49519" type="Sprite2D" parent="TileMapLayer" unique_id=325422379]
+z_index = 90
+position = Vector2(-128, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49520" type="Sprite2D" parent="TileMapLayer" unique_id=1184965640]
+z_index = 100
+position = Vector2(0, 640)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49521" type="Sprite2D" parent="TileMapLayer" unique_id=1666245690]
+z_index = 110
+position = Vector2(128, 704)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49522" type="Sprite2D" parent="TileMapLayer" unique_id=353400511]
+z_index = 120
+position = Vector2(256, 768)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49523" type="Sprite2D" parent="TileMapLayer" unique_id=95807587]
+z_index = 130
+position = Vector2(384, 832)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49524" type="Sprite2D" parent="TileMapLayer" unique_id=1612565461]
+z_index = 140
+position = Vector2(512, 896)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49525" type="Sprite2D" parent="TileMapLayer" unique_id=872708916]
+z_index = 60
+position = Vector2(-768, 384)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49526" type="Sprite2D" parent="TileMapLayer" unique_id=959356155]
+z_index = 70
+position = Vector2(-640, 448)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49527" type="Sprite2D" parent="TileMapLayer" unique_id=568730450]
+z_index = 80
+position = Vector2(-512, 512)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49528" type="Sprite2D" parent="TileMapLayer" unique_id=1037689376]
+z_index = 90
+position = Vector2(-384, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49529" type="Sprite2D" parent="TileMapLayer" unique_id=1912027359]
+z_index = 100
+position = Vector2(-256, 640)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49530" type="Sprite2D" parent="TileMapLayer" unique_id=1876628119]
+z_index = 110
+position = Vector2(-128, 704)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49531" type="Sprite2D" parent="TileMapLayer" unique_id=1683527456]
+z_index = 120
+position = Vector2(0, 768)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49532" type="Sprite2D" parent="TileMapLayer" unique_id=1559799664]
+z_index = 130
+position = Vector2(128, 832)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49533" type="Sprite2D" parent="TileMapLayer" unique_id=714870471]
+z_index = 140
+position = Vector2(256, 896)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49534" type="Sprite2D" parent="TileMapLayer" unique_id=535245095]
+z_index = 150
+position = Vector2(384, 960)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49535" type="Sprite2D" parent="TileMapLayer" unique_id=1626925001]
+z_index = 70
+position = Vector2(-896, 448)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49536" type="Sprite2D" parent="TileMapLayer" unique_id=1162677974]
+z_index = 80
+position = Vector2(-768, 512)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49537" type="Sprite2D" parent="TileMapLayer" unique_id=1198439557]
+z_index = 90
+position = Vector2(-640, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49538" type="Sprite2D" parent="TileMapLayer" unique_id=2067105001]
+z_index = 100
+position = Vector2(-512, 640)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49539" type="Sprite2D" parent="TileMapLayer" unique_id=446887295]
+z_index = 110
+position = Vector2(-384, 704)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49540" type="Sprite2D" parent="TileMapLayer" unique_id=400579660]
+z_index = 120
+position = Vector2(-256, 768)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49541" type="Sprite2D" parent="TileMapLayer" unique_id=295566632]
+z_index = 130
+position = Vector2(-128, 832)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49542" type="Sprite2D" parent="TileMapLayer" unique_id=1351548962]
+z_index = 140
+position = Vector2(0, 896)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49543" type="Sprite2D" parent="TileMapLayer" unique_id=659395733]
+z_index = 150
+position = Vector2(128, 960)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49544" type="Sprite2D" parent="TileMapLayer" unique_id=1666096798]
+z_index = 160
+position = Vector2(256, 1024)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49545" type="Sprite2D" parent="TileMapLayer" unique_id=431817394]
+z_index = 80
+position = Vector2(-1024, 512)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49546" type="Sprite2D" parent="TileMapLayer" unique_id=1650650038]
+z_index = 90
+position = Vector2(-896, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49547" type="Sprite2D" parent="TileMapLayer" unique_id=1333550883]
+z_index = 100
+position = Vector2(-768, 640)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49548" type="Sprite2D" parent="TileMapLayer" unique_id=1957295505]
+z_index = 110
+position = Vector2(-640, 704)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49549" type="Sprite2D" parent="TileMapLayer" unique_id=1474672140]
+z_index = 120
+position = Vector2(-512, 768)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49550" type="Sprite2D" parent="TileMapLayer" unique_id=1169798558]
+z_index = 130
+position = Vector2(-384, 832)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49551" type="Sprite2D" parent="TileMapLayer" unique_id=1585203067]
+z_index = 140
+position = Vector2(-256, 896)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49552" type="Sprite2D" parent="TileMapLayer" unique_id=1484957328]
+z_index = 150
+position = Vector2(-128, 960)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49553" type="Sprite2D" parent="TileMapLayer" unique_id=1229157000]
+z_index = 160
+position = Vector2(0, 1024)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49554" type="Sprite2D" parent="TileMapLayer" unique_id=271190007]
+z_index = 170
+position = Vector2(128, 1088)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49555" type="Sprite2D" parent="TileMapLayer" unique_id=181911905]
+z_index = 90
+position = Vector2(-1152, 576)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49556" type="Sprite2D" parent="TileMapLayer" unique_id=824326993]
+z_index = 100
+position = Vector2(-1024, 640)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49557" type="Sprite2D" parent="TileMapLayer" unique_id=366354159]
+z_index = 110
+position = Vector2(-896, 704)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49558" type="Sprite2D" parent="TileMapLayer" unique_id=956405073]
+z_index = 120
+position = Vector2(-768, 768)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49559" type="Sprite2D" parent="TileMapLayer" unique_id=554729029]
+z_index = 130
+position = Vector2(-640, 832)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49560" type="Sprite2D" parent="TileMapLayer" unique_id=1205308937]
+z_index = 140
+position = Vector2(-512, 896)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49561" type="Sprite2D" parent="TileMapLayer" unique_id=691017163]
+z_index = 150
+position = Vector2(-384, 960)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49562" type="Sprite2D" parent="TileMapLayer" unique_id=343497952]
+z_index = 160
+position = Vector2(-256, 1024)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49563" type="Sprite2D" parent="TileMapLayer" unique_id=541440375]
+z_index = 170
+position = Vector2(-128, 1088)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49564" type="Sprite2D" parent="TileMapLayer" unique_id=464488856]
+z_index = 180
+position = Vector2(0, 1152)
+texture = ExtResource("3_nauqi")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49565" type="Sprite2D" parent="TileMapLayer" unique_id=2054673219]
+z_index = 1
+texture = ExtResource("16_p081f")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49566" type="Sprite2D" parent="TileMapLayer" unique_id=1783079597]
+z_index = 11
+position = Vector2(128, 64)
+texture = ExtResource("17_xnmmm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49567" type="Sprite2D" parent="TileMapLayer" unique_id=1810289410]
+z_index = 21
+position = Vector2(256, 128)
+texture = ExtResource("17_xnmmm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49568" type="Sprite2D" parent="TileMapLayer" unique_id=1906450457]
+z_index = 31
+position = Vector2(384, 192)
+texture = ExtResource("17_xnmmm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49569" type="Sprite2D" parent="TileMapLayer" unique_id=1083947276]
+z_index = 41
+position = Vector2(512, 256)
+texture = ExtResource("17_xnmmm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49570" type="Sprite2D" parent="TileMapLayer" unique_id=877536680]
+z_index = 51
+position = Vector2(640, 320)
+texture = ExtResource("17_xnmmm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49571" type="Sprite2D" parent="TileMapLayer" unique_id=1183669570]
+z_index = 61
+position = Vector2(768, 384)
+texture = ExtResource("17_xnmmm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49572" type="Sprite2D" parent="TileMapLayer" unique_id=88694792]
+z_index = 71
+position = Vector2(896, 448)
+texture = ExtResource("17_xnmmm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49573" type="Sprite2D" parent="TileMapLayer" unique_id=1691931671]
+z_index = 81
+position = Vector2(1024, 512)
+texture = ExtResource("17_xnmmm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49574" type="Sprite2D" parent="TileMapLayer" unique_id=2056855835]
+z_index = 91
+position = Vector2(1152, 576)
+texture = ExtResource("18_p4rub")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49575" type="Sprite2D" parent="TileMapLayer" unique_id=1273813779]
+z_index = 11
+position = Vector2(-128, 64)
+texture = ExtResource("19_4jhhe")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49576" type="Sprite2D" parent="TileMapLayer" unique_id=516762258]
+z_index = 101
+position = Vector2(1024, 640)
+texture = ExtResource("20_j2ua1")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49577" type="Sprite2D" parent="TileMapLayer" unique_id=704150082]
+z_index = 21
+position = Vector2(-256, 128)
+texture = ExtResource("19_4jhhe")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49578" type="Sprite2D" parent="TileMapLayer" unique_id=346768030]
+z_index = 111
+position = Vector2(896, 704)
+texture = ExtResource("20_j2ua1")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49579" type="Sprite2D" parent="TileMapLayer" unique_id=547147032]
+z_index = 31
+position = Vector2(-384, 192)
+texture = ExtResource("19_4jhhe")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49580" type="Sprite2D" parent="TileMapLayer" unique_id=1786589017]
+z_index = 121
+position = Vector2(768, 768)
+texture = ExtResource("20_j2ua1")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49581" type="Sprite2D" parent="TileMapLayer" unique_id=963330828]
+z_index = 41
+position = Vector2(-512, 256)
+texture = ExtResource("19_4jhhe")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49582" type="Sprite2D" parent="TileMapLayer" unique_id=979774747]
+z_index = 141
+position = Vector2(768, 896)
+texture = ExtResource("21_vweoa")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49583" type="Sprite2D" parent="TileMapLayer" unique_id=887780342]
+z_index = 51
+position = Vector2(-640, 320)
+texture = ExtResource("19_4jhhe")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49584" type="Sprite2D" parent="TileMapLayer" unique_id=1471226106]
+z_index = 151
+position = Vector2(640, 960)
+texture = ExtResource("21_vweoa")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49585" type="Sprite2D" parent="TileMapLayer" unique_id=366762985]
+z_index = 61
+position = Vector2(-768, 384)
+texture = ExtResource("19_4jhhe")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49586" type="Sprite2D" parent="TileMapLayer" unique_id=1757640317]
+z_index = 151
+position = Vector2(384, 960)
+texture = ExtResource("20_j2ua1")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49587" type="Sprite2D" parent="TileMapLayer" unique_id=769431158]
+z_index = 71
+position = Vector2(-896, 448)
+texture = ExtResource("19_4jhhe")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49588" type="Sprite2D" parent="TileMapLayer" unique_id=513494255]
+z_index = 161
+position = Vector2(256, 1024)
+texture = ExtResource("20_j2ua1")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49589" type="Sprite2D" parent="TileMapLayer" unique_id=1754042866]
+z_index = 81
+position = Vector2(-1024, 512)
+texture = ExtResource("19_4jhhe")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49590" type="Sprite2D" parent="TileMapLayer" unique_id=692959909]
+z_index = 171
+position = Vector2(128, 1088)
+texture = ExtResource("20_j2ua1")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49591" type="Sprite2D" parent="TileMapLayer" unique_id=12148805]
+z_index = 91
+position = Vector2(-1152, 576)
+texture = ExtResource("22_fe1qu")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49592" type="Sprite2D" parent="TileMapLayer" unique_id=95252395]
+z_index = 101
+position = Vector2(-1024, 640)
+texture = ExtResource("23_5n04p")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49593" type="Sprite2D" parent="TileMapLayer" unique_id=727861993]
+z_index = 111
+position = Vector2(-896, 704)
+texture = ExtResource("23_5n04p")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49594" type="Sprite2D" parent="TileMapLayer" unique_id=1050140123]
+z_index = 121
+position = Vector2(-768, 768)
+texture = ExtResource("23_5n04p")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49595" type="Sprite2D" parent="TileMapLayer" unique_id=1005654800]
+z_index = 131
+position = Vector2(-640, 832)
+texture = ExtResource("23_5n04p")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49596" type="Sprite2D" parent="TileMapLayer" unique_id=2118150536]
+z_index = 141
+position = Vector2(-512, 896)
+texture = ExtResource("23_5n04p")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49597" type="Sprite2D" parent="TileMapLayer" unique_id=1470713746]
+z_index = 151
+position = Vector2(-384, 960)
+texture = ExtResource("23_5n04p")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49598" type="Sprite2D" parent="TileMapLayer" unique_id=901033393]
+z_index = 161
+position = Vector2(-256, 1024)
+texture = ExtResource("23_5n04p")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49599" type="Sprite2D" parent="TileMapLayer" unique_id=1286341437]
+z_index = 171
+position = Vector2(-128, 1088)
+texture = ExtResource("23_5n04p")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49600" type="Sprite2D" parent="TileMapLayer" unique_id=604444320]
+z_index = 181
+position = Vector2(0, 1152)
+texture = ExtResource("24_2cetu")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49601" type="Sprite2D" parent="TileMapLayer" unique_id=100831688]
+z_index = 2
+texture = ExtResource("5_h8slr")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49602" type="Sprite2D" parent="TileMapLayer" unique_id=1605462557]
+z_index = 12
+position = Vector2(128, 64)
+texture = ExtResource("6_8jiod")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49603" type="Sprite2D" parent="TileMapLayer" unique_id=1098461695]
+z_index = 12
+position = Vector2(-128, 64)
+texture = ExtResource("7_un4tm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49604" type="Sprite2D" parent="TileMapLayer" unique_id=1422582932]
+z_index = 32
+position = Vector2(128, 192)
+texture = ExtResource("8_s68v6")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49605" type="Sprite2D" parent="TileMapLayer" unique_id=915850453]
+z_index = 52
+position = Vector2(384, 320)
+texture = ExtResource("9_7h228")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49606" type="Sprite2D" parent="TileMapLayer" unique_id=2096441985]
+z_index = 72
+position = Vector2(640, 448)
+texture = ExtResource("8_s68v6")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49607" type="Sprite2D" parent="TileMapLayer" unique_id=88093989]
+z_index = 22
+position = Vector2(-256, 128)
+texture = ExtResource("10_1u3ai")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49608" type="Sprite2D" parent="TileMapLayer" unique_id=1586707015]
+z_index = 32
+position = Vector2(-128, 192)
+texture = ExtResource("11_7qpf6")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49609" type="Sprite2D" parent="TileMapLayer" unique_id=1390395556]
+z_index = 42
+position = Vector2(-256, 256)
+texture = ExtResource("11_7qpf6")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49610" type="Sprite2D" parent="TileMapLayer" unique_id=1093841128]
+z_index = 62
+position = Vector2(0, 384)
+texture = ExtResource("9_7h228")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49611" type="Sprite2D" parent="TileMapLayer" unique_id=1969326065]
+z_index = 82
+position = Vector2(256, 512)
+texture = ExtResource("12_4daou")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49612" type="Sprite2D" parent="TileMapLayer" unique_id=1372662660]
+z_index = 42
+position = Vector2(-512, 256)
+texture = ExtResource("10_1u3ai")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49613" type="Sprite2D" parent="TileMapLayer" unique_id=853899610]
+z_index = 52
+position = Vector2(-384, 320)
+texture = ExtResource("11_7qpf6")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49614" type="Sprite2D" parent="TileMapLayer" unique_id=291911571]
+z_index = 52
+position = Vector2(-640, 320)
+texture = ExtResource("7_un4tm")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49615" type="Sprite2D" parent="TileMapLayer" unique_id=2063467145]
+z_index = 72
+position = Vector2(-384, 448)
+texture = ExtResource("13_1iyvg")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49616" type="Sprite2D" parent="TileMapLayer" unique_id=780705509]
+z_index = 92
+position = Vector2(-128, 576)
+texture = ExtResource("13_1iyvg")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49617" type="Sprite2D" parent="TileMapLayer" unique_id=1056218498]
+z_index = 112
+position = Vector2(128, 704)
+texture = ExtResource("12_4daou")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49618" type="Sprite2D" parent="TileMapLayer" unique_id=19006416]
+z_index = 62
+position = Vector2(-768, 384)
+texture = ExtResource("14_62vv5")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49619" type="Sprite2D" parent="TileMapLayer" unique_id=844759021]
+z_index = 72
+position = Vector2(-896, 448)
+texture = ExtResource("14_62vv5")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49620" type="Sprite2D" parent="TileMapLayer" unique_id=1351885444]
+z_index = 102
+position = Vector2(-512, 640)
+texture = ExtResource("15_mllk8")
+offset = Vector2(0, -192)
+
+[node name="@Sprite2D@49621" type="Sprite2D" parent="TileMapLayer" unique_id=381230242]
+z_index = 122
+position = Vector2(-256, 768)
+texture = ExtResource("15_mllk8")
+offset = Vector2(0, -192)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=169346321]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_un4tm")
+
+[node name="Protagonista" type="Node2D" parent="." unique_id=52900923]
+position = Vector2(0, 576)
+script = ExtResource("25_h8slr")
+
+[node name="PartyMovementController" type="Node" parent="." unique_id=549509499]
+script = ExtResource("26_8jiod")
