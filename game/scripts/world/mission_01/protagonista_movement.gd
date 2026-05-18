@@ -13,8 +13,13 @@ func _ready() -> void:
 	_agent = $NavigationAgent2D
 	_agent.path_desired_distance = 12.0
 	_agent.target_desired_distance = 12.0
-	# Escuchar clicks del PartyMovementController
 	EventBus.move_to_requested.connect(_on_move_requested)
+	# Añadir cámara que siga al protagonista
+	var cam := Camera2D.new()
+	cam.name = "Camera2D"
+	cam.zoom = Vector2(0.5, 0.5)  # zoom out para ver la taberna
+	add_child(cam)
+	cam.make_current()
 
 func _physics_process(delta: float) -> void:
 	if not _moving:
