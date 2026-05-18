@@ -1,15 +1,23 @@
 ; Engine configuration file.
-; Generated for Vestigios — Godot 4.3
-; Editar preferiblemente desde el editor de Godot.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
 
 config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
 config/name="Vestigios"
 config/description="Un RPG táctico oscuro de fantasía"
 run/main_scene="res://scenes/core/main.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://assets/icons/icon.svg"
 
 [autoload]
@@ -31,6 +39,7 @@ FeatDatabase="*res://scripts/core/feat_database.gd"
 ClassFeatureDatabase="*res://scripts/core/class_feature_database.gd"
 SubclassDatabase="*res://scripts/core/subclass_database.gd"
 RngManager="*res://scripts/utils/rng_manager.gd"
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [display]
 
@@ -39,8 +48,16 @@ window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-textures/canvas_textures/default_texture_filter=0
+
+[tiled_importer]
+
+enable_json_format=true

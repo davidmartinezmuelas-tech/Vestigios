@@ -31,7 +31,7 @@ func change_state(new_state: GameState) -> void:
 
 func go_to_scene(scene_path: String) -> void:
 	EventBus.scene_transition_started.emit(scene_path)
-	get_tree().change_scene_to_file(scene_path)
+	get_tree().change_scene_to_file.call_deferred(scene_path)
 
 func go_to_combat(dungeon_id: String, room_data: Dictionary) -> void:
 	WorldState.set_pending_combat(dungeon_id, room_data)

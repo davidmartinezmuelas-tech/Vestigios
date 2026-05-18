@@ -10,9 +10,11 @@ extends Control
 @onready var title_label: Label    = $Title
 
 func _ready() -> void:
+	push_error("DEBUG: main_menu _ready running")
 	title_label.text = "VESTIGIOS"
 	new_game_btn.pressed.connect(_on_new_game)
 	quit_btn.pressed.connect(_on_quit)
+	push_warning("DEBUG: senales conectadas")
 	_build_save_slots()
 
 # ============================================================
@@ -52,8 +54,7 @@ func _build_slot_button(slot: int) -> Button:
 # ============================================================
 
 func _on_new_game() -> void:
-	# TODO: redirigir a protagonist_select cuando esté listo
-	# Por ahora va directo a la taberna para probar el movimiento
+	push_warning("DEBUG: Nueva Partida pulsado")
 	GameManager.go_to_scene("res://scenes/taberna_karreth.tscn")
 
 func _on_load_slot(slot: int) -> void:
