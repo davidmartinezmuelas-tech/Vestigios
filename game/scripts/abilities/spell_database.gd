@@ -445,7 +445,7 @@ func _s(
 	s.damage_dice_sides = 6
 	s.damage_ability    = ""
 	s.save_dc           = 0
-	s.save_success_multiplier = 0.5
+	s.save_success_damage_multiplier = 0.5
 
 	for key in props:
 		s.set(key, props[key])
