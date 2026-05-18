@@ -52,13 +52,9 @@ func _build_slot_button(slot: int) -> Button:
 # ============================================================
 
 func _on_new_game() -> void:
-	# Naeren y Lyth son los dos compañeros iniciales de Lyris.
-	# Si el jugador elige uno de ellos como protagonista,
-	# protagonist_select_ui.gd evitará duplicarlos.
-	WorldState.add_to_roster("naeren")
-	WorldState.add_to_roster("lyth")
-
-	GameManager.go_to_scene("res://scenes/ui/protagonist_select_scene.tscn")
+	# TODO: redirigir a protagonist_select cuando esté listo
+	# Por ahora va directo a la taberna para probar el movimiento
+	GameManager.go_to_scene("res://scenes/taberna_karreth.tscn")
 
 func _on_load_slot(slot: int) -> void:
 	if SaveManager.load_save(slot):
