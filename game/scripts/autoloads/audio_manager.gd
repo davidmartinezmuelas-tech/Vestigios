@@ -5,7 +5,7 @@ extends Node
 
 const SFX_POOL_SIZE: int = 16
 
-@onready var _music_player: AudioStreamPlayer = $MusicPlayer
+var _music_player: AudioStreamPlayer
 var _sfx_pool: Array[AudioStreamPlayer] = []
 var _current_music_path: String = ""
 
