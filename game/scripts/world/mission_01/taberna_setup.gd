@@ -23,11 +23,17 @@ func iso_pos(mx: int, my: int) -> Vector2:
 	return Vector2((mx - my) * TILE_W / 2.0, (mx + my) * TILE_H / 2.0)
 
 func _setup_scene() -> void:
-	_add_navigation()
-	_add_obstacles()
-	_add_character()
-	_add_click_marker()
-	_add_movement_controller()
+	if get_node_or_null("NavigationRegion2D") == null:
+		_add_navigation()
+	if get_node_or_null("@NavigationObstacle2D@0") == null \
+			and get_children().filter(func(n): return n is NavigationObstacle2D).is_empty():
+		_add_obstacles()
+	if get_node_or_null("Protagonista") == null:
+		_add_character()
+	if get_node_or_null("ClickMarker") == null:
+		_add_click_marker()
+	if get_node_or_null("PartyMovementController") == null:
+		_add_movement_controller()
 
 func _add_obstacles() -> void:
 	## Añade NavigationObstacle2D en las posiciones de objetos interiores
