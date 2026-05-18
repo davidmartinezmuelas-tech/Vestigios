@@ -439,7 +439,6 @@ func _s(
 	s.requires_concentration = concentration
 	s.range_tiles    = max(1, range_ft / 5)
 	s.uses_proficiency = true
-	s.item_type      = ItemData.ItemType.MISC  # no es un item fisico
 
 	# Valores por defecto para campos de AbilityData
 	s.damage_dice_count = 0
