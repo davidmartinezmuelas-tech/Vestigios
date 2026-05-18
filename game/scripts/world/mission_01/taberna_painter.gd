@@ -2,7 +2,11 @@
 extends Node2D
 
 func _ready() -> void:
+	# En runtime: limpiar las celdas del TileMapLayer para evitar errores de atlas
 	if not Engine.is_editor_hint():
+		var tml := get_node_or_null("TileMapLayer")
+		if tml != null:
+			tml.clear()
 		return
 	_build()
 
