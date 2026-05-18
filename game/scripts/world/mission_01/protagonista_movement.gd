@@ -26,20 +26,29 @@ func _ready() -> void:
 		sprite.name = "Sprite"
 		sprite.texture = load("res://assets/tilesets/kenney_dungeon/Characters/Male/Male_0_Idle0.png")
 		sprite.offset = Vector2(0, -192)
-		sprite.z_index = 500
+		# z_index heredado del nodo padre (calculado dinámicamente en _physics_process)
 		add_child(sprite)
 
-	# Cámara centrada en el protagonista
+	# Cámara isométrica con suavizado
 	if get_node_or_null("Camera2D") == null:
 		var cam := Camera2D.new()
 		cam.name = "Camera2D"
-		cam.zoom = Vector2(0.5, 0.5)
+		cam.zoom = Vector2(0.6, 0.6)
+		cam.position_smoothing_enabled = true
+		cam.position_smoothing_speed = 5.0
+		cam.offset = Vector2(0, -80)   # offset arriba para ver más del mapa
 		add_child(cam)
 		cam.make_current()
 
 	EventBus.move_to_requested.connect(_on_move_requested)
 
 func _physics_process(delta: float) -> void:
+	# Z-index dinámico: el personaje se ordena con los sprites del mapa
+	# (map_x + map_y) = position.y / 64 → mismo sistema que taberna_painter.gd
+	# +5 = por encima de muros(+1) y objetos(+2) de su misma profundidad,
+	#       pero por debajo de todo lo que esté más al frente
+	z_index = int(position.y / 64.0) * 10 + 5
+
 	if not _moving:
 		return
 	if _agent.is_navigation_finished():

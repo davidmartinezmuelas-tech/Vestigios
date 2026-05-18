@@ -21,8 +21,32 @@ func iso_pos(mx: int, my: int) -> Vector2:
 
 func _setup_scene() -> void:
 	_add_navigation()
+	_add_obstacles()
 	_add_character()
+	_add_click_marker()
 	_add_movement_controller()
+
+func _add_obstacles() -> void:
+	## Añade NavigationObstacle2D en las posiciones de objetos interiores
+	## para que el pathfinding los evite (barriles, mesas, bancos).
+	## Posiciones extraídas del TMX (capas walls + objects, interior 1-8).
+	var object_positions: Array[Vector2i] = [
+		Vector2i(1,2), Vector2i(1,3), Vector2i(1,4),
+		Vector2i(2,1), Vector2i(2,5),
+		Vector2i(3,3), Vector2i(3,7),
+		Vector2i(4,1), Vector2i(4,5),
+		Vector2i(5,3), Vector2i(5,7),
+		Vector2i(6,1), Vector2i(6,5),
+	]
+
+	for map_pos in object_positions:
+		var obstacle := NavigationObstacle2D.new()
+		obstacle.radius = 80.0         # radio de evitación en píxeles
+		obstacle.avoidance_enabled = true
+		var screen_pos := iso_pos(map_pos.x, map_pos.y)
+		obstacle.position = screen_pos + Vector2(0, 64)
+		add_child(obstacle)
+		obstacle.owner = get_tree().edited_scene_root
 
 func _add_navigation() -> void:
 	var nav := NavigationRegion2D.new()
@@ -72,6 +96,14 @@ func _add_character() -> void:
 
 	add_child(char_node)
 	char_node.owner = get_tree().edited_scene_root
+
+func _add_click_marker() -> void:
+	var marker := Node2D.new()
+	marker.name = "ClickMarker"
+	marker.set_script(load("res://scripts/world/mission_01/click_marker.gd"))
+	marker.z_index = 1000
+	add_child(marker)
+	marker.owner = get_tree().edited_scene_root
 
 func _add_movement_controller() -> void:
 	var controller := Node.new()
