@@ -19,6 +19,8 @@ func _ready() -> void:
 		_agent = $NavigationAgent2D
 	_agent.path_desired_distance = 12.0
 	_agent.target_desired_distance = 12.0
+	_agent.avoidance_enabled = true
+	_agent.radius = 40.0
 
 	# Crear sprite visible si no existe
 	if get_node_or_null("Sprite") == null:
@@ -44,10 +46,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Z-index dinámico: el personaje se ordena con los sprites del mapa
-	# (map_x + map_y) = position.y / 64 → mismo sistema que taberna_painter.gd
-	# +5 = por encima de muros(+1) y objetos(+2) de su misma profundidad,
-	#       pero por debajo de todo lo que esté más al frente
-	z_index = int(position.y / 64.0) * 10 + 5
+	# floor=+0, walls=+1, CHARACTER=+1 (mismo que muros),
+	# objects=+2 → objetos y muros del mismo nivel lo tapan
+	z_index = int(position.y / 64.0) * 10 + 1
 
 	if not _moving:
 		return

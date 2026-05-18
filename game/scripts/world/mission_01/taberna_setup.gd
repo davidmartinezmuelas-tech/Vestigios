@@ -12,8 +12,11 @@ const TILE_H := 128
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		return
-	# Solo ejecutar si no hay hijos ya configurados
-	if get_node_or_null("NavigationRegion2D") == null:
+	# Volver a ejecutar si faltan nodos del setup
+	var needs_setup := get_node_or_null("NavigationRegion2D") == null \
+		or get_node_or_null("ClickMarker") == null \
+		or get_node_or_null("Protagonista") == null
+	if needs_setup:
 		_setup_scene()
 
 func iso_pos(mx: int, my: int) -> Vector2:
