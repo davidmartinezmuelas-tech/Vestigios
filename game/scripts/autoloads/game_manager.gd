@@ -30,8 +30,16 @@ func change_state(new_state: GameState) -> void:
 	current_state = new_state
 
 func go_to_scene(scene_path: String) -> void:
+	if not ResourceLoader.exists(scene_path):
+		push_error("go_to_scene: escena no encontrada: " + scene_path)
+		return
 	EventBus.scene_transition_started.emit(scene_path)
-	get_tree().change_scene_to_file.call_deferred(scene_path)
+	## Esperar un frame antes de cambiar escena para que el arbol no este ocupado.
+	## Sin este await, change_scene_to_file falla con "parent node is busy".
+	await get_tree().process_frame
+	var err: int = get_tree().change_scene_to_file(scene_path)
+	if err != OK:
+		push_error("go_to_scene: fallo al cargar " + scene_path)
 
 func go_to_combat(dungeon_id: String, room_data: Dictionary) -> void:
 	WorldState.set_pending_combat(dungeon_id, room_data)

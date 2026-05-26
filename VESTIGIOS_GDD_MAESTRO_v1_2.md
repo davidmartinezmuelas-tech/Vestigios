@@ -464,7 +464,7 @@ consigo misma, no podría decirte la diferencia.
 - **Lyris Nightveil** — Pilar 5, drow, Pícaro/Asesina (superior del equipo)
 
 ### Personajes — Las Diez Cadenas (Kethara)
-- **Maerek Solden** — rey de Kethara
+- **Maerek Morvane** — rey de Kethara
 - **Valdris Morvane** — Cadena 1, humano, Hechicero gravitacional/temporal
 - **Morrivan Morvane** — Cadena 2, humana, Druida de Corrupción
 - **Gorrath el Inamovible** — Cadena 3, orco, Bárbaro montado

@@ -1,18 +1,9 @@
 ## main.gd
-## Punto de entrada del juego. Decide si mostrar el menú principal o cargar partida.
+## OBSOLETO — main_scene es main_menu.tscn directamente (ver project.godot).
+## Este script ya no se usa como punto de entrada. Se conserva por compatibilidad
+## con main.tscn pero NO debe hacer change_scene ni lógica de arranque.
 
 extends Node
 
 func _ready() -> void:
-	# Conectar señales globales de guardado
-	SaveManager.save_completed.connect(_on_save_completed)
-	SaveManager.load_completed.connect(_on_load_completed)
-
-	# Ir al menú principal
-	GameManager.go_to_scene("res://scenes/core/main_menu.tscn")
-
-func _on_save_completed(slot: int) -> void:
-	print("Partida guardada en slot %d" % slot)
-
-func _on_load_completed(slot: int) -> void:
-	print("Partida cargada desde slot %d" % slot)
+	push_warning("main.gd: este nodo no deberia estar activo. Verificar main_scene en project.godot.")

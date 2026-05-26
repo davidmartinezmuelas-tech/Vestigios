@@ -1,5 +1,5 @@
 # CLAUDE.md — Vestigios
-## Última actualización: 2026-05-17
+## Última actualización: 2026-05-19 (pipeline pixel art + offsets isométricos calibrados)
 
 ---
 
@@ -14,9 +14,74 @@
 ## Arte y herramientas de diseño
 - **Vista:** Isométrica
 - **Estilo personajes:** Pixel art
-- **Herramienta mapas:** Tiled (plugin godot-tiled-importer) → tiles placeholder de Kenney.nl
-- **Herramienta sprites:** Aseprite
+- **Herramienta mapas:** Tiled (plugin godot-tiled-importer) — actualmente suplantado por `taberna_painter.gd` (@tool) para la taberna
+- **Herramienta sprites:** Aseprite (assets manuales) + **PixelLab AI** (generación por MCP)
 - **Retratos de diálogo:** Midjourney (provisional) → artista comisionado (final)
+- **Tiles placeholder:** Kenney.nl (fallback) — tiles activos de taberna son custom PixelLab 64px
+
+### MCP servers activos
+Configurados en `~/.claude.json` (nivel usuario):
+```json
+"godot-ai": {
+  "type": "http",
+  "url": "http://127.0.0.1:8000/mcp"
+}
+"pixellab": {
+  "type": "http",
+  "url": "https://api.pixellab.ai/mcp",
+  "headers": { "Authorization": "Bearer <token>" }
+}
+```
+- **godot-ai**: control directo del editor Godot (WS:9500, HTTP:8000). Permite leer/escribir escenas, crear nodos, parchear scripts, hacer screenshots del editor.
+- **pixellab**: generación de pixel art por IA. Herramientas: `create_character`, `animate_character`, `create_isometric_tile`, `create_map_object`, etc.
+
+### Pipeline de assets visuales — cómo pedir assets a PixelLab
+
+**Regla fundamental:** NO pedir "un mapa" o "una escena". Pedir **piezas modulares** por tipo:
+- tiles de suelo (10-20 variantes)
+- bloques de pared (3-4 variantes)
+- props individuales (mesa, barril, barra, etc.)
+- personajes (base + animaciones por separado)
+
+### REGLA OBLIGATORIA — Kenney como referencia de dimensiones
+**ANTES de generar cualquier asset con PixelLab, buscar el equivalente en Kenney:**
+1. `ls game/assets/tilesets/kenney_dungeon/Isometric/ | grep -i <tipo>` para encontrar el tile
+2. Leer la imagen con `Read` para ver la forma y proporciones
+3. `python3 -c "from PIL import Image; img=Image.open('<path>'); print(img.size)"` para obtener dimensiones exactas
+4. Generar en PixelLab con **esas mismas dimensiones** pero con nuestro estilo oscuro medieval
+5. Aplicar `modulate = WALL_COLOR` si hay mismatch de color
+
+Ejemplo correcto:
+- Kenney `stoneWallAged_E.png` → 256×512px panel vertical → generar en PixelLab a 64×128px + scale=4.0
+- Kenney `door_E.png` → medir → generar puerta PixelLab a mismas proporciones
+
+**Template de prompt para PixelLab (usar siempre):**
+```
+Style: dark medieval pixel art, 2:1 isometric perspective, 64x64px,
+no anti-aliasing, thick dark outlines, light source top-left,
+limited muted palette (24 colors max), no smooth gradients,
+inspired by Children of Morta, Darkest Dungeon, Final Fantasy Tactics.
+Grimdark, worn stone / dark wood, torchlit atmosphere, cold shadows.
+```
+Luego añadir la descripción específica del objeto.
+
+**Herramientas PixelLab para escenarios:**
+- `create_isometric_tile` — tiles de suelo/pared con forma isométrica CORRECTA (thin tile para suelo, block para paredes)
+- `create_map_object` — props de decoración (mesas, barriles, puertas)
+- `create_character` + `animate_character` — personajes con 8 dirs + animaciones
+
+**Herramientas NO útiles para Vestigios:**
+- GPT Image / DALL-E → no genera pixel art coherente con paletas fijas
+- Skills genéricas de "Pixel Art" de MCP Market → generan SVG/texto, no imágenes reales
+- Interface/Frontend Design skills → son para UI web, no pixel art de juego
+
+**Pipeline completo por escena:**
+1. Concept/moodboard con referencias visuales (Darkest Dungeon, Children of Morta)
+2. Generar tiles base con `create_isometric_tile` (suelo thin tile + pared block)
+3. Generar props con `create_map_object`
+4. Descargar, organizar en `game/assets/tilesets/{nombre_escena}/`
+5. Actualizar el painter `@tool` de la escena con las nuevas rutas
+6. Ajustar offsets según tabla de calibración (ver sección taberna_painter)
 
 ### Sprites de personajes — convención de 8 direcciones
 Los personajes tienen 8 direcciones de movimiento. Para reducir trabajo se dibujan **5 direcciones** y las otras 3 se obtienen por espejo horizontal en Godot:
@@ -26,7 +91,17 @@ Los personajes tienen 8 direcciones de movimiento. Para reducir trabajo se dibuj
 **Estados de animación por personaje:** `idle`, `walk`, `attack`, `hit`, `death`, `cast`
 **Nomenclatura de animaciones:** `{estado}_{direccion}` — ej: `idle_s`, `walk_nw`, `attack_sw`
 
-### Pendiente de implementar (cuando se monte el mapa)
+### Assets de personajes generados (PixelLab)
+- **Johannes** — primer personaje jugable generado con PixelLab:
+  - ID en PixelLab: `1f2825e4-033d-41bc-b46a-c00ff9849af5`
+  - Ruta local: `game/assets/characters/johannes/`
+  - Poses estáticas (8 dir): `south.png`, `east.png`, `north.png`, `west.png`, `south-east.png`, `north-east.png`, `north-west.png`, `south-west.png`
+  - Animación walk: `walk/{direction}/frame_000.png` ... `frame_007.png` (8 frames × 8 dir) ✅
+  - Animación idle: `idle/{direction}/frame_000.png` ... `frame_007.png` (template `fight-stance-idle-8-frames`) ✅
+  - Spritesheet completo: `johannes_spritesheet.png`
+- Estilo visual: pixel art oscuro, 68×68px base, aspecto medieval fantástico
+
+### Pendiente de implementar (character animation)
 - `CharacterData.sprite` es actualmente una `Texture2D` estática — hay que migrar a `AnimatedSprite2D` con spritesheet direccional
 - Necesita un componente que calcule la dirección del personaje respecto a la cámara isométrica y seleccione la animación correcta
 - El flip horizontal para E, SE, NE se aplica en ese componente automáticamente
@@ -45,14 +120,116 @@ Los personajes tienen 8 direcciones de movimiento. Para reducir trabajo se dibuj
 ### Exploración (fuera de combate)
 - Click en terreno → el **protagonista** se mueve
 - El **grupo entero sigue en formación** automáticamente (`FormationManager`)
-- **Separar grupo (split party):** toggle que permite seleccionar y mover personajes individualmente — útil para sigilo, flanquear, activar mecanismos simultáneos
-- Al desactivar split party el grupo vuelve a seguir al protagonista
+- **Separar grupo (split party):** toggle con Tab → permite seleccionar y mover personajes individualmente
+- Al desactivar split party el grupo vuelve a seguir al protagonista en formación
+- Implementación en `party_movement_controller.gd` + `exploration_character.gd` (ver plan)
+
+### EventBus — señales de movimiento en exploración
+```
+move_to_requested(character_id: String, world_pos: Vector2)  # orden de movimiento
+party_split_changed(is_split: bool)                          # Tab toggle
+explorer_selected(character_id: String)                      # personaje seleccionado en split
+party_regrouped                                              # todos vuelven a formación
+```
 
 ### Combate
 - Turno por turno según **orden de iniciativa** (gestionado por `TurnManager`)
 - En tu turno: click en casilla para mover al personaje activo dentro de su velocidad
 - Las casillas alcanzables se iluminan (`CombatGrid`)
 - El protagonista no tiene turno especial — participa en el orden de iniciativa como los demás
+
+---
+
+## Escena activa — Taberna Karreth (primera escena jugable)
+
+### Estado actual
+- **Escena:** `game/scenes/taberna_karreth.tscn`
+- **Main scene temporal:** `project.godot` apunta a `taberna_karreth.tscn` para testing (debe restaurarse a `main.tscn` al terminar)
+- **Funciona:** click-to-move con protagonista, pathfinding, click marker visual, cámara suave
+- **Pendiente:** animación de personajes, corrección de posiciones de obstáculos, menú principal
+
+### taberna_painter.gd — pipeline de renderizado de escena
+Script `@tool` en `game/scripts/world/mission_01/taberna_painter.gd`. Genera todos los sprites de la escena en bucles (no coordenadas hardcodeadas). Usa `free()` síncrono para limpiar sprites viejos antes de crear nuevos.
+
+**Función central:**
+```gdscript
+func _add_sprite(x, y, depth, tex_path, sc, off_y, clip_h=0) -> void
+# x,y     → iso_pos(mx,my) convertido a int
+# depth   → iso_z(mx, my, layer) donde layer: 0=suelo, 1=pared, 2=objeto
+# sc      → scale (4.0 para tiles 64px)
+# off_y   → offset Y en espacio LOCAL (se multiplica x scale en pantalla)
+# clip_h  → clip región en píxeles FUENTE (opcional)
+```
+
+**Sistema de coordenadas isométrico:**
+```gdscript
+const TILE_W := 256  ## ancho del diamante en pantalla
+const TILE_H := 128  ## alto del diamante en pantalla
+func iso_pos(mx, my) → Vector2((mx-my)*128, (mx+my)*64)  ## centro del diamante
+func iso_z(mx, my, layer) → (mx+my)*10 + layer*2
+## layer: 0=suelo, 1=pared, 2=objeto, 3=personaje
+```
+
+### Calibración de offsets isométricos (scale=4.0, tiles 64px)
+**CRÍTICO:** `Sprite2D.offset` está en espacio LOCAL → se multiplica ×scale en pantalla.
+Con scale=4: offset_y=-16 → desplazamiento real en pantalla = -64px.
+
+| Asset | offset_y | Motivo |
+|---|---|---|
+| `iso_wall_block.png` (block) | **-16** | Confirmado en producción — fondo del bloque en iso_pos+64 |
+| `iso_floor_wood.png` (thin tile) | **-18** | Diamante en top 14px de fuente; centro en y=14px (no en 32px) |
+| `iso_wall_thick.png` (thick tile) | **-16** | Mismo anchor que block |
+| Objetos (mesas, barriles, barra) | **-36** | Base bottom anclada al plano del suelo isométrico |
+| Personajes | **-36** | Ídem |
+
+**Prueba diagnóstica de floor invisible:** si el suelo no aparece, cambiar `ISO_FLOOR` a `ISO_WALL` temporalmente. Si aparece → problema de offset; si no → problema de path/z-index.
+
+**Assets activos** (`game/assets/tilesets/taberna_custom/`, 64px PixelLab AI):
+- `iso_floor_wood.png` — suelo thin tile isométrico (diamante plano) ✅ nuevo
+- `iso_wall_block.png` — muro block isométrico (cubo con caras visibles) ✅ nuevo
+- `iso_wall_thick.png` — muro thick tile (más bajo, paredes frontales) ✅ nuevo
+- `floor_wood.png`, `wall_stone_block.png`, `wall_stone_panel.png` — tiles legacy (fallback)
+- `barrels.png`, `table_round.png`, `bench.png`, `bar_counter.png`, `fireplace.png`, `door.png`, `torch.png`
+
+**Layout de la sala (taberna_painter.gd):**
+- Grid 8×8 tiles (ROOM_MIN=1, ROOM_MAX=8)
+- Paredes traseras (NW mx=0 + NE my=0): `iso_wall_block.png`
+- Paredes frontales (SW my=9 + SE mx=9): `iso_wall_thick.png` (más bajas, no bloquean vista)
+- 6 mesas en 2 filas + barra en esquina NE + barriles + bancos
+
+### Nodos de juego en taberna_karreth.tscn
+Creados con `batch_execute` del Godot AI MCP (no por @tool):
+- `Protagonista` (Node2D + `protagonista_movement.gd`) — posición iso_pos(4,4)+(0,64)
+- `ClickMarker` (Node2D + `click_marker.gd`) — z_index=1000
+- `PartyMovementController` (Node + `party_movement_controller.gd`)
+- `NavigationRegion2D` — creado en runtime por `protagonista_movement.gd._ensure_navigation()` si no existe
+
+**Importante sobre @tool y MCP:** Los scripts `@tool` solo re-ejecutan al ABRIR la escena físicamente en Godot, NO al usar `scene_open` del MCP. Para forzar re-ejecución: cerrar y reabrir Godot.
+
+**Importante sobre NavigationPolygon:**
+- Límite exterior: **horario** (CW) en coordenadas de pantalla
+- Huecos de objetos: **antihorario** (CCW)
+- Usar `add_outline()` + `make_polygons_from_outlines()` síncrono
+- `NavigationObstacle2D` con `avoidance_enabled=false` (avoidance requiere CharacterBody2D)
+- `parent.add_child.call_deferred(nav)` al crear desde `_ready()` (parent ocupado)
+
+### protagonista_movement.gd
+Script en `game/scripts/world/mission_01/protagonista_movement.gd`, adjunto al nodo `Protagonista`.
+- Crea `NavigationAgent2D`, `AnimatedSprite2D`, `Camera2D`, `CharacterAnimator` en `_ready()` si no existen
+- `Camera2D`: zoom 0.6, `position_smoothing_enabled=true`, speed 5.0, offset Vector2(0,-80)
+- `NavigationAgent2D`: `avoidance_enabled=false` (Node2D no es physics body)
+- `_move_frames` counter: ignora `is_navigation_finished()` los primeros 3 frames (timing del nav server)
+- Recibe `EventBus.move_to_requested(character_id, world_pos)` para iniciar movimiento
+- Z-index dinámico: `z_index = int(position.y / 64.0) * 10 + 1`
+- assets_path: `res://assets/characters/johannes` (carga frames walk/idle en runtime)
+
+### character_animator.gd
+Script en `game/scripts/world/character_animator.gd`. Adjunto como hijo `CharacterAnimator` del personaje.
+- Carga frames PNG individuales desde `assets_base_path/{walk|idle}/{direction}/frame_XXX.png`
+- Crea `SpriteFrames` en runtime con animaciones `walk_south`, `idle_north-east`, etc.
+- `update_direction(velocity)` — selecciona animación según vector de movimiento
+- `play_idle()` — vuelve a idle manteniendo la última dirección
+- Fallback: si no hay frames de idle, usa la pose estática `{direction}.png`
 
 ---
 
@@ -170,8 +347,15 @@ game/
 │   ├── bastion/           → FacilityData, BastionFacilityInstance, BastionNPCData
 │   ├── save/              → SaveManager
 │   ├── ui/                → Main, Combat, Dialogue, Inventory, Bastion, CharacterCreation, PartySelection
-│   ├── world/             → BastionPlayer, FortGuard, InteractableObject, mission_01/
+│   ├── world/             → BastionPlayer, FortGuard, InteractableObject, party_movement_controller.gd, exploration_character.gd, mission_01/
+│   │   └── mission_01/    → taberna_painter.gd (@tool), taberna_setup.gd (@tool), protagonista_movement.gd, click_marker.gd
 │   └── utils/             → RngManager
+├── assets/
+│   ├── tilesets/
+│   │   ├── taberna_custom/ → 10 tiles PixelLab (64px): floor_wood, wall_stone_block, wall_stone_panel, barrels, table_round, bench, bar_counter, fireplace, door, torch
+│   │   └── kenney_dungeon/ → tiles placeholder Kenney (fallback)
+│   └── characters/
+│       └── johannes/       → 8 sprites dirección + spritesheet + animaciones walk/idle
 ├── scenes/                → .tscn
 └── data/
     ├── characters/heroes/ → vael, lyth, bicho, johannes, naeren, mia
@@ -357,6 +541,38 @@ MISIÓN 1 — El Fuerte de Piedra Gris:
     - Fiesta en el puerto (bebida → resaca solo al protagonista; opciones de compañía)
     - Briefing de Lyris: "barco para Ilvernis al amanecer"
 ```
+
+---
+
+## Estado de desarrollo actual (2026-05-19)
+
+### Funcionando
+- ✅ Click-to-move protagonista (NavigationAgent2D, party_movement_controller, click_marker)
+- ✅ Cámara suave (zoom 0.6, smoothing, offset -80)
+- ✅ Tiles isométricos nuevos: `iso_wall_block.png`, `iso_floor_wood.png`, `iso_wall_thick.png`
+- ✅ Johannes: 8 poses estáticas + 64 frames walk + 64 frames idle — todos importados
+- ✅ `character_animator.gd` — carga SpriteFrames en runtime, selecciona dirección por velocidad
+- ✅ `protagonista_movement.gd` — usa AnimatedSprite2D + CharacterAnimator
+- ✅ 0 errores de parseo Godot 4.6
+- ✅ NavigationRegion2D creado en runtime si no existe en escena
+
+### Pendiente inmediato
+- ⏳ Suelo taberna visible (offset -18 para iso_floor_wood.png — pendiente verificar tras reopen Godot)
+- ⏳ Movimiento Johannes (NavigationAgent2D + _move_frames fix — pendiente verificar)
+- ⏳ Animación Johannes en movimiento (CharacterAnimator conectado, falta test visual)
+- ⏳ Implementar ExplorationCharacter + split party completo (plan en `.claude/plans/`)
+- ⏳ Restaurar `project.godot` main scene a `main.tscn`
+- ⏳ Arreglar menú principal "Nueva Partida"
+
+### Reglas de trabajo con PixelLab para nuevas escenas
+1. Siempre pedir assets en piezas modulares (tile suelo, tile pared, prop individual)
+2. Usar el template de prompt con las reglas de estilo (ver sección MCP servers)
+3. Para tiles isométricos: `create_isometric_tile` con shape `thin tile` (suelo) o `block` (pared)
+4. Descargar con `curl` a `game/assets/tilesets/{nombre_escena}/`
+5. Los offsets para cada tipo de tile están en la tabla de calibración de taberna_painter
+
+### Garreth Ashveil — inmortalidad por clones
+Garreth tiene varios clones de sí mismo repartidos. Cuando muere, su consciencia pasa automáticamente al siguiente clon — esto le da una inmortalidad práctica hasta que se eliminen todos los cuerpos. Esta mecánica es el motivo por el que secuestró a Bicho (investigación).
 
 ---
 
